@@ -1,7 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, CCActivity!</string>
-    <string name="app_name">CC</string>
+    <string name="hello">Hello, CC! I am a string resource!</string>
 
+    <string name="app_name">Collector\'s Catalogue</string>
+	<string name="collections">Collections</string>
+	<string name="item">Item</string>
+	<string name="browseCollections">Browse Collections</string>
+	<string name="recentItems">Recent Items</string>
+	<string name="addToCollection">Add to Collection</string>
+	<string name="sharingManager">Sharing Manager</string>
+	<string name="collectionProperties">Collection Properties</string>
+	
+	<string name="newCollection">New Collection</string>
+	<string name="newPic">New Picture</string>
+	<string name="newItem">New Item</string>
+	
+	<string name="fieldName">Name</string>
+	<string name="fieldDesc">Description</string>
+	<string name="fieldThumbnail">Thumbnail</string>
+	
+	<string name="sharePublic">Public</string>
+	<string name="sharePrivate">Private</string>
+	<string name="permView">Can View</string>
+	<string name="permEdit">Can Edit</string>
+	<string name="permOwn">Can Own</string>
+	
+	<string name="newContact">New Contact</string>
+	
+	<string name="filter">Filter: </string>
+	<string name="tags">Tags: </string>
+	<string name="menu">Menu</string>
+	<string name="menuView">Views</string>
+	<string name="menuProperties">Properties</string>
+	
+	<string name="advSummary">Summary View</string>
+	<string name="advSearch">Advanced Search</string>
+	<string name="advTag">Advanced Tagger</string>
+	<string name="advBarcode">Scan Barcode</string>
+	<string name="advCamera">Camera Settings</string>
+	
+	<string name="btnDone">Done</string>
+	<string name="btnSave">Save</string>
+	<string name="btnCancel">Cancel</string>
+	<string name="btnOk">OK</string>
+	<string name="btnReturn">Return</string>
+	<string name="btnShare">Share</string>
+	<string name="btnAdd">Add</string>
+	<string name="untitled">Untitled</string>
+	
 </resources>
