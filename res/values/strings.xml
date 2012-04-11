@@ -22,6 +22,7 @@
 	
 	<string name="sharePublic">Public</string>
 	<string name="sharePrivate">Private</string>
+	<string name="share">Sharing</string>
 	<string name="permView">Can View</string>
 	<string name="permEdit">Can Edit</string>
 	<string name="permOwn">Can Own</string>
