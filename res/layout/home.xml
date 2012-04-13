@@ -13,13 +13,15 @@
         android:id="@+id/btnNewColl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/newCollection" />
+        android:text="@string/newCollection"
+        android:onClick="onBrowseCollectionPropertiesButtonClick" />
 
     <Button
         android:id="@+id/btnBrowseColl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/browseCollections" />
+        android:text="@string/browseCollections"
+        android:onClick="onBrowseCollectionsButtonClick" />
 
     <Button
         android:id="@+id/btnRecent"
