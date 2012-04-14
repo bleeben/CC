@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 public class CollectionsDataSource {
@@ -18,7 +19,7 @@ public class CollectionsDataSource {
 		dbHelper = new CollectionOpenHelper(context);
 	}
 	
-	public void open() throws SQLEXception{
+	public void open() throws SQLException{
 		database = dbHelper.getWritableDatabase();
 	}
 	
