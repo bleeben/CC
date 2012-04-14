@@ -21,10 +21,14 @@ public final class R {
         public static final int button1=0x7f050004;
         public static final int button2=0x7f050001;
         public static final int button3=0x7f05000e;
+        public static final int button4=0x7f050015;
         public static final int editText1=0x7f050005;
         public static final int editText2=0x7f050009;
         public static final int gridView1=0x7f050002;
         public static final int imageButton1=0x7f05000c;
+        public static final int imageButton2=0x7f050016;
+        public static final int imageView1=0x7f050017;
+        public static final int quickContactBadge1=0x7f050018;
         public static final int spinner1=0x7f05000f;
         public static final int tableRow1=0x7f050006;
         public static final int tableRow2=0x7f050007;
@@ -44,6 +48,7 @@ public final class R {
         public static final int item=0x7f030004;
         public static final int main=0x7f030005;
         public static final int new_item=0x7f030006;
+        public static final int sharing_manager=0x7f030007;
     }
     public static final class string {
         public static final int addToCollection=0x7f040006;
