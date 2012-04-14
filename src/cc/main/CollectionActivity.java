@@ -1,5 +1,6 @@
 package cc.main;
 
+import cc.rep.Collection;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,12 @@ public class CollectionActivity extends Activity {
     
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
+    	startActivity(intent);
+    }
+    
+    public void editProperties(View view){
+    	Intent intent = new Intent(this, CollectionPropertiesActivity.class);
+    	intent.putExtra("collection", new Collection());
     	startActivity(intent);
     }
     
