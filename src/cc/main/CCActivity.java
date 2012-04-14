@@ -24,8 +24,8 @@ public class CCActivity extends Activity {
     	startActivity(intent);
     }
     
-    public void onNewCollectionsButtonClick(View view) {
-    	Intent intent = new Intent(this, CollectionPropertiesActivity.class);
+    public void onNewCollectionButtonClick(View view) {
+    	Intent intent = new Intent(this, NewCollectionActivity.class);
     	startActivity(intent);
     }
 }

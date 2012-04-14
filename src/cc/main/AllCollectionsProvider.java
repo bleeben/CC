@@ -2,11 +2,15 @@ package cc.main;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 
 public class AllCollectionsProvider extends ContentProvider {
 
+	// Creates a UriMatcher object.
+    //private static final UriMatcher sUriMatcher;
+	
 	@Override
 	public int delete(Uri arg0, String arg1, String[] arg2) {
 		// TODO Auto-generated method stub

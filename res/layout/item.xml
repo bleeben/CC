@@ -72,14 +72,16 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btnCancel" />
+            android:text="@string/btnCancel"
+            android:onClick="onCancelButtonClick" />
 
         <Button
             android:id="@+id/button3"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btnDone" />
+            android:text="@string/btnDone"
+            android:onClick="onDoneButtonClick" />
 
     </LinearLayout>
 
