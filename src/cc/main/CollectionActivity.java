@@ -2,6 +2,7 @@ package cc.main;
 
 import cc.rep.Collection;
 import cc.rep.Item;
+import cc.rep.ResultCode;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class CollectionActivity extends Activity {
-	
-	 static final int NEW_ITEM_REQUEST = 1;
-	
 	Collection c;
 	
     /** Called when the activity is first created. */
-    @Override
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.collection);
@@ -29,13 +27,14 @@ public class CollectionActivity extends Activity {
     
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
-    	startActivityForResult(intent, NEW_ITEM_REQUEST);
+    	startActivityForResult(intent, ResultCode.NEW_ITEM_REQUEST);
+
     }
     
     protected void onActivityResult(int requestCode, int resultCode,
             Intent data) {
     	switch (requestCode) {
-    	case NEW_ITEM_REQUEST:
+    	case ResultCode.NEW_ITEM_REQUEST:
     		switch (resultCode) {
     		case RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
