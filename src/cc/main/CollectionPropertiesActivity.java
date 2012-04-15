@@ -1,6 +1,7 @@
 package cc.main;
 
 import cc.rep.Collection;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
