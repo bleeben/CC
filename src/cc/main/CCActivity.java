@@ -23,7 +23,7 @@ public class CCActivity extends Activity {
         
         ALERT = new AlertDialog.Builder(this).create();
         ALERT.setTitle("Debugging");
-        ALERT.setMessage("Are you sure?");
+        ALERT.setMessage("Home Screen");
         ALERT.setButton("OK", new DialogInterface.OnClickListener() {
            public void onClick(DialogInterface dialog, int which) {
               // here you can add functions
@@ -36,6 +36,8 @@ public class CCActivity extends Activity {
     
     public void onBrowseCollectionsButtonClick(View view) {
     	Intent intent = new Intent(this, CollectionsActivity.class);
+    	CCActivity.ALERT.setMessage("Entering Collections From Home");
+        CCActivity.ALERT.show();
     	startActivity(intent);
     }
     
