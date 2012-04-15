@@ -3,9 +3,17 @@ package cc.rep;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+<<<<<<< HEAD
 public class Item implements Parcelable {
+=======
+public class Item implements Parcelable{
+>>>>>>> 26b4faa94b913486614f808bff119872998c2be6
 	private String name;
 	private long id;
+	
+	public Item() {
+		
+	}
 	
 	public Item(String name){
 		this.name = name;
@@ -32,6 +40,7 @@ public class Item implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+<<<<<<< HEAD
 		dest.writeString(name);
 		dest.writeLong(id);
 		
@@ -47,5 +56,10 @@ public class Item implements Parcelable {
 			return new Item[size];
 		}
 	};
+=======
+		// TODO Auto-generated method stub
+		dest.writeString(name);
+	}
+>>>>>>> 26b4faa94b913486614f808bff119872998c2be6
 	
 }

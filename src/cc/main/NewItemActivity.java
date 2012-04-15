@@ -1,21 +1,31 @@
 package cc.main;
 
+import cc.rep.Item;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 
 public class NewItemActivity extends Activity {
     private static final int CAMERA_PIC_REQUEST = 1337;
+<<<<<<< HEAD
 	static final int NEW_ITEM = 100;
+=======
+
+    Item item;
+>>>>>>> 26b4faa94b913486614f808bff119872998c2be6
 
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_item);
+        
+        item = new Item();
     }
     //hi
     
@@ -26,8 +36,15 @@ public class NewItemActivity extends Activity {
     }
     
     public void onDoneButtonClick(View view) {
+<<<<<<< HEAD
     	
     	setResult(RESULT_OK);
+=======
+    	setResult(RESULT_OK);
+    	Intent intent = new Intent();
+    	intent.putExtra("item", item);
+    	setIntent(intent);
+>>>>>>> 26b4faa94b913486614f808bff119872998c2be6
     	finish();
     }
     
@@ -43,5 +60,12 @@ public class NewItemActivity extends Activity {
     		ImageView image = (ImageView) findViewById(R.id.imageView1);
     		image.setImageBitmap(thumbnail);
     	}
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.item, menu);
+        return true;
     }
 }
