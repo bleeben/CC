@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 public class NewItemActivity extends Activity {
     private static final int CAMERA_PIC_REQUEST = 1337;
-
+	static final int NEW_ITEM = 100;
 
 	/** Called when the activity is first created. */
     @Override
@@ -21,10 +21,13 @@ public class NewItemActivity extends Activity {
     
     
     public void onCancelButtonClick(View view) {
+    	setResult(RESULT_CANCELED);
     	finish();
     }
     
     public void onDoneButtonClick(View view) {
+    	
+    	setResult(RESULT_OK);
     	finish();
     }
     

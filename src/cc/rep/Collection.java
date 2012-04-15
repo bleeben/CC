@@ -1,11 +1,15 @@
 package cc.rep;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Collection implements Parcelable {
 	private String name;
 	private long id;
+	private List<Item> items;
 	
 	public String getName() {
 		return name;
@@ -19,10 +23,11 @@ public class Collection implements Parcelable {
 		// the parcel is read FIFO
 		this.name = in.readString();
 		this.id = in.readLong();
+		in.readTypedList(items, Item.CREATOR);
 	}
 	
 	public Collection(){
-		
+		items = new ArrayList<Item>();
 	}
 	
 	public long getID(){
@@ -31,6 +36,18 @@ public class Collection implements Parcelable {
 	
 	public void setID(long id){
 		this.id = id;
+	}
+	
+	public void addItem(Item item){
+		items.add(item);
+	}
+	
+	public boolean removeItem(Item item){
+		return items.remove(item);
+	}
+	
+	public List<Item> getItems(){
+		return items;
 	}
 
 	@Override
@@ -44,6 +61,7 @@ public class Collection implements Parcelable {
 		// TODO Auto-generated method stub
 		dest.writeString(name);
 		dest.writeLong(id);
+		dest.writeTypedList(items);
 	}
 	
 	// used to regenerate object

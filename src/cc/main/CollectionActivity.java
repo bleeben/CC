@@ -8,6 +8,8 @@ import android.view.View;
 
 public class CollectionActivity extends Activity {
     /** Called when the activity is first created. */
+	static final int NEW_ITEM = 100;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +19,7 @@ public class CollectionActivity extends Activity {
     
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
-    	startActivity(intent);
+    	startActivityForResult(intent, NEW_ITEM);
     }
     
     public void editProperties(View view){
@@ -26,4 +28,13 @@ public class CollectionActivity extends Activity {
     	startActivity(intent);
     }
     
+
+    protected void onActivityResult(int requestCode, int resultCode,
+            Intent data) {
+        if (requestCode == NEW_ITEM) {
+            if (resultCode == RESULT_OK) {
+                // A new item was made
+            }
+        }
+    }
 }
