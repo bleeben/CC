@@ -12,12 +12,7 @@ import android.widget.ImageView;
 
 public class NewItemActivity extends Activity {
     private static final int CAMERA_PIC_REQUEST = 1337;
-<<<<<<< HEAD
-	static final int NEW_ITEM = 100;
-=======
-
     Item item;
->>>>>>> 26b4faa94b913486614f808bff119872998c2be6
 
 	/** Called when the activity is first created. */
     @Override
@@ -36,15 +31,10 @@ public class NewItemActivity extends Activity {
     }
     
     public void onDoneButtonClick(View view) {
-<<<<<<< HEAD
-    	
-    	setResult(RESULT_OK);
-=======
     	setResult(RESULT_OK);
     	Intent intent = new Intent();
     	intent.putExtra("item", item);
     	setIntent(intent);
->>>>>>> 26b4faa94b913486614f808bff119872998c2be6
     	finish();
     }
     
