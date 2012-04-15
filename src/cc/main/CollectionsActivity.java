@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cc.rep.Collection;
+import cc.rep.ImageAdapter;
 import cc.rep.Item;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,11 +14,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 
 public class CollectionsActivity extends Activity {
 	
 	static final int NEW_COLLECTION_REQUEST = 0;
-	List<Collection> collections;
+	//List<Collection> collections;
+	GridView gridColls;
 	
     /** Called when the activity is first created. */
     @Override
@@ -25,7 +28,10 @@ public class CollectionsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.collections);
         
-        collections = new ArrayList<Collection>();
+        //collections = new ArrayList<Collection>();
+        gridColls = (GridView) findViewById(R.id.gridView1);
+        
+        //gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater()));
     }
     //hi
     
@@ -66,16 +72,5 @@ public class CollectionsActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-    
-    public void onResume() {
-    	
-    }
-    
-    public void onRestart() {
-    	Intent intent = getIntent();
-    	Parcelable extra = intent.getParcelableExtra("collection");
-    	Collection newColl = (Collection) extra;
-    	collections.add(newColl);
     }
 }
