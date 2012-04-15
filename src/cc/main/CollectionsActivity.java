@@ -28,14 +28,9 @@ public class CollectionsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.collections);
         
-        CCActivity.ALERT.setMessage("Alert Browsing");
-        CCActivity.ALERT.show();
-        
         //collections = new ArrayList<Collection>();
         gridColls = (GridView) findViewById(R.id.gridView1);
         
-        CCActivity.ALERT.setMessage("Alert Browsing 1");
-        CCActivity.ALERT.show();
         //gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater()));
     }
     //hi

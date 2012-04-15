@@ -32,11 +32,17 @@ public class NewCollectionActivity extends Activity {
     }
     
     public void onDoneButtonClick(View view) {
+        
+        
     	setResult(RESULT_OK);
+//    	CCActivity.alert(this,"Set Result");
     	c.setName(nameEdit.getText().toString());
-    	Intent intent = new Intent();
+    	CCActivity.alert(this,"Name Set: "+c.getName());
+    	Intent intent = new Intent(this, NewCollectionActivity.class);
     	intent.putExtra("collection", c);
     	setIntent(intent);
+    	CCActivity.alert(this,"Intent Set");
+    	
     	finish();
     }
 }
