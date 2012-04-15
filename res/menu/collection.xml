@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
+    <item android:id="@+id/properties" android:title="@string/menuProperties"></item><item android:id="@+id/share" android:title="@string/btnShare" android:visible="true" android:enabled="true"></item>
+    
 
 </menu>
