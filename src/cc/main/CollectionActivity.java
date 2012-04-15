@@ -12,10 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class CollectionActivity extends Activity {
-	
 	Collection c;
 	
-    @Override
+    /** Called when the activity is first created. */
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.collection);
@@ -28,6 +28,7 @@ public class CollectionActivity extends Activity {
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
     	startActivityForResult(intent, ResultCode.NEW_ITEM_REQUEST);
+
     }
     
     protected void onActivityResult(int requestCode, int resultCode,

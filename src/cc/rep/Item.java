@@ -3,9 +3,7 @@ package cc.rep;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
-
-public class Item implements Parcelable{
+public class Item implements Parcelable {
 	private String name;
 	private long id;
 	
@@ -53,5 +51,4 @@ public class Item implements Parcelable{
 			return new Item[size];
 		}
 	};
-
 }
