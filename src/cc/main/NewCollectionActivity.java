@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class NewCollectionActivity extends Activity {
 	
 	Collection c;
+	EditText nameEdit;
 	
     /** Called when the activity is first created. */
     @Override
@@ -18,6 +20,8 @@ public class NewCollectionActivity extends Activity {
         
         c = new Collection();
         
+        nameEdit = (EditText)findViewById(R.id.editTextName);
+        nameEdit.setText("Untitled");
     }
     //hi
     
@@ -29,6 +33,7 @@ public class NewCollectionActivity extends Activity {
     
     public void onDoneButtonClick(View view) {
     	setResult(RESULT_OK);
+    	c.setName(nameEdit.getText().toString());
     	Intent intent = new Intent();
     	intent.putExtra("collection", c);
     	setIntent(intent);
