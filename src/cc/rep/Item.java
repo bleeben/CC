@@ -28,13 +28,13 @@ public class Item implements Parcelable {
 		this.name = name;
 	}
 
-	@Override
+	//@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	//@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
 		dest.writeLong(id);

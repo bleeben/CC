@@ -33,7 +33,13 @@ public class CollectionPropertiesActivity extends Activity {
     
     public void onDoneButtonClick(View view) {
     	// save the collections state
-    	
     	finish();
+    }
+    
+    public void onShareButtonClick(View view){
+    	Intent intent = new Intent(this, SharingManagerActivity.class);
+    	intent.putExtra("collection", c);
+    	System.out.println("tesT");
+    	startActivity(intent);
     }
 }

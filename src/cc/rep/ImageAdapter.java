@@ -21,25 +21,25 @@ public class ImageAdapter extends BaseAdapter {
     }
 
 	
-	@Override
+	//@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return 9;
 	}
 
-	@Override
+	//@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	//@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	//@Override
 	public View getView(int position, View view, ViewGroup viewGroup) {
 		View itemView = view;
         

@@ -19,7 +19,7 @@ import android.widget.GridView;
 public class CollectionsActivity extends Activity {
 	
 	static final int NEW_COLLECTION_REQUEST = 0;
-	//List<Collection> collections;
+	private ArrayList<Collection> collections = new ArrayList<Collection>();;
 	GridView gridColls;
 	
     /** Called when the activity is first created. */
@@ -30,8 +30,7 @@ public class CollectionsActivity extends Activity {
         
         //collections = new ArrayList<Collection>();
         gridColls = (GridView) findViewById(R.id.gridView1);
-        
-        //gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater()));
+        gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater()));
     }
     //hi
     
@@ -47,6 +46,7 @@ public class CollectionsActivity extends Activity {
     		switch (resultCode) {
     		case RESULT_OK:
     	        Collection newColl = (Collection) data.getParcelableExtra("collection");
+    	        collections.add(newColl);
     			break;
     		case RESULT_CANCELED:
     			break;

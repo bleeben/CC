@@ -76,4 +76,10 @@ public class CollectionActivity extends Activity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    
+    public void onShareButtonClick(View view){
+    	Intent intent = new Intent(this, SharingManagerActivity.class);
+    	intent.putExtra("collection", c);
+    	startActivity(intent);
+    }
 }
