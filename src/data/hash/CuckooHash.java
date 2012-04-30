@@ -1,5 +1,5 @@
 package data.hash;
 
-public class CuckooHash {
+public class CuckooHash<K,V> extends BasicHashMap<K, V>{
 
 }
