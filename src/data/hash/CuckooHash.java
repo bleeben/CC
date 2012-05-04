@@ -1,6 +1,6 @@
 package data.hash;
 
-public class CuckooHash<K,V> extends BasicHashMap<K, V>{
+public class CuckooHash<K,V> extends SkeletonHashMap<K, V>{
 
 	@Override
 	public V put(K key, V value) {
@@ -30,6 +30,12 @@ public class CuckooHash<K,V> extends BasicHashMap<K, V>{
 	public boolean containsValue(V value) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	protected void resize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
