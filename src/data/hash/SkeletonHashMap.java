@@ -1,7 +1,9 @@
 package data.hash;
 
+import java.lang.reflect.Array;
+
 public abstract class SkeletonHashMap<K, V> {
-	protected int capacity;
+	protected int capacity=16;
 	protected int size;
 	protected K[] keys;
 	protected V[] values;
@@ -18,7 +20,13 @@ public abstract class SkeletonHashMap<K, V> {
 		return 1.0f * size / capacity;
 	}
 	
-	protected abstract void init();
+	@SuppressWarnings("unchecked")
+	protected void init(Class<K> c,Class<V> v) {
+		// TODO Auto-generated method stub
+		keys = (K[]) Array.newInstance(c, capacity);
+		values = (V[]) Array.newInstance(v, capacity);
+		
+	}
 
 	protected abstract void resize();
 

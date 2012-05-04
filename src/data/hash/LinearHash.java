@@ -1,5 +1,7 @@
 package data.hash;
 
+import java.lang.reflect.Array;
+
 public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 
 	@Override
@@ -38,4 +40,7 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 		
 	}
 
+	public LinearHash(Class<K> c,Class<V> v) {
+		init(c,v);
+	}
 }
