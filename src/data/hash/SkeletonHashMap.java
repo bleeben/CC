@@ -1,6 +1,6 @@
 package data.hash;
 
-public abstract class SkeletonHashMap<K, V> implements HashMapStructure<K, V> {
+public abstract class SkeletonHashMap<K, V> {
 	protected int capacity;
 	protected int size;
 	protected K[] keys;
@@ -16,4 +16,9 @@ public abstract class SkeletonHashMap<K, V> implements HashMapStructure<K, V> {
 		return 1.0f*size/capacity;
 	}
 	protected abstract void resize();
+	public abstract V put(K key, V value);
+	public abstract V get(K key);
+	public abstract V remove(K key);
+	public abstract boolean containsKey(K key);
+	public abstract boolean containsValue(V value);
 }
