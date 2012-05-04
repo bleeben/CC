@@ -17,6 +17,8 @@ public abstract class SkeletonHashMap<K, V> {
 	public float load() {
 		return 1.0f * size / capacity;
 	}
+	
+	protected abstract void init();
 
 	protected abstract void resize();
 
