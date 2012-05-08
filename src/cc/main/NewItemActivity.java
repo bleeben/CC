@@ -41,10 +41,9 @@ public class NewItemActivity extends Activity {
     }
     
     public void onDoneButtonClick(View view) {
-    	setResult(RESULT_OK);
     	Intent intent = new Intent();
     	intent.putExtra("item", item);
-    	setIntent(intent);
+    	setResult(Activity.RESULT_OK, intent);
     	finish();
     }
     

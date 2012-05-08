@@ -29,8 +29,10 @@
         <activity android:name="CollectionsActivity" android:label="@string/app_name"></activity>
         <activity android:name="CollectionActivity" android:label="@string/app_name"></activity>
         <activity android:name="NewCollectionActivity" android:label="@string/app_name"></activity>
+        <activity android:name="CollectionPropertiesActivity" android:label="@string/app_name"></activity>
         <activity android:name="NewItemActivity" android:label="@string/app_name"></activity>
         <activity android:name="ItemActivity" android:label="@string/app_name"></activity>
+        <activity android:name="SharingManagerActivity" android:label="@string/app_name"></activity>
     </application>
 
 </manifest>

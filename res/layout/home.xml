@@ -1,33 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    
-    <Button
-        android:id="@+id/btnNewPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newPic"
-        android:onClick="onNewItemButtonClick" />
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btnNewColl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newCollection"
-        android:onClick="onNewCollectionButtonClick" />
 
-    <Button
-        android:id="@+id/btnBrowseColl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/browseCollections"
-        android:onClick="onBrowseCollectionsButtonClick" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="152dp" >
 
-    <Button
-        android:id="@+id/btnRecent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recentItems" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" 
+            android:layout_weight="1.00">
 
-</TableLayout>
+
+
+            <Button
+                android:id="@+id/btnNewPic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="onNewItemButtonClick"
+                android:text="@string/newPic" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.00"
+            android:orientation="vertical" >
+
+
+            <Button
+                android:id="@+id/btnNewColl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.50"
+                android:onClick="onNewCollectionButtonClick"
+                android:text="@string/newCollection" />
+
+            <Button
+                android:id="@+id/btnBrowseColl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.50"
+                android:onClick="onBrowseCollectionsButtonClick"
+                android:text="@string/browseCollections" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnRecent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:text="@string/recentItems" />
+    </LinearLayout>
+
+</LinearLayout>

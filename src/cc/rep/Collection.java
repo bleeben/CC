@@ -9,7 +9,8 @@ import android.os.Parcelable;
 public class Collection implements Parcelable {
 	private String name;
 	private long id;
-	private List<Item> items;
+	private List<Item> items = new ArrayList<Item>();
+	private List<Sharer> sharers = new ArrayList<Sharer>();;
 	
 	public String getName() {
 		return name;
@@ -24,6 +25,7 @@ public class Collection implements Parcelable {
 		this.name = in.readString();
 		this.id = in.readLong();
 		in.readTypedList(items, Item.CREATOR);
+		in.readTypedList(sharers, Sharer.CREATOR);
 	}
 	
 	public Collection(){
@@ -37,31 +39,41 @@ public class Collection implements Parcelable {
 	public void setID(long id){
 		this.id = id;
 	}
-	
+
 	public void addItem(Item item){
 		items.add(item);
 	}
-	
+	public void addSharer(Sharer sharer){
+		sharers.add(sharer);
+	}
 	public boolean removeItem(Item item){
 		return items.remove(item);
 	}
+	public boolean removeSharer(Sharer sharer){
+		return sharers.remove(sharer);
+	}
 	
+
 	public List<Item> getItems(){
 		return items;
 	}
+	public List<Sharer> getSharers(){
+		return sharers;
+	}
 
-	@Override
+	//@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	//@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
 		dest.writeString(name);
 		dest.writeLong(id);
 		dest.writeTypedList(items);
+		dest.writeTypedList(sharers);
 	}
 	
 	// used to regenerate object

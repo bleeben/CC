@@ -14,23 +14,26 @@
         android:layout_height="wrap_content"
         android:text="@string/collections"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
     <Button
         android:id="@+id/button2"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/newCollection"
-        android:onClick="onNewCollectionButtonClick" />
+        android:onClick="onNewCollectionButtonClick"
+        android:text="@string/newCollection" />
             
     </LinearLayout>
-
+<!-- http://developer.android.com/guide/tutorials/views/hello-gridview.html -->
     <GridView
         android:id="@+id/gridView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="3" 
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:numColumns="3"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:gravity="center">
     </GridView>
 
     <LinearLayout
