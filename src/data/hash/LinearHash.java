@@ -1,12 +1,11 @@
 package data.hash;
 
-import java.lang.reflect.Array;
-
 public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 
 	@Override
 	public V put(K key, V value) {
 		// TODO Auto-generated method stub
+		hash(key.hashCode());
 		return null;
 	}
 
