@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class Item implements Parcelable {
 	private String name;
 	private long id;
+	private Collection collection;
 	
 	public Item() {
 		
@@ -18,6 +19,7 @@ public class Item implements Parcelable {
 	public Item(Parcel in) {
 		this.name = in.readString();
 		this.id = in.readLong();
+		this.collection = in.readParcelable(Collection.class.getClassLoader());
 	}
 
 	public String getName() {
@@ -38,9 +40,18 @@ public class Item implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
 		dest.writeLong(id);
+		dest.writeParcelable(collection, 0);
 		
 	}
 	
+	public Collection getCollection() {
+		return collection;
+	}
+
+	public void setCollection(Collection collection) {
+		this.collection = collection;
+	}
+
 	// used to regenerate object
 	public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>(){
 		public Item createFromParcel(Parcel in){

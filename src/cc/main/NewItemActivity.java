@@ -9,10 +9,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 public class NewItemActivity extends Activity {
     Item item;
+    EditText nameEdit;
+    Spinner collectionSpinner;
 
 	/** Called when the activity is first created. */
     @Override
@@ -21,6 +25,12 @@ public class NewItemActivity extends Activity {
         setContentView(R.layout.new_item);
         
         item = new Item();
+        
+        nameEdit = (EditText)findViewById(R.id.editTextName);
+        nameEdit.setText("Untitled");
+        
+        collectionSpinner = (Spinner) findViewById(R.id.collectionSpinner);
+        
     }
     //hi
     
