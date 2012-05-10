@@ -51,6 +51,11 @@ public class Item implements Parcelable {
 	public void setCollection(Collection collection) {
 		this.collection = collection;
 	}
+	
+	public void setCollection(long id){
+		// TODO: search through collections to find the id
+		
+	}
 
 	public long getID() {
 		return id;

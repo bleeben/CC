@@ -59,10 +59,26 @@ public class ItemsDataSource {
 		return items;
 	}
 	
+	public List<Item> getItemsOfCollection(long collection_id){
+		List<Item> items = new ArrayList<Item>();
+		
+		Cursor cursor = database.query(ItemOpenHelper.ITEM_TABLE_NAME, allColumns, ItemOpenHelper.COLUMN_COLLECTION + " = " + collection_id, null, null, null, null);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()){
+			Item i = cursorToItem(cursor);
+			items.add(i);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return items;
+	}
+	
 	private Item cursorToItem(Cursor cursor){
 		Item i = new Item();
 		i.setID(cursor.getLong(0));
 		i.setName(cursor.getString(1));
+		i.setCollection(cursor.getLong(2));
 		return i;
 	}
 	
