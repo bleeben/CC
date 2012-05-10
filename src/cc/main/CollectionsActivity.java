@@ -1,6 +1,7 @@
 package cc.main;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import cc.rep.Collection;
@@ -14,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 public class CollectionsActivity extends Activity {
@@ -30,7 +33,21 @@ public class CollectionsActivity extends Activity {
         
         //collections = new ArrayList<Collection>();
         gridColls = (GridView) findViewById(R.id.gridView1);
-        gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater()));
+        gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater(),collections));
+        
+        gridColls.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                    int position, long id) {
+ 
+                // Sending image id to FullScreenActivity
+                Intent i = new Intent(getApplicationContext(), CollectionActivity.class);
+                // passing array index
+                i.putExtra("id", position);
+                i.putParcelableArrayListExtra("collections", collections);
+                startActivity(i);
+            }
+        });
     }
     //hi
     

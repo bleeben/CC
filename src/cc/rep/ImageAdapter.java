@@ -1,5 +1,7 @@
 package cc.rep;
 
+import java.util.ArrayList;
+
 import cc.main.R;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,11 +15,13 @@ public class ImageAdapter extends BaseAdapter {
 
     Context context;
     LayoutInflater li;
+    ArrayList<Collection> collections;
     
-    public ImageAdapter(Context context,LayoutInflater li)
+    public ImageAdapter(Context context,LayoutInflater li,ArrayList<Collection> collections)
     {
        this.context = context;
        this.li=li;
+       this.collections=collections;
     }
 
 	

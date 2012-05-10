@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.Toast;
 
 public class CCActivity extends Activity {
 	
@@ -37,7 +38,8 @@ public class CCActivity extends Activity {
 	 }
 	 
 	 public static void alert(Context context,String msg) {
-		 alert(context,"Debugging",msg);
+		 //alert(context,"Debugging",msg);
+		 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 	 }
 	
     /** Called when the activity is first created. */
@@ -46,7 +48,7 @@ public class CCActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         
-        CCActivity.alert(this,"Debugging","Home Screen");
+        CCActivity.alert(this,"Home Screen");
     }
     //hi
     
@@ -75,6 +77,7 @@ public class CCActivity extends Activity {
     		case Activity.RESULT_OK:
     	        Collection newColl = (Collection) data.getParcelableExtra("collection");
     	        collections.add(newColl);
+    	        CCActivity.alert(this, "Num Collections: "+collections.size());
     			break;
     		}
     		break;
