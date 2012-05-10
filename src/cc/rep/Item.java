@@ -18,7 +18,7 @@ public class Item implements Parcelable {
 
 	public Item(Parcel in) {
 		this.name = in.readString();
-		this.id = in.readLong();
+		this.setID(in.readLong());
 		this.collection = in.readParcelable(Collection.class.getClassLoader());
 	}
 
@@ -39,7 +39,7 @@ public class Item implements Parcelable {
 	//@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
-		dest.writeLong(id);
+		dest.writeLong(getID());
 		dest.writeParcelable(collection, 0);
 		
 	}
@@ -50,6 +50,14 @@ public class Item implements Parcelable {
 
 	public void setCollection(Collection collection) {
 		this.collection = collection;
+	}
+
+	public long getID() {
+		return id;
+	}
+
+	public void setID(long id) {
+		this.id = id;
 	}
 
 	// used to regenerate object
