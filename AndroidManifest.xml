@@ -8,7 +8,7 @@
     <provider
         android:authorities = "com.contentprovider.cc.maincontentprovider"
         android:multiprocess = "true"
-        android:name = "com.contentprovider.cc.MainContentProvider"></provider>
+        android:name = "contentprovider.MainContentProvider"></provider>
 
     <application
         android:icon="@drawable/ic_launcher"
