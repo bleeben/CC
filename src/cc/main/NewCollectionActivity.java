@@ -12,6 +12,7 @@ public class NewCollectionActivity extends Activity {
 	
 	Collection c;
 	EditText nameEdit;
+	EditText descEdit;
 	
     /** Called when the activity is first created. */
     @Override
@@ -25,6 +26,7 @@ public class NewCollectionActivity extends Activity {
         
         nameEdit = (EditText)findViewById(R.id.editTextName);
         nameEdit.setText("Untitled "+size);
+        descEdit = (EditText)findViewById(R.id.editTextDesc);
     }
     //hi
     
@@ -36,6 +38,7 @@ public class NewCollectionActivity extends Activity {
     
     public void onDoneButtonClick(View view) {
     	c.setName(nameEdit.getText().toString());
+    	c.setDesc(descEdit.getText().toString());
     	Intent intent = new Intent();
     	intent.putExtra("collection", c);
     	
