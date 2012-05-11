@@ -1,5 +1,6 @@
 package cc.main;
 
+import cc.rep.Collection;
 import cc.rep.Item;
 import cc.rep.ResultCode;
 import android.app.Activity;
@@ -25,9 +26,11 @@ public class NewItemActivity extends Activity {
         setContentView(R.layout.new_item);
         
         item = new Item();
+        Intent i = getIntent();
+        int size = i.getIntExtra("totalNum",0);
         
         nameEdit = (EditText)findViewById(R.id.editTextName);
-        nameEdit.setText("Untitled");
+        nameEdit.setText("Untitled "+size);
         
         collectionSpinner = (Spinner) findViewById(R.id.collectionSpinner);
         
@@ -41,6 +44,7 @@ public class NewItemActivity extends Activity {
     }
     
     public void onDoneButtonClick(View view) {
+    	item.setName(nameEdit.getText().toString());
     	Intent intent = new Intent();
     	intent.putExtra("item", item);
     	setResult(Activity.RESULT_OK, intent);

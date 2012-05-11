@@ -53,6 +53,9 @@ public class Collection implements Parcelable, Storable{
 		return sharers.remove(sharer);
 	}
 	
+	public int size(){
+		return items.size();
+	}
 
 	public List<Item> getItems(){
 		return items;
@@ -60,7 +63,14 @@ public class Collection implements Parcelable, Storable{
 	public List<Sharer> getSharers(){
 		return sharers;
 	}
-
+	
+	public Item getItem(int location){
+		return items.get(location);
+	}
+	public Sharer getSharer(int location){
+		return sharers.get(location);
+	}
+	
 	//@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub

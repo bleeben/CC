@@ -47,6 +47,7 @@ public class CollectionsActivity extends Activity {
                 // passing array index
                 i.putExtra("id", position);
                 i.putParcelableArrayListExtra("collections", collections);
+                i.putExtra("collection", collections.get(position));
                 startActivity(i);
             }
         });

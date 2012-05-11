@@ -41,6 +41,7 @@ public class CollectionActivity extends Activity {
                 // passing array index
                 i.putExtra("id", position);
                 i.putExtra("collection", c);
+                i.putExtra("item", c.getItem(position));
                 startActivity(i);
             }
         });
@@ -49,6 +50,7 @@ public class CollectionActivity extends Activity {
     
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
+    	intent.putExtra("totalNum", c.size());
     	startActivityForResult(intent, ResultCode.NEW_ITEM_REQUEST);
 
     }
@@ -60,6 +62,8 @@ public class CollectionActivity extends Activity {
     		switch (resultCode) {
     		case RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
+    			c.addItem(newItem);
+    			CCActivity.alert(this, "Num Items: "+c.size());
     			break;
     		case RESULT_CANCELED:
     			break;
