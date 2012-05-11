@@ -8,15 +8,19 @@ import cc.rep.Item;
 import cc.rep.ResultCode;
 import cc.rep.SpinnerListAdapter;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class NewItemActivity extends Activity {
     Item item;
@@ -63,6 +67,27 @@ public class NewItemActivity extends Activity {
     	finish();
     }
     
+    public void onAddTag(View view){
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View add_tag = factory.inflate(R.layout.add_tag, null);
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+//           .setIconAttribute(android.R.attr.alertDialogIcon)
+            .setTitle(R.string.addTagTitle)
+            .setView(add_tag)
+            .setPositiveButton(R.string.addTagOK, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                	Toast.makeText(NewItemActivity.this, "NewItemActivity: + OK : " + ((EditText) add_tag.findViewById(R.id.editText1)).getText(), Toast.LENGTH_SHORT).show();
+                }
+            })
+            .setNegativeButton(R.string.addTagCancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                	Toast.makeText(NewItemActivity.this, "NewItemActivity: + cancel", Toast.LENGTH_SHORT).show();
+                }
+            })
+            .create();
+        alertDialog.show();
+        
+    }
     
     public void takePicture(View view) {
     	Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);

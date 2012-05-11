@@ -53,6 +53,10 @@
 	<string name="btnReturn">Return</string>
 	<string name="btnShare">Share</string>
 	<string name="btnAdd">Add</string>
+    <string name="btnAddTag">+</string>
 	<string name="untitled">Untitled</string>
+    <string name="addTagTitle">Add Tag</string>
+    <string name="addTagOK">OK</string>
+    <string name="addTagCancel">Cancel</string>
 	
 </resources>

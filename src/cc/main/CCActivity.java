@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -106,6 +107,11 @@ public class CCActivity extends Activity {
 
 	public static void alert(NewCollectionActivity newCollectionActivity,
 			String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void alert(OnClickListener onClickListener, String msg) {
 		// TODO Auto-generated method stub
 		
 	}
