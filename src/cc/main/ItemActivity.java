@@ -3,13 +3,18 @@ package cc.main;
 import cc.rep.Collection;
 import cc.rep.Item;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ItemActivity extends Activity {
 	
@@ -41,6 +46,30 @@ public class ItemActivity extends Activity {
     	intent.putExtra("item", item);
     	setResult(Activity.RESULT_OK, intent);
     	finish();
+    }
+    
+    public void onAddTag(View view){
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View add_tag = factory.inflate(R.layout.add_tag, null);
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+//           .setIconAttribute(android.R.attr.alertDialogIcon)
+            .setTitle(R.string.addTagTitle)
+            .setView(add_tag
+            		)
+            .setPositiveButton(R.string.addTagOK, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    Toast.makeText(ItemActivity.this, "NewItemActivity: + OK : " + 
+                    									((EditText) add_tag.findViewById(R.id.editText1)).getText(), Toast.LENGTH_SHORT).show();
+                }
+            })
+            .setNegativeButton(R.string.addTagCancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                	Toast.makeText(ItemActivity.this, "NewItemActivity: + cancel", Toast.LENGTH_SHORT).show();
+                }
+            })
+            .create();
+        alertDialog.show();
+        
     }
     
     @Override
