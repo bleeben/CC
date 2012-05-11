@@ -10,7 +10,8 @@ public class Collection implements Parcelable, Storable{
 	private String name;
 	private long id;
 	private List<Item> items = new ArrayList<Item>();
-	private List<Sharer> sharers = new ArrayList<Sharer>();;
+	private List<Sharer> sharers = new ArrayList<Sharer>();
+	private String desc;
 	
 	public String getName() {
 		return name;
@@ -122,6 +123,18 @@ public class Collection implements Parcelable, Storable{
 			return new Collection[size];
 		}
 	};
+
+	@Override
+	public String getDesc() {
+		// TODO Auto-generated method stub
+		return desc;
+	}
+
+	@Override
+	public void setDesc(String desc) {
+		// TODO Auto-generated method stub
+		this.desc=desc;
+	}
 	
 	
 
