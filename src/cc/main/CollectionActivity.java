@@ -1,6 +1,7 @@
 package cc.main;
 
 import cc.rep.Collection;
+import cc.rep.ImageAdapter;
 import cc.rep.Item;
 import cc.rep.ResultCode;
 import android.app.Activity;
@@ -10,9 +11,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class CollectionActivity extends Activity {
 	Collection c;
+	GridView gridColls;
 	
     /** Called when the activity is first created. */
 	@Override
@@ -22,6 +27,23 @@ public class CollectionActivity extends Activity {
         
         Intent i = getIntent();
         c = (Collection) i.getParcelableExtra("collection");
+        
+        gridColls = (GridView) findViewById(R.id.gridView1);
+        gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater(),c));
+        
+        gridColls.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v,
+                    int position, long id) {
+ 
+                // Sending image id to FullScreenActivity
+                Intent i = new Intent(getApplicationContext(), ItemActivity.class);
+                // passing array index
+                i.putExtra("id", position);
+                i.putExtra("collection", c);
+                startActivity(i);
+            }
+        });
     }
     //hi
     

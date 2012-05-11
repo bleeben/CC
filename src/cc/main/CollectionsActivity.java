@@ -31,7 +31,9 @@ public class CollectionsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.collections);
         
-        //collections = new ArrayList<Collection>();
+        Intent i = getIntent();
+        collections = i.getParcelableArrayListExtra("collections");
+        
         gridColls = (GridView) findViewById(R.id.gridView1);
         gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater(),collections));
         

@@ -6,7 +6,7 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Collection implements Parcelable {
+public class Collection implements Parcelable, Storable{
 	private String name;
 	private long id;
 	private List<Item> items = new ArrayList<Item>();

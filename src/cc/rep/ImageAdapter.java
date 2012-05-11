@@ -1,6 +1,7 @@
 package cc.rep;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cc.main.R;
 import android.content.Context;
@@ -15,26 +16,33 @@ public class ImageAdapter extends BaseAdapter {
 
     Context context;
     LayoutInflater li;
-    ArrayList<Collection> collections;
+    List<? extends Storable> c;
     
     public ImageAdapter(Context context,LayoutInflater li,ArrayList<Collection> collections)
     {
        this.context = context;
        this.li=li;
-       this.collections=collections;
+       this.c=collections;
+    }
+    
+    public ImageAdapter(Context context,LayoutInflater li,Collection collection)
+    {
+       this.context = context;
+       this.li=li;
+       this.c=collection.getItems();
     }
 
 	
 	//@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 9;
+		return c.size();
 	}
 
 	//@Override
-	public Object getItem(int arg0) {
+	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return null;
+		return c.get(position);
 	}
 
 	//@Override
@@ -56,7 +64,7 @@ public class ImageAdapter extends BaseAdapter {
            
            // Add The Text!!!
            TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-           tv.setText("Item "+ position );
+           tv.setText(position +": "+c.get(position).getName());
            
            // Add The Image!!!           
            ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);

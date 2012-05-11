@@ -20,9 +20,11 @@ public class NewCollectionActivity extends Activity {
         setContentView(R.layout.collection_properties);
         
         c = new Collection();
+        Intent i = getIntent();
+        int size = i.getIntExtra("totalNum",0);
         
         nameEdit = (EditText)findViewById(R.id.editTextName);
-        nameEdit.setText("Untitled");
+        nameEdit.setText("Untitled "+size);
     }
     //hi
     

@@ -3,7 +3,7 @@ package cc.rep;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Item implements Parcelable {
+public class Item implements Parcelable, Storable {
 	private String name;
 	private long id;
 	private Collection collection;
