@@ -3,9 +3,11 @@ package contentprovider;
 import cc.rep.CollectionOpenHelper;
 import cc.rep.ItemOpenHelper;
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
@@ -101,19 +103,34 @@ public class MainContentProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues values) {
+		SQLiteDatabase sqlDB;
+		long rowID;
 		switch (sURIMatcher.match(uri)) {
 		case C:
-			break;
 		case C_ID:
+			sqlDB = collectionDB.getWritableDatabase();
+			rowID = sqlDB.insert(CollectionOpenHelper.COLLECTION_TABLE_NAME, null, values);
+			if (rowID > 0){
+				Uri _uri = ContentUris.withAppendedId(CONTENT_URI_C, rowID);
+				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			}
 			break;
 		case I:
-			break;
 		case I_ID:
+			sqlDB = itemDB.getWritableDatabase();
+			rowID = sqlDB.insert(ItemOpenHelper.ITEM_TABLE_NAME, null, values);
+			if (rowID > 0){
+				Uri _uri = ContentUris.withAppendedId(CONTENT_URI_I, rowID);
+				getContext().getContentResolver().notifyChange(_uri, null);
+				return _uri;
+			}
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown uri: " + uri.toString());
 		}
-		return null;
+
+		throw new SQLException("Failed to insert row into " + uri);
 	}
 
 	@Override
@@ -165,14 +182,19 @@ public class MainContentProvider extends ContentProvider {
 	public int update(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
 		// TODO Auto-generated method stub
+		SQLiteDatabase sqlDB;
 		switch (sURIMatcher.match(uri)) {
 		case C:
+			sqlDB = collectionDB.getWritableDatabase();
 			break;
 		case C_ID:
+			sqlDB = collectionDB.getWritableDatabase();
 			break;
 		case I:
+			sqlDB = itemDB.getWritableDatabase();
 			break;
 		case I_ID:
+			sqlDB = itemDB.getWritableDatabase();
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown uri: " + uri.toString());
