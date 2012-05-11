@@ -61,7 +61,6 @@ public class MainContentProvider extends ContentProvider {
 			} else {
 				rowsAffected = sqlDB.delete(CollectionOpenHelper.COLLECTION_TABLE_NAME, selection + " and " + CollectionOpenHelper.COLUMN_ID + " = " + id, null);
 			}
-			sqlDB = collectionDB.getWritableDatabase();
 			break;
 		case I:
 			sqlDB = itemDB.getWritableDatabase();
@@ -86,19 +85,20 @@ public class MainContentProvider extends ContentProvider {
 	@Override
 	public String getType(Uri uri) {
 		// TODO Auto-generated method stub
+		String single = "vnd.android.cursor.item/";
+		String mult = "vnd.android.cursor.dir/";
 		switch (sURIMatcher.match(uri)) {
 		case C:
-			break;
+			return mult + "vnd.cc.collections";
 		case C_ID:
-			break;
+			return single + "vnd.cc.collection";
 		case I:
-			break;
+			return mult + "vnd.cc.items";
 		case I_ID:
-			break;
+			return single + "vnd.cc.item";
 		default:
 			throw new IllegalArgumentException("Unknown uri: " + uri.toString());
 		}
-		return null;
 	}
 
 	@Override
@@ -183,23 +183,39 @@ public class MainContentProvider extends ContentProvider {
 			String[] selectionArgs) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase sqlDB;
+		int rowsAffected = 0;
 		switch (sURIMatcher.match(uri)) {
 		case C:
 			sqlDB = collectionDB.getWritableDatabase();
+			rowsAffected = sqlDB.update(CollectionOpenHelper.COLLECTION_TABLE_NAME, values, selection, selectionArgs);
 			break;
 		case C_ID:
 			sqlDB = collectionDB.getWritableDatabase();
+			String id = uri.getLastPathSegment();
+			if (TextUtils.isEmpty(selection)){
+				rowsAffected = sqlDB.update(CollectionOpenHelper.COLLECTION_TABLE_NAME, values, CollectionOpenHelper.COLUMN_ID + " = " + id, null);
+			} else {
+				rowsAffected = sqlDB.update(CollectionOpenHelper.COLLECTION_TABLE_NAME, values, selection + " and " + CollectionOpenHelper.COLUMN_ID + " = " + id, null);
+			}
 			break;
 		case I:
 			sqlDB = itemDB.getWritableDatabase();
+			rowsAffected = sqlDB.update(ItemOpenHelper.ITEM_TABLE_NAME, values, selection, selectionArgs);
 			break;
 		case I_ID:
 			sqlDB = itemDB.getWritableDatabase();
+			String id2 = uri.getLastPathSegment();
+			if (TextUtils.isEmpty(selection)){
+				rowsAffected = sqlDB.update(ItemOpenHelper.ITEM_TABLE_NAME, values, ItemOpenHelper.COLUMN_ID + " = " + id2, null);
+			} else {
+				rowsAffected = sqlDB.update(ItemOpenHelper.ITEM_TABLE_NAME, values, selection + " and " + ItemOpenHelper.COLUMN_ID + " = " + id2, null);
+			}
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown uri: " + uri.toString());
 		}
-		return 0;
+		getContext().getContentResolver().notifyChange(uri, null);
+		return rowsAffected;
 	}
 
 }
