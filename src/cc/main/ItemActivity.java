@@ -9,11 +9,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class ItemActivity extends Activity {
 	
 	Item item;
 	int position;
+	TextView itemName;
 	
     /** Called when the activity is first created. */
     @Override

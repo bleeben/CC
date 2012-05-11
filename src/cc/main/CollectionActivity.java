@@ -14,13 +14,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.Spinner;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 public class CollectionActivity extends Activity {
 	Collection c;
 	GridView gridColls;
 	int position;
 	static final int BROWSE_ITEM = 4;
+	TextView collectionName;
 	
     /** Called when the activity is first created. */
 	@Override
@@ -49,6 +52,9 @@ public class CollectionActivity extends Activity {
                 startActivityForResult(i,BROWSE_ITEM);
             }
         });
+        
+        collectionName = (TextView) findViewById(R.id.collectionName);
+        collectionName.setText(c.getName());
     }
     //hi
     
