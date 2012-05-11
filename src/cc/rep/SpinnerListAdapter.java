@@ -10,26 +10,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-public class ImageAdapter extends BaseAdapter {
+public class SpinnerListAdapter extends BaseAdapter implements SpinnerAdapter{
 
     Context context;
     LayoutInflater li;
     List<? extends Storable> c;
     
-    public ImageAdapter(Context context,LayoutInflater li,ArrayList<Collection> collections)
+    public SpinnerListAdapter(Context context,LayoutInflater li,ArrayList<Collection> collections)
     {
        this.context = context;
        this.li=li;
        this.c=collections;
     }
     
-    public ImageAdapter(Context context,LayoutInflater li,Collection collection)
+    public SpinnerListAdapter(Context context,LayoutInflater li,Collection collection)
     {
        this.context = context;
        this.li=li;
-       this.c=collection.getItems();
+       ArrayList<Collection> c=new ArrayList<Collection>();
+       c.add(collection);
+       this.c=c;
     }
 
 	
@@ -63,15 +66,21 @@ public class ImageAdapter extends BaseAdapter {
            itemView = li.inflate(R.layout.grid_item, null);
            
            // Add The Text!!!
-           TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-           tv.setText(position +": "+c.get(position).getName());
+           TextView tv = new TextView(context);
+           tv.setText(c.get(position).getName());
            
-           // Add The Image!!!           
-           ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);
-           iv.setImageResource(R.drawable.ic_launcher);
         }
         
         return itemView;
+	}
+	
+	@Override
+	public View getDropDownView(int position, View convertView, ViewGroup parent) {
+		if (convertView==null) {
+			return getView(position,convertView,parent);
+		}
+		return convertView;
+
 	}
 
 }

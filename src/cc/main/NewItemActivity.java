@@ -3,8 +3,10 @@ package cc.main;
 import java.util.ArrayList;
 
 import cc.rep.Collection;
+import cc.rep.ImageAdapter;
 import cc.rep.Item;
 import cc.rep.ResultCode;
+import cc.rep.SpinnerListAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -38,6 +40,11 @@ public class NewItemActivity extends Activity {
         
         Collection c = (Collection) i.getParcelableExtra("collection");
         ArrayList<Collection> cs = i.getParcelableArrayListExtra("collections");
+        if (cs==null) {
+        	collectionSpinner.setAdapter(new SpinnerListAdapter(this,getLayoutInflater(),c));
+        } else {
+        	collectionSpinner.setAdapter(new SpinnerListAdapter(this,getLayoutInflater(),cs));
+        }
         
     }
     //hi
