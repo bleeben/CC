@@ -99,6 +99,18 @@ public class Collection implements Parcelable, Storable{
 		}
 		
 		return temp;
+	}	
+	
+	public ArrayList<Item> getMatches(ArrayList<Tag> filters) {
+		ArrayList<Item> temp = new ArrayList<Item>();
+		
+		for(Item item:items){
+			if(item.matchesTags(filters)){
+				temp.add(item); //TODO - Don't copy, right? Want to have it so that an edits you make edit the original.
+			}
+		}
+		
+		return temp;
 	}
 	// used to regenerate object
 	public static final Parcelable.Creator<Collection> CREATOR = new Parcelable.Creator<Collection>(){

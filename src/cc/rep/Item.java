@@ -85,6 +85,15 @@ public class Item implements Parcelable, Storable {
 		return false;
 	}
 	
+	public boolean matchesTags(ArrayList<Tag> filters){
+		for(Tag filter:filters){
+			if(!matchesTag(filter)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	
 
 	// used to regenerate object
