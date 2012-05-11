@@ -70,6 +70,9 @@ public class ImageAdapter extends BaseAdapter {
            ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);
            iv.setImageResource(R.drawable.ic_launcher);
         }
+        // Add The Text!!!
+        TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
+        tv.setText(position +": "+c.get(position).getName());
         
         return itemView;
 	}

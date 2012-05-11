@@ -30,12 +30,16 @@ public class ItemActivity extends Activity {
     }
     //hi
     
-    
     public void onCancelButtonClick(View view) {
+    	setResult(RESULT_CANCELED);
     	finish();
     }
     
     public void onDoneButtonClick(View view) {
+    	item.setName(itemName.getText().toString());
+    	Intent intent = new Intent();
+    	intent.putExtra("item", item);
+    	setResult(Activity.RESULT_OK, intent);
     	finish();
     }
     

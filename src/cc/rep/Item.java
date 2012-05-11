@@ -10,6 +10,7 @@ public class Item implements Parcelable, Storable {
 	private long id;
 	private Collection collection;
 	private ArrayList<Tag> tags = new ArrayList<Tag>();;
+	private String desc;
 	
 	public Item() {
 	}
@@ -106,4 +107,18 @@ public class Item implements Parcelable, Storable {
 			return new Item[size];
 		}
 	};
+	
+	@Override
+	public String getDesc() {
+		// TODO Auto-generated method stub
+		return desc;
+	}
+
+	@Override
+	public void setDesc(String desc) {
+		// TODO Auto-generated method stub
+		this.desc=desc;
+	}
+	
+	
 }
