@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -63,6 +64,7 @@ public class CollectionActivity extends Activity {
     		case RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
     			c.addItem(newItem);
+    			((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
     			CCActivity.alert(this, "Num Items: "+c.size());
     			break;
     		case RESULT_CANCELED:

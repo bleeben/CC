@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
@@ -56,6 +57,7 @@ public class CollectionsActivity extends Activity {
     
     public void onNewCollectionButtonClick(View view) {
     	Intent intent = new Intent(this, NewCollectionActivity.class);
+    	intent.putExtra("totalNum", collections.size());
     	startActivityForResult(intent, NEW_COLLECTION_REQUEST);
     }
     
@@ -67,6 +69,8 @@ public class CollectionsActivity extends Activity {
     		case RESULT_OK:
     	        Collection newColl = (Collection) data.getParcelableExtra("collection");
     	        collections.add(newColl);
+    	        ((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
+    	        CCActivity.alert(this, "Num Collections: "+collections.size());
     			break;
     		case RESULT_CANCELED:
     			break;

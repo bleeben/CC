@@ -61,6 +61,7 @@ public class CCActivity extends Activity {
     
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
+    	intent.putExtra("totalNum", collections.size());
     	startActivityForResult(intent, NEW_ITEM_REQUEST);
     }
     
