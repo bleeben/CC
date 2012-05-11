@@ -1,5 +1,7 @@
 package cc.rep;
 
+import java.util.ArrayList;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,9 +9,9 @@ public class Item implements Parcelable, Storable {
 	private String name;
 	private long id;
 	private Collection collection;
+	private ArrayList<Tag> tags = new ArrayList<Tag>();;
 	
 	public Item() {
-		
 	}
 	
 	public Item(String name){
@@ -64,6 +66,26 @@ public class Item implements Parcelable, Storable {
 	public void setID(long id) {
 		this.id = id;
 	}
+	
+
+	public ArrayList<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTages(ArrayList<Tag> tags){
+		this.tags = tags;
+	}
+	
+	public boolean matchesTag(Tag filter){
+		for(Tag tag:tags){
+			if(tag.matchesTag(filter)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 
 	// used to regenerate object
 	public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>(){
