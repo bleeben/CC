@@ -67,6 +67,9 @@ public class Collection implements Parcelable, Storable{
 	public Item getItem(int location){
 		return items.get(location);
 	}
+	public void setItem(int location, Item item){
+		items.set(location, item);
+	}
 	public Sharer getSharer(int location){
 		return sharers.get(location);
 	}

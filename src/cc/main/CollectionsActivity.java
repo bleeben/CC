@@ -23,6 +23,8 @@ import android.widget.GridView;
 public class CollectionsActivity extends Activity {
 	
 	static final int NEW_COLLECTION_REQUEST = 0;
+	static final int BROWSE_COLLECTION = 3;
+	
 	private ArrayList<Collection> collections = new ArrayList<Collection>();;
 	GridView gridColls;
 	
@@ -46,10 +48,10 @@ public class CollectionsActivity extends Activity {
                 // Sending image id to FullScreenActivity
                 Intent i = new Intent(getApplicationContext(), CollectionActivity.class);
                 // passing array index
-                i.putExtra("id", position);
+                i.putExtra("position", position);
                 i.putParcelableArrayListExtra("collections", collections);
                 i.putExtra("collection", collections.get(position));
-                startActivity(i);
+                startActivityForResult(i,BROWSE_COLLECTION);
             }
         });
     }
@@ -76,7 +78,27 @@ public class CollectionsActivity extends Activity {
     			break;
     		}
     		break;
+    	case BROWSE_COLLECTION:
+    		switch (resultCode) {
+    		case Activity.RESULT_OK:
+    			Collection c = data.getParcelableExtra("collection");
+    			int pos = data.getIntExtra("position", 0);
+    			collections.set(pos, c);
+    			//collections = c;
+    			break;
+    		}
+    		break;
     	}
+    }
+    
+    @Override
+    public void onPause(){
+    	super.onPause();
+    	CCActivity.alert(this, "Leaving Collections");
+    	
+    	Intent intent = new Intent();
+    	intent.putExtra("collections", collections);
+    	setResult(Activity.RESULT_OK, intent);
     }
     	
     @Override

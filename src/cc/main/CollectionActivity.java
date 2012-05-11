@@ -19,6 +19,8 @@ import android.widget.AdapterView.OnItemClickListener;
 public class CollectionActivity extends Activity {
 	Collection c;
 	GridView gridColls;
+	int position;
+	static final int BROWSE_ITEM = 4;
 	
     /** Called when the activity is first created. */
 	@Override
@@ -28,6 +30,7 @@ public class CollectionActivity extends Activity {
         
         Intent i = getIntent();
         c = (Collection) i.getParcelableExtra("collection");
+        position = i.getIntExtra("position", 0);
         
         gridColls = (GridView) findViewById(R.id.gridView1);
         gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater(),c));
@@ -40,10 +43,10 @@ public class CollectionActivity extends Activity {
                 // Sending image id to FullScreenActivity
                 Intent i = new Intent(getApplicationContext(), ItemActivity.class);
                 // passing array index
-                i.putExtra("id", position);
+                i.putExtra("position", position);
                 i.putExtra("collection", c);
                 i.putExtra("item", c.getItem(position));
-                startActivity(i);
+                startActivityForResult(i,BROWSE_ITEM);
             }
         });
     }
@@ -52,6 +55,7 @@ public class CollectionActivity extends Activity {
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
     	intent.putExtra("totalNum", c.size());
+    	intent.putExtra("collection", c);
     	startActivityForResult(intent, ResultCode.NEW_ITEM_REQUEST);
 
     }
@@ -71,6 +75,16 @@ public class CollectionActivity extends Activity {
     			break;
     		}
     		break;
+    	case BROWSE_ITEM:
+    		switch (resultCode) {
+    		case Activity.RESULT_OK:
+    			Item item = data.getParcelableExtra("item");
+    			int pos = data.getIntExtra("position", 0);
+    			c.setItem(pos, item);
+    			//collections = c;
+    			break;
+    		}
+    		break;
     	}
     }
     public void editProperties(View view){
@@ -81,6 +95,17 @@ public class CollectionActivity extends Activity {
     	Intent intent = new Intent(this, CollectionPropertiesActivity.class);
     	intent.putExtra("collection", new Collection());
     	startActivity(intent);
+    }
+    
+    @Override
+    public void onPause(){
+    	super.onPause();
+    	CCActivity.alert(this, "Leaving Collections");
+    	
+    	Intent intent = new Intent();
+    	intent.putExtra("collection", c);
+    	intent.putExtra("position", position);
+    	setResult(Activity.RESULT_OK, intent);
     }
     
     @Override

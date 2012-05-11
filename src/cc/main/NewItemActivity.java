@@ -1,5 +1,7 @@
 package cc.main;
 
+import java.util.ArrayList;
+
 import cc.rep.Collection;
 import cc.rep.Item;
 import cc.rep.ResultCode;
@@ -33,6 +35,9 @@ public class NewItemActivity extends Activity {
         nameEdit.setText("Untitled "+size);
         
         collectionSpinner = (Spinner) findViewById(R.id.collectionSpinner);
+        
+        Collection c = (Collection) i.getParcelableExtra("collection");
+        ArrayList<Collection> cs = i.getParcelableArrayListExtra("collections");
         
     }
     //hi

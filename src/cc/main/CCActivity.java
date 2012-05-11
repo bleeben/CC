@@ -21,6 +21,7 @@ public class CCActivity extends Activity {
 	
 	 static final int NEW_COLLECTION_REQUEST = 0;
 	 static final int NEW_ITEM_REQUEST = 1;
+	 static final int BROWSE_COLLECTIONS = 2;
 
 	private ArrayList<Collection> collections = new ArrayList<Collection>();;
 	 
@@ -56,12 +57,14 @@ public class CCActivity extends Activity {
     	Intent intent = new Intent(this, CollectionsActivity.class);
     	CCActivity.alert(this,"Entering Collections From Home");
     	intent.putParcelableArrayListExtra("collections", collections);
-    	startActivity(intent);
+    	startActivityForResult(intent,BROWSE_COLLECTIONS);
+    	//startActivity(intent);
     }
     
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
     	intent.putExtra("totalNum", collections.size());
+    	intent.putParcelableArrayListExtra("collections", collections);
     	startActivityForResult(intent, NEW_ITEM_REQUEST);
     }
     
@@ -87,6 +90,14 @@ public class CCActivity extends Activity {
     		switch (resultCode) {
     		case Activity.RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
+    			break;
+    		}
+    		break;
+    	case BROWSE_COLLECTIONS:
+    		switch (resultCode) {
+    		case Activity.RESULT_OK:
+    			ArrayList<Collection> c = data.getParcelableArrayListExtra("collections");
+    			collections = c;
     			break;
     		}
     		break;
