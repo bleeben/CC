@@ -64,6 +64,16 @@ public class NewItemActivity extends Activity {
     	item.setName(nameEdit.getText().toString());
     	Intent intent = new Intent();
     	intent.putExtra("item", item);
+    	
+    	Intent i = getIntent();
+        Collection c = (Collection) i.getParcelableExtra("collection");
+        ArrayList<Collection> cs = i.getParcelableArrayListExtra("collections");
+        if (cs==null) {
+        } else {
+        	intent.putExtra("position", collectionSpinner.getSelectedItemPosition());
+        }
+    	
+    	
     	setResult(Activity.RESULT_OK, intent);
     	finish();
     }

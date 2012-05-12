@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="onNewItemButtonClick"
-                android:text="@string/newPic" />
+                android:text="@string/newItem" />
 
         </LinearLayout>
 

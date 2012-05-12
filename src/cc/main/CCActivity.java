@@ -91,6 +91,9 @@ public class CCActivity extends Activity {
     		switch (resultCode) {
     		case Activity.RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
+    			int position = data.getIntExtra("position", 0);
+    			if (collections.size()>0)
+    				collections.get(position).addItem(newItem);
     			break;
     		}
     		break;
