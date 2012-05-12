@@ -16,16 +16,22 @@ public class SharingManagerActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sharing_manager);
         
-        c = new Collection();
+        Intent i = getIntent();
+        c = (Collection) i.getParcelableExtra("collection");
+        
         
     }
+    
     public void onCancelButtonClick(View view) {
-    	//c.setName(nameEdit.getText().toString());
+    	setResult(RESULT_CANCELED);
     	finish();
     }
     
     public void onDoneButtonClick(View view) {
-    	// save the collections state
+    	Intent intent = new Intent();
+    	intent.putExtra("collection", c);
+    	
+    	setResult(Activity.RESULT_OK,intent);
     	finish();
     }
 }

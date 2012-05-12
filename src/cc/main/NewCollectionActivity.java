@@ -1,18 +1,24 @@
 package cc.main;
 
 import cc.rep.Collection;
+import cc.rep.Item;
+import cc.rep.ResultCode;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 public class NewCollectionActivity extends Activity {
 	
 	Collection c;
 	EditText nameEdit;
 	EditText descEdit;
+	ToggleButton shareToggle;
+	static final int SHARE_COLLECTION = 6;
 	
     /** Called when the activity is first created. */
     @Override
@@ -27,9 +33,24 @@ public class NewCollectionActivity extends Activity {
         nameEdit = (EditText)findViewById(R.id.editTextName);
         nameEdit.setText("Untitled "+size);
         descEdit = (EditText)findViewById(R.id.editTextDesc);
+        shareToggle = (ToggleButton) findViewById(R.id.toggleButtonShare);
+        shareToggle.setChecked(true);
     }
     //hi
     
+    protected void onActivityResult(int requestCode, int resultCode,
+            Intent data) {
+    	switch (requestCode) {
+    	case SHARE_COLLECTION:
+    		switch (resultCode) {
+    		case Activity.RESULT_OK:
+    			Collection collection = data.getParcelableExtra("collection");
+    			c = collection;
+    			break;
+    		}
+    		break;
+    	}
+    }
     
     public void onCancelButtonClick(View view) {
     	setResult(RESULT_CANCELED);
@@ -39,6 +60,7 @@ public class NewCollectionActivity extends Activity {
     public void onDoneButtonClick(View view) {
     	c.setName(nameEdit.getText().toString());
     	c.setDesc(descEdit.getText().toString());
+       	c.setPrivate(shareToggle.isChecked());
     	Intent intent = new Intent();
     	intent.putExtra("collection", c);
     	
@@ -48,6 +70,6 @@ public class NewCollectionActivity extends Activity {
     public void onShareButtonClick(View view){
     	Intent intent = new Intent(this, SharingManagerActivity.class);
     	intent.putExtra("collection", c);
-    	startActivity(intent);
+    	startActivityForResult(intent,SHARE_COLLECTION);
     }
 }

@@ -8,6 +8,7 @@ public class Sharer implements Parcelable{
     private String name;
     private String email;
     private String permission;
+    private Permission perms;
     
     public Sharer(String email) {
     	this.name = email;

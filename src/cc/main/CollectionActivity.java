@@ -1,5 +1,7 @@
 package cc.main;
 
+import java.util.ArrayList;
+
 import cc.rep.Collection;
 import cc.rep.ImageAdapter;
 import cc.rep.Item;
@@ -24,6 +26,8 @@ public class CollectionActivity extends Activity {
 	int position;
 	static final int BROWSE_ITEM = 4;
 	TextView collectionName;
+	static final int EDIT_COLLECTION_PROPERTIES = 5;
+	static final int SHARE_COLLECTION = 6;
 	
     /** Called when the activity is first created. */
 	@Override
@@ -91,6 +95,22 @@ public class CollectionActivity extends Activity {
     			break;
     		}
     		break;
+    	case EDIT_COLLECTION_PROPERTIES:
+    		switch (resultCode) {
+    		case Activity.RESULT_OK:
+    			Collection collection = data.getParcelableExtra("collection");
+    			c = collection;
+    			break;
+    		}
+    		break;
+    	case SHARE_COLLECTION:
+    		switch (resultCode) {
+    		case Activity.RESULT_OK:
+    			Collection collection = data.getParcelableExtra("collection");
+    			c = collection;
+    			break;
+    		}
+    		break;
     	}
     }
     public void editProperties(View view){
@@ -100,7 +120,7 @@ public class CollectionActivity extends Activity {
     public void editProperties(){
     	Intent intent = new Intent(this, CollectionPropertiesActivity.class);
     	intent.putExtra("collection", new Collection());
-    	startActivity(intent);
+    	startActivityForResult(intent,EDIT_COLLECTION_PROPERTIES );
     }
     
     @Override
@@ -129,7 +149,7 @@ public class CollectionActivity extends Activity {
             	editProperties();
                 return true;
             case R.id.share:
-            	
+            	onShareButtonClick();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -137,8 +157,11 @@ public class CollectionActivity extends Activity {
     }
     
     public void onShareButtonClick(View view){
+    	onShareButtonClick();
+    }
+    public void onShareButtonClick(){
     	Intent intent = new Intent(this, SharingManagerActivity.class);
     	intent.putExtra("collection", c);
-    	startActivity(intent);
+    	startActivityForResult(intent,SHARE_COLLECTION);
     }
 }

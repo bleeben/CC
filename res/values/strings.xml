@@ -20,9 +20,10 @@
 	<string name="fieldDesc">Description</string>
 	<string name="fieldThumbnail">Thumbnail</string>
 	
+	<string name="shareVisible">Visibility</string>
 	<string name="sharePublic">Public</string>
 	<string name="sharePrivate">Private</string>
-	<string name="share">Sharing</string>
+	<string name="share">Share Menu</string>
 	<string name="permView">Can View</string>
 	<string name="permEdit">Can Edit</string>
 	<string name="permOwn">Can Own</string>

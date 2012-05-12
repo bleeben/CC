@@ -12,6 +12,20 @@ public class Collection implements Parcelable, Storable{
 	private List<Item> items = new ArrayList<Item>();
 	private List<Sharer> sharers = new ArrayList<Sharer>();
 	private String desc;
+	private boolean isVisible=true;
+	
+	public boolean isPrivate(){
+		return !isVisible;
+	}
+	public boolean isPublic(){
+		return isVisible;
+	}
+	public void setPrivate(boolean p){
+		isVisible=!p;
+	}
+	public void setPublic(boolean p){
+		isVisible=p;
+	}
 	
 	public String getName() {
 		return name;
