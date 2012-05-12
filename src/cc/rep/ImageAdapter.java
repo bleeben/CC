@@ -69,10 +69,15 @@ public class ImageAdapter extends BaseAdapter {
            // Add The Image!!!           
            ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);
            iv.setImageResource(R.drawable.ic_launcher);
+        } else {
+        	// Add The Text!!!
+            TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
+            tv.setText(position +": "+c.get(position).getName());
+            
+            // Add The Image!!!           
+            ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);
+            iv.setImageResource(R.drawable.ic_launcher);
         }
-        // Add The Text!!!
-        TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-        tv.setText(position +": "+c.get(position).getName());
         
         return itemView;
 	}

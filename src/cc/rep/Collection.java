@@ -12,7 +12,7 @@ public class Collection implements Parcelable, Storable{
 	private List<Item> items = new ArrayList<Item>();
 	private List<Sharer> sharers = new ArrayList<Sharer>();
 	private String desc;
-	private boolean isVisible=true;
+	private boolean isVisible=false;
 	
 	public boolean isPrivate(){
 		return !isVisible;

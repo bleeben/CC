@@ -35,6 +35,8 @@ public class NewCollectionActivity extends Activity {
         descEdit = (EditText)findViewById(R.id.editTextDesc);
         shareToggle = (ToggleButton) findViewById(R.id.toggleButtonShare);
         shareToggle.setChecked(true);
+        
+        nameEdit.clearFocus();
     }
     //hi
     

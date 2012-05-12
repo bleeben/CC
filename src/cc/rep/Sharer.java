@@ -3,27 +3,28 @@ package cc.rep;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Sharer implements Parcelable{
+public class Sharer implements Parcelable,Storable{
 	//TODO
     private String name;
     private String email;
-    private String permission;
+    //private String permission;
     private Permission perms;
     
     public Sharer(String email) {
     	this.name = email;
         this.email = email;
-        this.permission = "edit";
+        //this.permission = "edit";
+        this.perms=Permission.CAN_EDIT;
     }    
-    public Sharer(String email, String permission) {
+    public Sharer(String email, Permission permission) {
     	this.name = email;
         this.email = email;
-        this.permission = permission;
+        this.perms = permission;
     }
-    public Sharer(String name, String email, String permission) {
+    public Sharer(String name, String email, Permission permission) {
     	this.name = name;
         this.email = email;
-        this.permission = permission;
+        this.perms = permission;
     }
 
     public String getName() {
@@ -34,8 +35,8 @@ public class Sharer implements Parcelable{
         return email;
     }
 
-    public String getPermission() {
-        return permission;
+    public Permission getPermission() {
+        return perms;
     }
 
     public void setName(String name) {
@@ -46,15 +47,15 @@ public class Sharer implements Parcelable{
 	public Sharer(Parcel in) {
 		this.name = in.readString();
 		this.email = in.readString();
-		this.permission = in.readString();
+		this.perms = Permission.values()[in.readInt()];
 	}
 	
     public void setEmail(String email) {
         this.email = email;
     }
     
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public void setPermission(Permission permission) {
+        this.perms = permission;
     }
     
 	//@Override
@@ -67,7 +68,7 @@ public class Sharer implements Parcelable{
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
 		dest.writeString(email);
-		dest.writeString(permission);
+		dest.writeInt(perms.ordinal());
 	}
 	
 	// used to regenerate object
@@ -80,4 +81,23 @@ public class Sharer implements Parcelable{
 			return new Sharer[size];
 		}
 	};
+
+	@Override
+	public long getID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void setID(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public String getDesc() {
+		return getEmail();
+	}
+	@Override
+	public void setDesc(String desc) {
+		setEmail(desc);
+	}
 }

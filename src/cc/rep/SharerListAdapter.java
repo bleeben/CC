@@ -10,29 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-public class SpinnerListAdapter extends BaseAdapter implements SpinnerAdapter{
+public class SharerListAdapter extends BaseAdapter{
 
     Context context;
     LayoutInflater li;
     List<? extends Storable> c;
-    
-    public SpinnerListAdapter(Context context,LayoutInflater li,ArrayList<Collection> collections)
+        
+    public SharerListAdapter(Context context,LayoutInflater li,Collection collection)
     {
        this.context = context;
        this.li=li;
-       this.c=collections;
-    }
-    
-    public SpinnerListAdapter(Context context,LayoutInflater li,Collection collection)
-    {
-       this.context = context;
-       this.li=li;
-       ArrayList<Collection> c=new ArrayList<Collection>();
-       c.add(collection);
-       this.c=c;
+       c = collection.getSharers();
     }
 
 	
@@ -70,20 +62,13 @@ public class SpinnerListAdapter extends BaseAdapter implements SpinnerAdapter{
            tv.setText(c.get(position).getName());
            
            itemView = tv;
+           
         } else {
         	((TextView) view).setText(c.get(position).getName());
         }
         
+        
         return itemView;
-	}
-	
-	@Override
-	public View getDropDownView(int position, View convertView, ViewGroup parent) {
-		if (convertView==null) {
-			return getView(position,convertView,parent);
-		}
-		return convertView;
-
 	}
 
 }

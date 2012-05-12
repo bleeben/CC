@@ -119,7 +119,7 @@ public class CollectionActivity extends Activity {
     
     public void editProperties(){
     	Intent intent = new Intent(this, CollectionPropertiesActivity.class);
-    	intent.putExtra("collection", new Collection());
+    	intent.putExtra("collection", c);
     	startActivityForResult(intent,EDIT_COLLECTION_PROPERTIES );
     }
     

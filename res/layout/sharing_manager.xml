@@ -30,35 +30,42 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/editText"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="2.50"
             android:ems="10"
-            android:inputType="textPersonName" >
+            android:inputType="textPersonName"
+            android:text="@string/fieldName"
+            android:selectAllOnFocus="true" >
 
             <requestFocus />
         </EditText>
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/spinnerPerm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3.20"
             android:entries="@array/permArray" />
-
+		<Button
+            android:id="@+id/buttonAdd"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onAddButtonClick"
+            android:text="@string/btnAdd" />
     </LinearLayout>
     
-    <GridView
-        android:id="@+id/gridView1"
+    <ListView
+        android:id="@+id/listSharers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:numColumns="1" >
+        android:layout_weight="1" >
 
-    </GridView>
+    </ListView>
     
     <LinearLayout
         android:layout_width="match_parent"

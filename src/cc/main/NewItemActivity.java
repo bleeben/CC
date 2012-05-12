@@ -50,6 +50,7 @@ public class NewItemActivity extends Activity {
         	collectionSpinner.setAdapter(new SpinnerListAdapter(this,getLayoutInflater(),cs));
         }
         
+        nameEdit.clearFocus();
     }
     //hi
     
