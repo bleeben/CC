@@ -1,11 +1,23 @@
 package data.hash;
 
-public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
+import java.lang.reflect.Array;
 
+public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
+	private boolean[] deleted;
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void init(Class<K> c,Class<V> v) {
+		// TODO Auto-generated method stub
+		keys = (K[]) Array.newInstance(c, capacity);
+		values = (V[]) Array.newInstance(v, capacity);
+		deleted = (boolean[]) Array.newInstance(Boolean.class, capacity);
+		
+	}
+	
 	@Override
 	public V put(K key, V value) {
-		// TODO Auto-generated method stub
-		hash(key.hashCode());
+		int i = hash(key.hashCode());
 		return null;
 	}
 
@@ -23,7 +35,10 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 
 	@Override
 	public boolean containsKey(K key) {
-		// TODO Auto-generated method stub
+		int i = hash(key.hashCode());
+		while(keys[i]!=null){
+			if(t[i]!=nil)
+		}
 		return false;
 	}
 
