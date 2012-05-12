@@ -45,12 +45,12 @@
             android:onClick="takePicture"
             android:text="take pic" />
 
-        <ImageButton
+        <!-- <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:src="@android:drawable/btn_star" />
+            android:src="@android:drawable/btn_star" /> -->
 
         <ImageView
             android:id="@+id/imageView1"
@@ -60,11 +60,11 @@
 
     </FrameLayout>
 
-    <ImageButton
+    <!-- <ImageButton
         android:id="@+id/imageButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher" /> -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,6 +85,13 @@
             android:layout_height="wrap_content"
             android:text="@string/btnAddTag"
             android:onClick="onAddTag"/>
+        
+        <Gallery
+            android:id="@+id/galleryTags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        
     </LinearLayout>
 
 
