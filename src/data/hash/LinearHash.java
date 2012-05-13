@@ -3,24 +3,31 @@ package data.hash;
 import java.lang.reflect.Array;
 
 public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
+	private Entry[] entries;
 	private boolean[] deleted;
 
-	public int linear_hash(K key){
-		return hash(key.hashCode()) & (capacity-1); // hash % capacity
+	public int next(int i){
+		return (i+81019) % capacity;
 	}
+	
 	public int find_space(K key){
-		int i = linear_hash(key);
-	     while (entries[i]!=null && !key.equals(entries[i].getKey())){
-	    	 i = (i+1) % capacity;
+		int i = hash(key.hashCode()) & (capacity-1);
+		int j = -1;
+	     while ((entries[i]!=null && !key.equals(entries[i].getKey()))){
+	    	 i = next(i);
+	    	 if(j==-1 && (entries[i]==null || deleted[i])){
+	    		 j = i;
+	    	 }
 	     }
+	     if (entries[i]!=null && !key.equals(entries[i].getKey()))
+	    	 i = j;
 	     return i;
 	} 
 	
 	public int find(K key){
-		int i = linear_hash(key);
+		int i = hash(key.hashCode()) & (capacity-1);
 	     while ((entries[i]!=null && !key.equals(entries[i].getKey())) || deleted[i]){
-//	    	 i = (i+1) - (capacity & -((i+1)>=capacity);
-	    	 i = (i+1) % capacity;
+	    	 i = next(i);
 	     }
 	     return i;
 	}
@@ -29,20 +36,22 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 	@Override
 	public V put(K key, V value) {
 		int i = find_space(key);
-		if(entries[i]==null)
-			++size;
 		Entry<K,V> e = entries[i];
-		entries[i] = new Entry<K, V>(hash(key.hashCode()),key,value,e);
+		entries[i] = new Entry<K, V>(key.hashCode(),key,value);
 		deleted[i] = false;
-		resize();
+		
+		if(e==null)
+			++size;
+			resize();
 		return value;
 	}
 	
 	@Override
 	public V get(K key) {
 		int i = find(key);
-		if(entries[i]!=null){
-			return (V) entries[i].getValue();
+		Entry<K,V> e = entries[i];
+		if(e!=null){
+			return e.getValue();
 		}
 		return null;
 	}
@@ -50,16 +59,16 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 	@Override
 	public V remove(K key) {
 		int i = find(key);
-		V value = null;
+		Entry<K,V> e = entries[i];
 		
-		if(entries[i]!=null){
+		if(e!=null){
 			--size;
-			value = (V) entries[i].getValue();
 			entries[i] = null;
 			deleted[i] = true;
 			resize();
+			return e.getValue();
 		}
-		return value;
+		return null;
 	}
 
 	@Override
@@ -102,13 +111,12 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 		for(int i = 0;i<tempCapacity;i++){
 			Entry<K,V> e = tempEntries[i];
 			if(e!=null){			
-				int j = linear_hash(e.getKey());
+				int j = e.getHash() & (capacity-1);
 				if(entries[j]==null){
 					entries[j] = e;
 				} else {
-					while(entries[j]!=null){ //Slow slow can't figure out why :[
-						j = (j+1) % capacity;
-						System.out.println("" + i + " " + j);
+					while(entries[j]!=null){
+						j = next(j);
 					}
 					entries[j] = e;
 				}
@@ -117,34 +125,27 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 	}
 
 	
-	public LinearHash(Class<K> c,Class<V> v){
-		minLoad = 3.0f / 16.0f; // 3/6
-		maxLoad = 3.0f / 4.0f; // 3/4
-		
-		init(c,v);
-		deleted = new boolean[capacity];
+	public LinearHash(){
+		this(DEFAULT_CAPACITY);
 	}	
-	public LinearHash(Class<K> c,Class<V> v, int capacity){
-		minLoad = 3.0f / 16.0f; // 3/6
-		maxLoad = 3.0f / 4.0f; // 3/4
-		capacity--; // round v up to the nearest power of 2.
-		capacity |= capacity >> 1;
-		capacity |= capacity >> 2;
-		capacity |= capacity >> 4;
-		capacity |= capacity >> 8;
-		capacity |= capacity >> 16;
-		capacity++;
-		this.capacity = capacity;
+	public LinearHash(int capacity){
+		this.capacity = nearestPowerOfTwo(capacity);
 		
-		init(c,v);
+		minLoad = 3.0f / 16.0f; // 3/16
+		maxLoad = 3.0f / 4.0f; // 3/4
+		minThreshold = (int) (minLoad*capacity);
+		maxThreshold = (int) (maxLoad*capacity);
+		
+		entries = new Entry[capacity];
 		deleted = new boolean[capacity];
 	}
+	
 
 	public static void main(String[] args){
-		 LinearHash<String,Integer> test = new LinearHash<String, Integer>(String.class,Integer.class);
+		 LinearHash<String,Integer> test = new LinearHash<String, Integer>();
 		 test.put("Test", 10);
-		 System.out.println("0".hashCode());
-		 System.out.println(hash("0".hashCode()));
+		 System.out.println("".hashCode());
+		 System.out.println(hash("".hashCode()));
 		 
 	}
 }

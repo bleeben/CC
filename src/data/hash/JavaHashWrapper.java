@@ -1,41 +1,41 @@
 package data.hash;
+import java.util.HashMap;
 
 public class JavaHashWrapper<K,V> extends SkeletonHashMap<K, V>{
-
+	private HashMap hashMap;
+	public JavaHashWrapper(Class<K> c,Class<V> v){
+		hashMap = new HashMap<K,V>();
+	}
 	@Override
 	public V put(K key, V value) {
-		// TODO Auto-generated method stub
+		hashMap.put(key, value);
 		return null;
 	}
 
 	@Override
-	public V get(K key) {
-		// TODO Auto-generated method stub
-		return null;
+	public V get(K key){
+		return (V) hashMap.get(key);
 	}
 
 	@Override
 	public V remove(K key) {
-		// TODO Auto-generated method stub
-		return null;
+		return (V) hashMap.remove(key);
 	}
 
 	@Override
 	public boolean containsKey(K key) {
-		// TODO Auto-generated method stub
-		return false;
+		return hashMap.containsKey(key);
 	}
 
 	@Override
 	public boolean containsValue(V value) {
-		// TODO Auto-generated method stub
-		return false;
+		return hashMap.containsValue(value);
 	}
 
 	@Override
 	protected void resize() {
-		// TODO Auto-generated method stub
-		
+		return;
+		//not needed;
 	}
 
 }

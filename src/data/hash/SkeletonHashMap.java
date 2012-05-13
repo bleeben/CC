@@ -1,9 +1,9 @@
 package data.hash;
 
 public abstract class SkeletonHashMap<K, V> {
-	protected Entry[] entries;
 	
 	protected int size;
+	protected static int DEFAULT_CAPACITY = 16;
 	protected int capacity = 16;
 	protected int minCapacity = 16;
 	protected int minThreshold;
@@ -19,14 +19,6 @@ public abstract class SkeletonHashMap<K, V> {
 		//return (size >= minThreshold || size <= minCapacity) && size <= maxThreshold;
 	}
 	
-	@SuppressWarnings("unchecked")
-	protected void init(Class<K> c,Class<V> v) {
-		entries = new Entry[capacity];
-		minThreshold = (int) (minLoad*capacity);
-		maxThreshold = (int) (maxLoad*capacity);
-		
-	}
-
 	protected abstract void resize();
 
 	public abstract V put(K key, V value);
@@ -53,8 +45,17 @@ public abstract class SkeletonHashMap<K, V> {
 		h ^= (h >>> 20) ^ (h >>> 12);
 		return h ^ (h >>> 7) ^ (h >>> 4);
 	}
-
-	static int indexFor(int h, int length) {
-		return h & (length - 1);
+	
+	public int nearestPowerOfTwo(int capacity){
+		// Rounds capacity up to the nearest power of 2, and returns it.
+		capacity--; 
+		capacity |= capacity >> 1;
+		capacity |= capacity >> 2;
+		capacity |= capacity >> 4;
+		capacity |= capacity >> 8;
+		capacity |= capacity >> 16;
+		capacity++;
+		
+		return capacity;
 	}
 }
