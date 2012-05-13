@@ -1,30 +1,29 @@
 package data.hash;
 
-import java.lang.reflect.Array;
-
 public abstract class SkeletonHashMap<K, V> {
-	protected int capacity=16;
+	protected Entry[] entries;
+	
 	protected int size;
-	protected K[] keys;
-	protected V[] values;
+	protected int capacity = 16;
+	protected int minCapacity = 16;
+	protected int minThreshold;
+	protected int maxThreshold;
+	
 	protected float minLoad; // 1/3
-	protected float maxLoad; // 2/3
+	protected float maxLoad; // .75
 	protected float prefLoad; // 1/2?
 
 	// a good load will be between 1/3 and 2/3? subject to change
 	protected boolean checkLoad() {
-		return load() < minLoad || load() > maxLoad;
-	}
-
-	public float load() {
-		return 1.0f * size / capacity;
+		return size <= maxThreshold;
+		//return (size >= minThreshold || size <= minCapacity) && size <= maxThreshold;
 	}
 	
 	@SuppressWarnings("unchecked")
 	protected void init(Class<K> c,Class<V> v) {
-		// TODO Auto-generated method stub
-		keys = (K[]) Array.newInstance(c, capacity);
-		values = (V[]) Array.newInstance(v, capacity);
+		entries = new Entry[capacity];
+		minThreshold = (int) (minLoad*capacity);
+		maxThreshold = (int) (maxLoad*capacity);
 		
 	}
 
