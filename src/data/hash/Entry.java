@@ -5,6 +5,13 @@ public class Entry<K,V> {
 	private K key;
 	private V value;
 	
+	public Entry(K key, V value){
+		this.hash = key.hashCode();
+		this.key = key;
+		this.value = value;
+	}
+
+	
 	public Entry(int hash, K key, V value){
 		this.hash = hash;
 		this.key = key;
