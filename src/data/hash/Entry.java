@@ -5,12 +5,7 @@ public class Entry<K,V> {
 	private K key;
 	private V value;
 	
-	public Entry(int hash, K key, V value, Entry e){
-		if(e!=null){
-			this.hash = e.getHash();
-			this.key = (K) e.getKey();
-			this.value = (V) e.getValue();
-		}
+	public Entry(int hash, K key, V value){
 		this.hash = hash;
 		this.key = key;
 		this.value = value;
@@ -24,7 +19,17 @@ public class Entry<K,V> {
 		return key;
 	}
 	
+	public boolean keyquals(K k){
+		return hash == k.hashCode() && key == k;
+	}
+
+	public boolean equals(Entry<K,V> e){
+		return e!=null && hash == e.getHash() && key == e.getKey();
+	}
 	public V getValue(){
 		return value;
+	}
+	public V setValue(V value){
+		return this.value = value;
 	}
 }
