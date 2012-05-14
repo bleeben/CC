@@ -196,7 +196,7 @@ public class NewItemActivity extends Activity {
 	                Bitmap thumbnail = android.provider.MediaStore.Images.Media
 	                        .getBitmap(cr, selectedImage);
 	                ImageView image = (ImageView) findViewById(R.id.imageView1);
-					//image.setImageURI(data.getData());
+					//image.setImageURI(selectedImage);
 					item.setPicUri(selectedImage);
 					image.setImageBitmap(thumbnail);
 	                CCActivity.alert(this, "Image saved to:\n" + selectedImage);

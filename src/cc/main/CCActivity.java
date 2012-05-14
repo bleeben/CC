@@ -116,6 +116,7 @@ public class CCActivity extends Activity {
     	        Collection newColl = (Collection) data.getParcelableExtra("collection");
     	        collections.add(newColl);
     	        CCActivity.alert(this, "Num Collections: "+collections.size());
+    	        onBrowseCollectionsButtonClick(null);
     			break;
     		}
     		break;

@@ -3,8 +3,12 @@ package cc.rep;
 import java.util.ArrayList;
 import java.util.List;
 
+import cc.main.CCActivity;
 import cc.main.R;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,22 +65,50 @@ public class ImageAdapter extends BaseAdapter {
            
            //Inflate the layout
            itemView = li.inflate(R.layout.grid_item, null);
+           Storable s = c.get(position);
            
            // Add The Text!!!
            TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-           tv.setText(position +": "+c.get(position).getName());
+           tv.setText(position +": "+s.getName());
            
            // Add The Image!!!           
            ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);
-           iv.setImageResource(R.drawable.ic_launcher);
+			try {
+				if (s.getPicUri() != null) {
+					Uri imageUri = s.getPicUri();
+					ContentResolver cr = context.getContentResolver();
+					Bitmap thumbnail = android.provider.MediaStore.Images.Media
+							.getBitmap(cr, imageUri);
+					//iv.setImageBitmap(thumbnail);
+				} else {
+					iv.setImageResource(R.drawable.ic_launcher);					
+				}
+			} catch (Exception e) {
+				iv.setImageResource(R.drawable.ic_launcher);
+			}
+			
         } else {
+        	
+        	Storable s = c.get(position);
         	// Add The Text!!!
             TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-            tv.setText(position +": "+c.get(position).getName());
+            tv.setText(position +": "+s.getName());
             
             // Add The Image!!!           
             ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);
-            iv.setImageResource(R.drawable.ic_launcher);
+            try {
+				if (s.getPicUri() != null) {
+					Uri imageUri = s.getPicUri();
+					ContentResolver cr = context.getContentResolver();
+					Bitmap thumbnail = android.provider.MediaStore.Images.Media
+							.getBitmap(cr, imageUri);
+					//iv.setImageBitmap(thumbnail);
+				} else {
+					iv.setImageResource(R.drawable.ic_launcher);					
+				}
+			} catch (Exception e) {
+				iv.setImageResource(R.drawable.ic_launcher);
+			}
         }
         
         return itemView;
