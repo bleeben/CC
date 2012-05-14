@@ -10,7 +10,7 @@ public class Item implements Parcelable, Storable {
 	private String name;
 	private long id;
 	private Collection collection;
-	private ArrayList<Tag> tags = new ArrayList<Tag>();;
+	private ArrayList<Tag> tags = new ArrayList<Tag>();
 	private String desc;
 	
 	public Item() {
@@ -24,6 +24,7 @@ public class Item implements Parcelable, Storable {
 		this.name = in.readString();
 		this.setID(in.readLong());
 		this.collection = in.readParcelable(Collection.class.getClassLoader());
+		in.readTypedList(tags, Tag.CREATOR);
 	}
 
 	public String getName() {
@@ -45,7 +46,7 @@ public class Item implements Parcelable, Storable {
 		dest.writeString(name);
 		dest.writeLong(getID());
 		dest.writeParcelable(collection, 0);
-		
+		dest.writeTypedList(tags);
 	}
 	
 	public Collection getCollection() {
@@ -73,8 +74,24 @@ public class Item implements Parcelable, Storable {
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
+	
+	public void addTag(Tag tag){
+		tags.add(tag);
+	}
+	
+	public void addTag(String tag){
+		tags.add(new Tag(tag));
+	}
+	
+	public boolean removeTag(Tag tag){
+		return tags.remove(tag);
+	}
+	
+	public boolean removeTag(String tag){
+		return tags.remove(new Tag(tag));
+	}
 
-	public void setTages(ArrayList<Tag> tags){
+	public void setTags(ArrayList<Tag> tags){
 		this.tags = tags;
 	}
 	

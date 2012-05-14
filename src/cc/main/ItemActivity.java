@@ -6,6 +6,7 @@ import cc.rep.Collection;
 import cc.rep.Item;
 import cc.rep.ResultCode;
 import cc.rep.SpinnerListAdapter;
+import cc.rep.Tag;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,7 +18,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,21 +32,22 @@ public class ItemActivity extends Activity {
 	int position;
 	TextView itemName;
     Spinner collectionSpinner;
-
+    Gallery tagGallery;
+    ArrayAdapter<Tag> tagArr;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_item);
+        setContentView(R.layout.item);
         
         Intent i = getIntent();
         item = (Item) i.getParcelableExtra("item");
         position = i.getIntExtra("position", 0);
-        
+        //CCActivity.alert(this, "debug0");
         itemName = (TextView)findViewById(R.id.textViewItemName);
         itemName.setText(item.getName());
-        
+        //CCActivity.alert(this, "debug1");
         collectionSpinner = (Spinner) findViewById(R.id.collectionSpinner);
         
         Collection c = (Collection) i.getParcelableExtra("collection");
@@ -53,6 +57,10 @@ public class ItemActivity extends Activity {
         } else {
         	collectionSpinner.setAdapter(new SpinnerListAdapter(this,getLayoutInflater(),cs));
         }
+        CCActivity.alert(this, "debug: "+item.getTags().size());
+        tagGallery = (Gallery) findViewById(R.id.galleryTags);
+        tagArr=new ArrayAdapter<Tag>(this, android.R.layout.simple_gallery_item, item.getTags());
+        tagGallery.setAdapter(tagArr);
         
     }
     //hi
@@ -74,25 +82,32 @@ public class ItemActivity extends Activity {
     public void onAddTag(View view){
         LayoutInflater factory = LayoutInflater.from(this);
         final View add_tag = factory.inflate(R.layout.add_tag, null);
+        final EditText editTag = (EditText) add_tag.findViewById(R.id.editTextTag);
         AlertDialog alertDialog = new AlertDialog.Builder(this)
 //           .setIconAttribute(android.R.attr.alertDialogIcon)
             .setTitle(R.string.addTagTitle)
-            .setView(add_tag
-            		)
+            .setView(add_tag)
             .setPositiveButton(R.string.addTagOK, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    Toast.makeText(ItemActivity.this, "NewItemActivity: + OK : " + 
-                    									((EditText) add_tag.findViewById(R.id.editText1)).getText(), Toast.LENGTH_SHORT).show();
+                	//Toast.makeText(NewItemActivity.this, "NewItemActivity: + OK : " + ((EditText) add_tag.findViewById(R.id.editText1)).getText(), Toast.LENGTH_SHORT).show();
+                	CCActivity.alert(getApplicationContext(), "mooDebug");
+                	item.addTag(editTag.getText().toString());
+                	CCActivity.alert(getApplicationContext(), "mooDebug11");
+                	//tagArr.notifyDataSetChanged();
+                	updateTagAdapter();
                 }
             })
             .setNegativeButton(R.string.addTagCancel, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                	Toast.makeText(ItemActivity.this, "NewItemActivity: + cancel", Toast.LENGTH_SHORT).show();
                 }
             })
             .create();
         alertDialog.show();
-        
+    }
+    
+    public void updateTagAdapter(){
+    	tagArr=new ArrayAdapter<Tag>(this, android.R.layout.simple_gallery_item, item.getTags());
+        tagGallery.setAdapter(tagArr);
     }
     
     @Override

@@ -51,6 +51,10 @@ public class CCActivity extends Activity {
         setContentView(R.layout.home);
         
         CCActivity.alert(this,"Home Screen");
+        
+        if (collections.size()==0) {
+        	collections.add(new Collection("Unsorted"));
+        }
     }
     //hi
     
