@@ -102,6 +102,8 @@ public class Item implements Parcelable, Storable {
 	}
 
 	public boolean matchesTag(Tag filter) {
+		if(filter.getText().equals(""))
+			return true;
 		for (Tag tag : tags) {
 			if (tag.matchesTag(filter)) {
 				return true;
