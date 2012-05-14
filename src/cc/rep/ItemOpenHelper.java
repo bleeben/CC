@@ -14,6 +14,7 @@ public class ItemOpenHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_COLLECTION = "collection_id";
 	public static final String COLUMN_DESC = "description";
+	public static final String COLUMN_PIC = "pic";
 	
 	
 	private static final int DATABASE_VERSION = 1;
@@ -22,7 +23,8 @@ public class ItemOpenHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + ITEM_TABLE_NAME + " (" +
             COLUMN_ID + " integer primary key autoincrement, " +
             COLUMN_NAME + " TEXT not null, " + COLUMN_COLLECTION + " integer, " +
-            COLUMN_DESC + " TEXT not null );";
+            COLUMN_DESC + " TEXT not null," + 
+            COLUMN_PIC + " TEXT not null" + ");";
     
     
 	public ItemOpenHelper(Context context, String name, CursorFactory factory,

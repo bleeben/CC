@@ -22,6 +22,9 @@ public class MainContentProvider extends ContentProvider {
 
 	public static final int I = 200;
 	public static final int I_ID = 220;
+	
+	public static final int T = 300;
+	public static final int T_ID = 330;
 
 	private static final String AUTHORITY = "com.contentprovider.cc.maincontentprovider";
 

@@ -3,6 +3,7 @@ package cc.rep;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -161,14 +162,21 @@ public class Collection implements Parcelable, Storable{
 		this.desc=desc;
 	}
 	
-	@Override
 	public void setPicUri(Uri uri) {
 		this.picUri=uri;
 	}
 
-	@Override
 	public Uri getPicUri() {
 		return picUri;
 	}	
 
+	
+	public ContentValues makeContentValues(){
+		ContentValues v = new ContentValues();
+		v.put(CollectionOpenHelper.COLUMN_ID, id);
+		v.put(CollectionOpenHelper.COLUMN_DESC, desc);
+		v.put(CollectionOpenHelper.COLUMN_NAME, name);
+		v.put(CollectionOpenHelper.COLUMN_PIC, picUri.toString());
+		return v;
+	}
 }

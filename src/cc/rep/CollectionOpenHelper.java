@@ -12,14 +12,17 @@ public class CollectionOpenHelper extends SQLiteOpenHelper {
 	
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_NAME = "name";
-	
+	public static final String COLUMN_DESC = "desc";
+	public static final String COLUMN_PIC = "pic";	
 	
 	private static final int DATABASE_VERSION = 1;
 	public static final String COLLECTION_TABLE_NAME = "collections";
     private static final String COLLECTION_TABLE_CREATE =
             "CREATE TABLE " + COLLECTION_TABLE_NAME + " (" +
             COLUMN_ID + " integer primary key autoincrement, " +
-            COLUMN_NAME + " TEXT not null);";
+            COLUMN_NAME + " TEXT not null, " + 
+            COLUMN_DESC + " TExt not null, " + 
+            COLUMN_PIC + " TEXT not null " +");";
 
 	public CollectionOpenHelper(Context context, String name,
 			CursorFactory factory, int version) {

@@ -151,16 +151,15 @@ public class Item implements Parcelable, Storable {
 		v.put(ItemOpenHelper.COLUMN_ID, id);
 		v.put(ItemOpenHelper.COLUMN_COLLECTION, collection.getID());
 		v.put(ItemOpenHelper.COLUMN_NAME, name);
+		v.put(ItemOpenHelper.COLUMN_PIC, picUri.toString());
 		return v;
 		
 	}
 
-	@Override
 	public void setPicUri(Uri uri) {
 		this.picUri=uri;
 	}
 
-	@Override
 	public Uri getPicUri() {
 		return picUri;
 	}
