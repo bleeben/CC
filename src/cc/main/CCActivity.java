@@ -76,7 +76,22 @@ public class CCActivity extends Activity {
         }
         
         if (collections.size()==0) {
-        	collections.add(new Collection("Unsorted"));
+        	Collection collection = new Collection("Unsorted");
+        	
+        	//TODO - TEST
+        	Item item = new Item("Dog");
+        	item.addTag("Dog");
+        	collection.addItem(item);
+        	
+        	item = new Item("Also a dog");
+        	item.addTag("Dog");
+        	collection.addItem(item);
+        	
+        	item = new Item("Not a dog");
+        	item.addTag("Cat");
+        	collection.addItem(item);
+        	
+        	collections.add(collection);
         }
         
     }

@@ -6,6 +6,7 @@ import cc.rep.Collection;
 import cc.rep.ImageAdapter;
 import cc.rep.Item;
 import cc.rep.ResultCode;
+import cc.rep.Tag;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class CollectionActivity extends Activity {
 	static final int EDIT_COLLECTION_PROPERTIES = 5;
 	static final int SHARE_COLLECTION = 6;
 	EditText filterEdit;
+	ImageAdapter adapter;
 	
     /** Called when the activity is first created. */
 	@Override
@@ -41,8 +43,9 @@ public class CollectionActivity extends Activity {
         c = (Collection) i.getParcelableExtra("collection");
         position = i.getIntExtra("position", 0);
         
+        adapter = new ImageAdapter(this,getLayoutInflater(),c.getItems());
         gridColls = (GridView) findViewById(R.id.gridView1);
-        gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater(),c));
+        gridColls.setAdapter(adapter);
         
         gridColls.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -159,6 +162,16 @@ public class CollectionActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    
+    public void filter(View view){
+    	Tag filter = new Tag(filterEdit.getText().toString());
+
+//        adapter = new ImageAdapter(this,getLayoutInflater(),c.getMatches(filter));        
+    	adapter.setC(this.c.getMatches(filter));
+//        gridColls.setAdapter(adapter);
+    	adapter.notifyDataSetChanged();
+    	gridColls.invalidateViews();
     }
     
     public void onShareButtonClick(View view){

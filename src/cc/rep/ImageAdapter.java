@@ -18,20 +18,13 @@ public class ImageAdapter extends BaseAdapter {
     LayoutInflater li;
     List<? extends Storable> c;
     
-    public ImageAdapter(Context context,LayoutInflater li,ArrayList<Collection> collections)
+    public ImageAdapter(Context context,LayoutInflater li, List<? extends Storable> list)
     {
        this.context = context;
        this.li=li;
-       this.c=collections;
+       this.c = list;
     }
     
-    public ImageAdapter(Context context,LayoutInflater li,Collection collection)
-    {
-       this.context = context;
-       this.li=li;
-       this.c=collection.getItems();
-    }
-
 	
 	//@Override
 	public int getCount() {
@@ -82,4 +75,7 @@ public class ImageAdapter extends BaseAdapter {
         return itemView;
 	}
 
+	public void setC(List<? extends Storable> c){
+		this.c = c;
+	}
 }
