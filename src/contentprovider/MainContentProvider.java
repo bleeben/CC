@@ -26,7 +26,8 @@ public class MainContentProvider extends ContentProvider {
 	public static final int T = 300;
 	public static final int T_ID = 330;
 
-	private static final String AUTHORITY = "com.contentprovider.cc.maincontentprovider";
+//	private static final String AUTHORITY = "com.contentprovider.cc.maincontentprovider";
+	private static final String AUTHORITY = "contentprovider.MainContentProvider";
 
 	private static final String COLLECTION_BASE_PATH = CollectionOpenHelper.COLLECTION_TABLE_NAME;
 	public static final Uri CONTENT_URI_C = Uri.parse("content://" + AUTHORITY

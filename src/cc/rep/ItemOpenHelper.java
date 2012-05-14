@@ -16,6 +16,7 @@ public class ItemOpenHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_DESC = "description";
 	public static final String COLUMN_PIC = "pic";
 	
+	public static final String[] ALL_COLUMNS = {COLUMN_ID, COLUMN_NAME, COLUMN_COLLECTION, COLUMN_DESC, COLUMN_PIC};
 	
 	private static final int DATABASE_VERSION = 1;
 	public static final String ITEM_TABLE_NAME = "items";

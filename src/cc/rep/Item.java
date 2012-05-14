@@ -3,6 +3,7 @@ package cc.rep;
 import java.util.ArrayList;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -162,5 +163,22 @@ public class Item implements Parcelable, Storable {
 
 	public Uri getPicUri() {
 		return picUri;
+	}
+	
+	public static Item cursorToItem(Cursor cursor){
+		Item i  = new Item();
+		i.setID(cursor.getLong(0));
+		i.setName(cursor.getString(1));
+		i.setPicUri(Uri.parse(cursor.getString(3)));
+		return i;
+	}
+	
+	public static Item cursorToIteFromCol(Cursor cursor, Collection collection){
+		Item i  = new Item();
+		i.setID(cursor.getLong(0));
+		i.setName(cursor.getString(1));
+		i.setPicUri(Uri.parse(cursor.getString(3)));
+		i.setCollection(collection);
+		return i;
 	}
 }

@@ -6,7 +6,7 @@
 
     <uses-sdk android:minSdkVersion="10" />
     <provider
-        android:authorities = "com.contentprovider.cc.maincontentprovider"
+        android:authorities = "contentprovider.MainContentProvider"
         android:multiprocess = "true"
         android:name = "contentprovider.MainContentProvider"></provider>
     <uses-permission android:name="android.permission.CAMERA"/>
