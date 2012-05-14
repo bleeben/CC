@@ -73,7 +73,7 @@ public class CollectionPropertiesActivity extends Activity {
     	// update contentresolver
     	ContentValues updateValues = c.makeContentValues();
     	String selectionClause = CollectionOpenHelper.COLUMN_ID + " = " + c.getID();
-    	int rowsUpdated = getContentResolver().update(MainContentProvider.CONTENT_URI_C, updateValues, selectionClause, null);
+    	int rowsUpdated = getContentResolver().update(MainContentProvider.CONTENT_URI_C, updateValues, selectionClause, new String[0]);
     	System.out.println("updated rows id; " + c.getID() + " and num: " + rowsUpdated);
     	setResult(Activity.RESULT_OK,intent);
     	finish();

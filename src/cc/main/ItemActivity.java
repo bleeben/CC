@@ -2,13 +2,17 @@ package cc.main;
 
 import java.util.ArrayList;
 
+import contentprovider.MainContentProvider;
+
 import cc.rep.Collection;
 import cc.rep.Item;
+import cc.rep.ItemOpenHelper;
 import cc.rep.ResultCode;
 import cc.rep.SpinnerListAdapter;
 import cc.rep.Tag;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +23,7 @@ import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -84,6 +89,12 @@ public class ItemActivity extends Activity {
     public void onDoneButtonClick(View view) {
     	item.setName(itemName.getText().toString());
     	Intent intent = new Intent();
+    	//save the item
+    	int updatedNum;
+    	ContentValues v = item.makeContentValues();
+    	updatedNum = getContentResolver().update(MainContentProvider.CONTENT_URI_I, v, ItemOpenHelper.COLUMN_ID + " = " + item.getID(), new String[0]);
+    	Log.i(ACTIVITY_SERVICE, "Updated items " + updatedNum);
+    	
     	intent.putExtra("item", item);
     	intent.putExtra("position", position);
     	setResult(Activity.RESULT_OK, intent);
