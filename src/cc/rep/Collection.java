@@ -9,28 +9,31 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Collection implements Parcelable, Storable{
+public class Collection implements Parcelable, Storable {
 	private String name;
 	private long id;
 	private List<Item> items = new ArrayList<Item>();
 	private List<Sharer> sharers = new ArrayList<Sharer>();
 	private String desc;
-	private boolean isVisible=false;
+	private boolean isVisible = false;
 	private Uri picUri;
-	
-	public boolean isPrivate(){
+
+	public boolean isPrivate() {
 		return !isVisible;
 	}
-	public boolean isPublic(){
+
+	public boolean isPublic() {
 		return isVisible;
 	}
-	public void setPrivate(boolean p){
-		isVisible=!p;
+
+	public void setPrivate(boolean p) {
+		isVisible = !p;
 	}
-	public void setPublic(boolean p){
-		isVisible=p;
+
+	public void setPublic(boolean p) {
+		isVisible = p;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -39,7 +42,7 @@ public class Collection implements Parcelable, Storable{
 		this.name = name;
 	}
 
-	public Collection(Parcel in){
+	public Collection(Parcel in) {
 		// the parcel is read FIFO
 		this.name = in.readString();
 		this.id = in.readLong();
@@ -49,104 +52,114 @@ public class Collection implements Parcelable, Storable{
 		in.readTypedList(sharers, Sharer.CREATOR);
 		in.readParcelable(Uri.class.getClassLoader());
 	}
-	
-	public Collection(){
+
+	public Collection() {
 	}
-	public Collection(String name){
+
+	public Collection(String name) {
 		setName(name);
 	}
-	
-	public long getID(){
+
+	public long getID() {
 		return id;
 	}
-	
-	public void setID(long id){
+
+	public void setID(long id) {
 		this.id = id;
 	}
 
-	public void addItem(Item item){
+	public void addItem(Item item) {
 		items.add(item);
 	}
-	public void addSharer(Sharer sharer){
+
+	public void addSharer(Sharer sharer) {
 		sharers.add(sharer);
 	}
-	public boolean removeItem(Item item){
+
+	public boolean removeItem(Item item) {
 		return items.remove(item);
 	}
-	public boolean removeSharer(Sharer sharer){
+
+	public boolean removeSharer(Sharer sharer) {
 		return sharers.remove(sharer);
 	}
-	
-	public int size(){
+
+	public int size() {
 		return items.size();
 	}
 
-	public List<Item> getItems(){
+	public List<Item> getItems() {
 		return items;
 	}
-	public List<Sharer> getSharers(){
+
+	public List<Sharer> getSharers() {
 		return sharers;
 	}
-	
-	public Item getItem(int location){
+
+	public Item getItem(int location) {
 		return items.get(location);
 	}
-	public void setItem(int location, Item item){
+
+	public void setItem(int location, Item item) {
 		items.set(location, item);
 	}
-	public Sharer getSharer(int location){
+
+	public Sharer getSharer(int location) {
 		return sharers.get(location);
 	}
-	
-	//@Override
+
+	// @Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	//@Override
+	// @Override
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
 		dest.writeString(name);
 		dest.writeLong(id);
 		dest.writeString(desc);
-		dest.writeByte((byte) (isVisible ? 1 : 0)); 
+		dest.writeByte((byte) (isVisible ? 1 : 0));
 		dest.writeTypedList(items);
 		dest.writeTypedList(sharers);
 		dest.writeParcelable(picUri, 0);
-		
+
 	}
-	
+
 	public ArrayList<Item> getMatches(Tag filter) {
 		ArrayList<Item> temp = new ArrayList<Item>();
-		
-		for(Item item:items){
-			if(item.matchesTag(filter)){
-				temp.add(item); //TODO - Don't copy, right? Want to have it so that an edits you make edit the original.
+
+		for (Item item : items) {
+			if (item.matchesTag(filter)) {
+				temp.add(item); // TODO - Don't copy, right? Want to have it so
+								// that an edits you make edit the original.
 			}
 		}
-		
-		return temp;
-	}	
-	
-	public ArrayList<Item> getMatches(ArrayList<Tag> filters) {
-		ArrayList<Item> temp = new ArrayList<Item>();
-		
-		for(Item item:items){
-			if(item.matchesTags(filters)){
-				temp.add(item); //TODO - Don't copy, right? Want to have it so that an edits you make edit the original.
-			}
-		}
-		
+
 		return temp;
 	}
+
+	public ArrayList<Item> getMatches(ArrayList<Tag> filters) {
+		ArrayList<Item> temp = new ArrayList<Item>();
+
+		for (Item item : items) {
+			if (item.matchesTags(filters)) {
+				temp.add(item); // TODO - Don't copy, right? Want to have it so
+								// that an edits you make edit the original.
+			}
+		}
+
+		return temp;
+	}
+
 	// used to regenerate object
-	public static final Parcelable.Creator<Collection> CREATOR = new Parcelable.Creator<Collection>(){
-		public Collection createFromParcel(Parcel in){
+	public static final Parcelable.Creator<Collection> CREATOR = new Parcelable.Creator<Collection>() {
+		public Collection createFromParcel(Parcel in) {
 			return new Collection(in);
 		}
-		
-		public Collection[] newArray(int size){
+
+		public Collection[] newArray(int size) {
 			return new Collection[size];
 		}
 	};
@@ -160,28 +173,29 @@ public class Collection implements Parcelable, Storable{
 	@Override
 	public void setDesc(String desc) {
 		// TODO Auto-generated method stub
-		this.desc=desc;
+		this.desc = desc;
 	}
-	
+
 	public void setPicUri(Uri uri) {
-		this.picUri=uri;
+		this.picUri = uri;
 	}
 
 	public Uri getPicUri() {
 		return picUri;
-	}	
+	}
 
-	
-	public ContentValues makeContentValues(){
+	public ContentValues makeContentValues() {
 		ContentValues v = new ContentValues();
 		v.put(CollectionOpenHelper.COLUMN_ID, id);
 		v.put(CollectionOpenHelper.COLUMN_DESC, desc);
 		v.put(CollectionOpenHelper.COLUMN_NAME, name);
-		v.put(CollectionOpenHelper.COLUMN_PIC, picUri.toString());
+		if (picUri != null) {
+			v.put(CollectionOpenHelper.COLUMN_PIC, picUri.toString());
+		}
 		return v;
 	}
-	
-	public static Collection cursorToCollection(Cursor cursor){
+
+	public static Collection cursorToCollection(Cursor cursor) {
 		Collection c = new Collection();
 		c.setID(cursor.getLong(0));
 		c.setName(cursor.getString(1));
