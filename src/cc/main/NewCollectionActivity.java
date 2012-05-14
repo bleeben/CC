@@ -68,7 +68,6 @@ public class NewCollectionActivity extends Activity {
     	c.setDesc(descEdit.getText().toString());
        	c.setPrivate(shareToggle.isChecked());
     	Intent intent = new Intent();
-    	intent.putExtra("collection", c);
     	
     	
     	// add it to the database
@@ -77,6 +76,8 @@ public class NewCollectionActivity extends Activity {
     	insertValues.remove(CollectionOpenHelper.COLUMN_ID);
     	newUri = getContentResolver().insert(MainContentProvider.CONTENT_URI_C, insertValues);
     	c.setID(Long.parseLong(newUri.getLastPathSegment()));
+
+    	intent.putExtra("collection", c);
     	
     	setResult(Activity.RESULT_OK,intent);
     	finish();
