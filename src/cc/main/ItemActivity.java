@@ -137,6 +137,7 @@ public class ItemActivity extends Activity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
     	if (requestCode == ResultCode.CAMERA_PIC_REQUEST){
+    		CCActivity.notify(this, "Image saved to:\n" + data.getData());
     		Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
     		ImageView image = (ImageView) findViewById(R.id.imageView1);
     		//image.setImageURI(data.getData());
