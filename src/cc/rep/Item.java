@@ -2,6 +2,7 @@ package cc.rep;
 
 import java.util.ArrayList;
 
+import android.content.ContentValues;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -118,6 +119,15 @@ public class Item implements Parcelable, Storable {
 	public void setDesc(String desc) {
 		// TODO Auto-generated method stub
 		this.desc=desc;
+	}
+	
+	public ContentValues makeContentValues(){
+		ContentValues v = new ContentValues();
+		v.put(ItemOpenHelper.COLUMN_ID, id);
+		v.put(ItemOpenHelper.COLUMN_COLLECTION, collection.getID());
+		v.put(ItemOpenHelper.COLUMN_NAME, name);
+		return v;
+		
 	}
 	
 	

@@ -6,38 +6,33 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class ItemOpenHelper extends SQLiteOpenHelper {
+public class TagOpenHelper extends SQLiteOpenHelper {
 	
 	private static final String DATABASE_NAME = "database.db";
 	
 	public static final String COLUMN_ID = "_id";
-	public static final String COLUMN_NAME = "name";
-	public static final String COLUMN_COLLECTION = "collection_id";
-	public static final String COLUMN_DESC = "description";
-	
+	public static final String COLUMN_TEXT = "text";
 	
 	private static final int DATABASE_VERSION = 1;
-	public static final String ITEM_TABLE_NAME = "items";
+	public static final String ITEM_TABLE_NAME = "tags";
     private static final String ITEM_TABLE_CREATE =
             "CREATE TABLE " + ITEM_TABLE_NAME + " (" +
             COLUMN_ID + " integer primary key autoincrement, " +
-            COLUMN_NAME + " TEXT not null, " + COLUMN_COLLECTION + " integer, " +
-            COLUMN_DESC + " TEXT not null );";
-    
-    
-	public ItemOpenHelper(Context context, String name, CursorFactory factory,
+            COLUMN_TEXT + " TEXT not null );";
+
+	public TagOpenHelper(Context context, String name, CursorFactory factory,
 			int version) {
 		super(context, name, factory, version);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ItemOpenHelper(Context context){
+	public TagOpenHelper(Context context){
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(ITEM_TABLE_CREATE);
+
 	}
 
 	@Override
