@@ -68,7 +68,11 @@ public class CCActivity extends Activity {
         	android.util.Log.e(ACTIVITY_SERVICE, "CCActivity cursor is null");
         	throw new RuntimeException("Cursor failed in CCActivity");
         }
-                
+        
+        while (cCursor.moveToNext()){
+        	Collection newCol = Collection.cursorToCollection(cCursor);
+        	collections.add(newCol);
+        }
         if (collections.size()==0) {
         	collections.add(new Collection("Unsorted"));
         }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -178,5 +179,14 @@ public class Collection implements Parcelable, Storable{
 		v.put(CollectionOpenHelper.COLUMN_NAME, name);
 		v.put(CollectionOpenHelper.COLUMN_PIC, picUri.toString());
 		return v;
+	}
+	
+	public static Collection cursorToCollection(Cursor cursor){
+		Collection c = new Collection();
+		c.setID(cursor.getLong(0));
+		c.setName(cursor.getString(1));
+		c.setDesc(cursor.getString(2));
+		c.setPicUri(Uri.parse(cursor.getString(3)));
+		return c;
 	}
 }
