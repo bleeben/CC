@@ -1,8 +1,11 @@
 package cc.main;
 
+import contentprovider.MainContentProvider;
 import cc.rep.Collection;
+import cc.rep.CollectionOpenHelper;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +28,7 @@ public class CollectionPropertiesActivity extends Activity {
         
         Intent i = getIntent();
         c = (Collection) i.getParcelableExtra("collection");
+        
         
         nameEdit = (EditText)findViewById(R.id.editTextName);
         nameEdit.setText(c.getName());
@@ -66,6 +70,11 @@ public class CollectionPropertiesActivity extends Activity {
     	Intent intent = new Intent();
     	intent.putExtra("collection", c);
     	
+    	// update contentresolver
+    	ContentValues updateValues = c.makeContentValues();
+    	String selectionClause = CollectionOpenHelper.COLUMN_ID + " = " + c.getID();
+    	int rowsUpdated = getContentResolver().update(MainContentProvider.CONTENT_URI_C, updateValues, selectionClause, null);
+    	System.out.println("updated rows id; " + c.getID() + " and num: " + rowsUpdated);
     	setResult(Activity.RESULT_OK,intent);
     	finish();
     }

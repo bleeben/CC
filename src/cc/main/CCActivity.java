@@ -3,7 +3,10 @@ package cc.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import contentprovider.MainContentProvider;
+
 import cc.rep.Collection;
+import cc.rep.CollectionOpenHelper;
 import cc.rep.Item;
 import cc.rep.Sharer;
 import android.app.Activity;
@@ -12,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -57,6 +61,14 @@ public class CCActivity extends Activity {
         
         CCActivity.alert(this,"Home Screen");
         
+        //populate collections:
+        String [] columns = CollectionOpenHelper.ALL_COLUMNS;
+        Cursor cCursor = getContentResolver().query(MainContentProvider.CONTENT_URI_C, columns, null, null, null);
+        if (cCursor == null || cCursor.getCount() < 0){
+        	android.util.Log.e(ACTIVITY_SERVICE, "CCActivity cursor is null");
+        	throw new RuntimeException("Cursor failed in CCActivity");
+        }
+                
         if (collections.size()==0) {
         	collections.add(new Collection("Unsorted"));
         }

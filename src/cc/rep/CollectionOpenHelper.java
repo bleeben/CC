@@ -15,6 +15,8 @@ public class CollectionOpenHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_DESC = "desc";
 	public static final String COLUMN_PIC = "pic";	
 	
+	public static final String[] ALL_COLUMNS = {COLUMN_ID, COLUMN_NAME, COLUMN_DESC, COLUMN_PIC};
+	
 	private static final int DATABASE_VERSION = 1;
 	public static final String COLLECTION_TABLE_NAME = "collections";
     private static final String COLLECTION_TABLE_CREATE =
