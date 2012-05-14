@@ -3,6 +3,7 @@ package cc.rep;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -13,6 +14,7 @@ public class Collection implements Parcelable, Storable{
 	private List<Sharer> sharers = new ArrayList<Sharer>();
 	private String desc;
 	private boolean isVisible=false;
+	private Uri picUri;
 	
 	public boolean isPrivate(){
 		return !isVisible;
@@ -39,8 +41,11 @@ public class Collection implements Parcelable, Storable{
 		// the parcel is read FIFO
 		this.name = in.readString();
 		this.id = in.readLong();
+		this.desc = in.readString();
+		this.isVisible = in.readByte() == 1;
 		in.readTypedList(items, Item.CREATOR);
 		in.readTypedList(sharers, Sharer.CREATOR);
+		in.readParcelable(Uri.class.getClassLoader());
 	}
 	
 	public Collection(){
@@ -102,8 +107,12 @@ public class Collection implements Parcelable, Storable{
 		// TODO Auto-generated method stub
 		dest.writeString(name);
 		dest.writeLong(id);
+		dest.writeString(desc);
+		dest.writeByte((byte) (isVisible ? 1 : 0)); 
 		dest.writeTypedList(items);
 		dest.writeTypedList(sharers);
+		dest.writeParcelable(picUri, 0);
+		
 	}
 	
 	public ArrayList<Item> getMatches(Tag filter) {
@@ -152,6 +161,14 @@ public class Collection implements Parcelable, Storable{
 		this.desc=desc;
 	}
 	
-	
+	@Override
+	public void setPicUri(Uri uri) {
+		this.picUri=uri;
+	}
+
+	@Override
+	public Uri getPicUri() {
+		return picUri;
+	}	
 
 }

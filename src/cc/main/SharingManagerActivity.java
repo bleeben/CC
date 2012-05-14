@@ -40,8 +40,6 @@ public class SharingManagerActivity extends Activity{
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                     int position, long id) {
- 
-                // Sending image id to FullScreenActivity
             	CCActivity.alert(getApplicationContext(), c.getSharer(position).getName());
             }
         });

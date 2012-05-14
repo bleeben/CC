@@ -41,6 +41,11 @@ public class CCActivity extends Activity {
 	 
 	 public static void alert(Context context,String msg) {
 		 //alert(context,"Debugging",msg);
+		 //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+	 }
+	 
+	 public static void notify(Context context,String msg) {
+		 //alert(context,"Debugging",msg);
 		 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 	 }
 	
@@ -60,7 +65,7 @@ public class CCActivity extends Activity {
     //hi
     
     public void onRecentButtonClick(View view) {
-    	CCActivity.alert(this, getString(R.string.noRecentItems));
+    	CCActivity.notify(this, getString(R.string.noRecentItems));
     }
     
     public void onBrowseCollectionsButtonClick(View view) {

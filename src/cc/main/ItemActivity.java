@@ -42,15 +42,6 @@ public class ItemActivity extends Activity {
     Gallery tagGallery;
     ArrayAdapter<Tag> tagArr;
 
-    private Preview mPreview;
-	Camera mCamera;
-	int numberOfCameras = 0;
-	boolean hasCam;
-	int cameraCurrentlyLocked;
-	// The first rear facing camera
-	int defaultCameraId;
-	boolean cameraWorking = false;
-    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,73 +64,18 @@ public class ItemActivity extends Activity {
         } else {
         	collectionSpinner.setAdapter(new SpinnerListAdapter(this,getLayoutInflater(),cs));
         }
-
-		if (getCameraInstance() != null) {
-			hasCam = checkCameraHardware(getApplicationContext());
-
-			if (hasCam) {
-				numberOfCameras = Camera.getNumberOfCameras();
-				// Find the ID of the default camera
-				CameraInfo cameraInfo = new CameraInfo();
-				for (int i = 0; i < numberOfCameras; i++) {
-					Camera.getCameraInfo(i, cameraInfo);
-					if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
-						defaultCameraId = i;
-					}
-				}
-				// CCActivity.alert(this, "Cameras: "+numberOfCameras);
-
-				
-				// CCActivity.alert(this, "Frame");
-
-				if (numberOfCameras > 0 && hasCam) {
-					FrameLayout frame = (FrameLayout) findViewById(R.id.frameLayout);
-					ImageView image = (ImageView) findViewById(R.id.imageView1);
-					frame.removeView(image);
-					mPreview = new Preview(this);
-					// CCActivity.alert(this, "Preview");
-					frame.addView(mPreview);
-				}
-			}
-		}
-
-        
         
         tagGallery = (Gallery) findViewById(R.id.galleryTags);
         tagArr=new ArrayAdapter<Tag>(this, android.R.layout.simple_gallery_item, item.getTags());
         tagGallery.setAdapter(tagArr);
         
+        
+        ImageView image = (ImageView) findViewById(R.id.imageView1);
+        if (item.getPicUri()!=null)
+        	image.setImageURI(item.getPicUri());
+		
     }
-    
-	/** Check if this device has a camera */
-	private boolean checkCameraHardware(Context context) {
-		// CCActivity.alert(this, "Checking for Cam");
-		if (context.getPackageManager().hasSystemFeature(
-				PackageManager.FEATURE_CAMERA)) {
-			// this device has a camera
-			return true;
-		} else {
-			// no camera on this device
-			return false;
-		}
-	}
-
-	/** A safe way to get an instance of the Camera object. */
-	public Camera getCameraInstance() {
-		Camera c = null;
-		try {
-			c = Camera.open(); // attempt to get a Camera instance
-			cameraWorking = true;
-		} catch (Exception e) {
-			// Camera is not available (in use or does not exist)
-			CCActivity
-					.alert(getApplicationContext(), "Unable to access camera");
-			cameraWorking = false;
-		}
-		return c; // returns null if camera is unavailable
-	}
-
-    
+        
     public void onCancelButtonClick(View view) {
     	setResult(RESULT_CANCELED);
     	finish();
@@ -182,30 +118,8 @@ public class ItemActivity extends Activity {
     }
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-
-		// Open the default i.e. the first rear facing camera.
-		if (hasCam && numberOfCameras > 0 && mPreview != null) {
-			mCamera = getCameraInstance();
-			cameraCurrentlyLocked = defaultCameraId;
-			mPreview.setCamera(mCamera);
-		}
-	}
-
-	@Override
 	protected void onPause() {
 		super.onPause();
-
-		// Because the Camera object is a shared resource, it's very
-		// important to release it when the activity is paused.
-		if (hasCam && numberOfCameras > 0 && mPreview != null) {
-			if (mCamera != null) {
-				mPreview.setCamera(null);
-				mCamera.release();
-				mCamera = null;
-			}
-		}
 
     	CCActivity.alert(this, "Leaving Item");
     	Intent intent = new Intent();
@@ -216,25 +130,18 @@ public class ItemActivity extends Activity {
 	}
     
 	public void takePicture(View view) {
-		if (hasCam && numberOfCameras > 0) {
-			PictureCallback postview = null;
-			PictureCallback raw = null;
-			PictureCallback jpeg = null;
-			ShutterCallback shutter = null;
-			mPreview.takePicture(shutter, raw, postview, jpeg);
-		}
-		if (cameraWorking == false) {
-			Intent cameraIntent = new Intent(
+		Intent cameraIntent = new Intent(
 					android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 			startActivityForResult(cameraIntent, ResultCode.CAMERA_PIC_REQUEST);
-		}
 	}
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
     	if (requestCode == ResultCode.CAMERA_PIC_REQUEST){
     		Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
     		ImageView image = (ImageView) findViewById(R.id.imageView1);
-    		image.setImageBitmap(thumbnail);
+    		//image.setImageURI(data.getData());
+    		item.setPicUri(data.getData());
+			image.setImageBitmap(thumbnail);
     	}
     }
     

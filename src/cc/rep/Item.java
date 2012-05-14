@@ -3,6 +3,7 @@ package cc.rep;
 import java.util.ArrayList;
 
 import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,9 +13,12 @@ public class Item implements Parcelable, Storable {
 	private Collection collection;
 	private ArrayList<Tag> tags = new ArrayList<Tag>();
 	private String desc;
+	private Uri picUri;
 	
 	public Item() {
 	}
+	
+	
 	
 	public Item(String name){
 		this.name = name;
@@ -23,8 +27,10 @@ public class Item implements Parcelable, Storable {
 	public Item(Parcel in) {
 		this.name = in.readString();
 		this.setID(in.readLong());
+		this.desc = in.readString();
 		this.collection = in.readParcelable(Collection.class.getClassLoader());
 		in.readTypedList(tags, Tag.CREATOR);
+		in.readParcelable(Uri.class.getClassLoader());
 	}
 
 	public String getName() {
@@ -45,8 +51,10 @@ public class Item implements Parcelable, Storable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
 		dest.writeLong(getID());
+		dest.writeString(desc);
 		dest.writeParcelable(collection, 0);
 		dest.writeTypedList(tags);
+		dest.writeParcelable(picUri, 0);
 	}
 	
 	public Collection getCollection() {
@@ -146,6 +154,14 @@ public class Item implements Parcelable, Storable {
 		return v;
 		
 	}
-	
-	
+
+	@Override
+	public void setPicUri(Uri uri) {
+		this.picUri=uri;
+	}
+
+	@Override
+	public Uri getPicUri() {
+		return picUri;
+	}
 }

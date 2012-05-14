@@ -1,14 +1,15 @@
 package cc.rep;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Sharer implements Parcelable,Storable{
 	//TODO
-    private String name;
-    private String email;
+    private String name="";
+    private String email="";
     //private String permission;
-    private Permission perms;
+    private Permission perms=Permission.CAN_VIEW;
     
     public Sharer(String email) {
     	this.name = email;
@@ -99,5 +100,15 @@ public class Sharer implements Parcelable,Storable{
 	@Override
 	public void setDesc(String desc) {
 		setEmail(desc);
+	}
+	@Override
+	public void setPicUri(Uri uri) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Uri getPicUri() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -3,23 +3,15 @@ package cc.main;
 import java.util.ArrayList;
 
 import cc.rep.Collection;
-import cc.rep.ImageAdapter;
 import cc.rep.Item;
 import cc.rep.ResultCode;
 import cc.rep.SpinnerListAdapter;
 import cc.rep.Tag;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.hardware.Camera;
-import android.hardware.Camera.CameraInfo;
-import android.hardware.Camera.PictureCallback;
-import android.hardware.Camera.ShutterCallback;
-import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,7 +19,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -38,15 +29,6 @@ public class NewItemActivity extends Activity {
 	EditText nameEdit;
 	Spinner collectionSpinner;
 
-	private Preview mPreview;
-	Camera mCamera;
-	int numberOfCameras = 0;
-	boolean hasCam;
-	int cameraCurrentlyLocked;
-	// The first rear facing camera
-	int defaultCameraId;
-	boolean cameraWorking = false;
-	
 	Gallery tagGallery;
 	ArrayAdapter<Tag> tagArr;
 
@@ -78,34 +60,6 @@ public class NewItemActivity extends Activity {
 					getLayoutInflater(), cs));
 		}
 		
-		if (getCameraInstance() != null) {
-			hasCam = checkCameraHardware(getApplicationContext());
-
-			if (hasCam) {
-				numberOfCameras = Camera.getNumberOfCameras();
-				// Find the ID of the default camera
-				CameraInfo cameraInfo = new CameraInfo();
-				for (int i = 0; i < numberOfCameras; i++) {
-					Camera.getCameraInfo(i, cameraInfo);
-					if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
-						defaultCameraId = i;
-					}
-				}
-				// CCActivity.alert(this, "Cameras: "+numberOfCameras);
-
-				
-				// CCActivity.alert(this, "Frame");
-
-				if (numberOfCameras > 0 && hasCam) {
-					FrameLayout frame = (FrameLayout) findViewById(R.id.frameLayout);
-					ImageView image = (ImageView) findViewById(R.id.imageView1);
-					frame.removeView(image);
-					mPreview = new Preview(this);
-					// CCActivity.alert(this, "Preview");
-					frame.addView(mPreview);
-				}
-			}
-		}
 		
 		tagGallery = (Gallery) findViewById(R.id.galleryTags);
 		tagArr = new ArrayAdapter<Tag>(this,
@@ -114,64 +68,6 @@ public class NewItemActivity extends Activity {
 
 		nameEdit.clearFocus();
 	}
-
-	// hi
-
-	/** Check if this device has a camera */
-	private boolean checkCameraHardware(Context context) {
-		// CCActivity.alert(this, "Checking for Cam");
-		if (context.getPackageManager().hasSystemFeature(
-				PackageManager.FEATURE_CAMERA)) {
-			// this device has a camera
-			return true;
-		} else {
-			// no camera on this device
-			return false;
-		}
-	}
-
-	/** A safe way to get an instance of the Camera object. */
-	public Camera getCameraInstance() {
-		Camera c = null;
-		try {
-			c = Camera.open(); // attempt to get a Camera instance
-			cameraWorking = true;
-		} catch (Exception e) {
-			// Camera is not available (in use or does not exist)
-			CCActivity
-					.alert(getApplicationContext(), "Unable to access camera");
-			cameraWorking = false;
-		}
-		return c; // returns null if camera is unavailable
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		// Open the default i.e. the first rear facing camera.
-		if (hasCam && numberOfCameras > 0 && mPreview != null) {
-			mCamera = getCameraInstance();
-			cameraCurrentlyLocked = defaultCameraId;
-			mPreview.setCamera(mCamera);
-		}
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-		// Because the Camera object is a shared resource, it's very
-		// important to release it when the activity is paused.
-		if (hasCam && numberOfCameras > 0 && mPreview != null) {
-			if (mCamera != null) {
-				mPreview.setCamera(null);
-				mCamera.release();
-				mCamera = null;
-			}
-		}
-	}
-
 	public void onCancelButtonClick(View view) {
 		setResult(RESULT_CANCELED);
 		finish();
@@ -183,7 +79,7 @@ public class NewItemActivity extends Activity {
 		intent.putExtra("item", item);
 
 		Intent i = getIntent();
-		Collection c = (Collection) i.getParcelableExtra("collection");
+		//Collection c = (Collection) i.getParcelableExtra("collection");
 		ArrayList<Collection> cs = i.getParcelableArrayListExtra("collections");
 		if (cs == null) {
 		} else {
@@ -229,27 +125,23 @@ public class NewItemActivity extends Activity {
 				android.R.layout.simple_gallery_item, item.getTags());
 		tagGallery.setAdapter(tagArr);
 	}
-
+	
 	public void takePicture(View view) {
-		if (hasCam && numberOfCameras > 0) {
-			PictureCallback postview = null;
-			PictureCallback raw = null;
-			PictureCallback jpeg = null;
-			ShutterCallback shutter = null;
-			mPreview.takePicture(shutter, raw, postview, jpeg);
-		}
-		if (cameraWorking == false) {
 			Intent cameraIntent = new Intent(
 					android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 			startActivityForResult(cameraIntent, ResultCode.CAMERA_PIC_REQUEST);
-		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == ResultCode.CAMERA_PIC_REQUEST) {
-			Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-			ImageView image = (ImageView) findViewById(R.id.imageView1);
-			image.setImageBitmap(thumbnail);
+			if (resultCode == RESULT_OK) {
+				//CCActivity.alert(this, "Image saved to:\n" + data.getData());
+				Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+				ImageView image = (ImageView) findViewById(R.id.imageView1);
+				//image.setImageURI(data.getData());
+				item.setPicUri(data.getData());
+				image.setImageBitmap(thumbnail);
+			}
 		}
 	}
 

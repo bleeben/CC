@@ -9,6 +9,11 @@
         android:authorities = "com.contentprovider.cc.maincontentprovider"
         android:multiprocess = "true"
         android:name = "contentprovider.MainContentProvider"></provider>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.SET_ORIENTATION"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:icon="@drawable/ic_launcher"

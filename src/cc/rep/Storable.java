@@ -1,5 +1,7 @@
 package cc.rep;
 
+import android.net.Uri;
+
 public interface Storable{
 	public String getName();
 	public void setName(String name);
@@ -7,4 +9,6 @@ public interface Storable{
 	public void setID(long id);
 	public String getDesc();
 	public void setDesc(String desc);
+	public void setPicUri(Uri uri);
+	public Uri getPicUri();
 }

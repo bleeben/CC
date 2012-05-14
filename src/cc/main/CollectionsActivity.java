@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
@@ -27,6 +28,8 @@ public class CollectionsActivity extends Activity {
 	
 	private ArrayList<Collection> collections = new ArrayList<Collection>();;
 	GridView gridColls;
+	
+	EditText filterEdit;
 	
     /** Called when the activity is first created. */
     @Override
@@ -54,6 +57,9 @@ public class CollectionsActivity extends Activity {
                 startActivityForResult(i,BROWSE_COLLECTION);
             }
         });
+        
+        filterEdit = (EditText) findViewById(R.id.filterText);
+        filterEdit.clearFocus();
     }
     //hi
     

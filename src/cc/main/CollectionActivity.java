@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,6 +29,7 @@ public class CollectionActivity extends Activity {
 	TextView collectionName;
 	static final int EDIT_COLLECTION_PROPERTIES = 5;
 	static final int SHARE_COLLECTION = 6;
+	EditText filterEdit;
 	
     /** Called when the activity is first created. */
 	@Override
@@ -59,6 +61,9 @@ public class CollectionActivity extends Activity {
         
         collectionName = (TextView) findViewById(R.id.collectionName);
         collectionName.setText(c.getName());
+        
+        filterEdit = (EditText) findViewById(R.id.filterText);
+        filterEdit.clearFocus();
     }
     //hi
     
