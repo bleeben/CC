@@ -55,8 +55,13 @@ public class CCActivity extends Activity {
         if (collections.size()==0) {
         	collections.add(new Collection("Unsorted"));
         }
+        
     }
     //hi
+    
+    public void onRecentButtonClick(View view) {
+    	CCActivity.alert(this, getString(R.string.noRecentItems));
+    }
     
     public void onBrowseCollectionsButtonClick(View view) {
     	Intent intent = new Intent(this, CollectionsActivity.class);

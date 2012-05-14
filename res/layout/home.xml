@@ -65,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
-            android:text="@string/recentItems" />
+            android:text="@string/recentItems"
+            android:onClick="onRecentButtonClick" />
     </LinearLayout>
 
 </LinearLayout>
