@@ -3,14 +3,18 @@ package cc.main;
 import java.io.File;
 import java.util.ArrayList;
 
+import contentprovider.MainContentProvider;
+
 import cc.rep.Collection;
 import cc.rep.Item;
+import cc.rep.ItemOpenHelper;
 import cc.rep.ResultCode;
 import cc.rep.SpinnerListAdapter;
 import cc.rep.Tag;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -82,7 +86,6 @@ public class NewItemActivity extends Activity {
 	public void onDoneButtonClick(View view) {
 		item.setName(nameEdit.getText().toString());
 		Intent intent = new Intent();
-		intent.putExtra("item", item);
 
 		Intent i = getIntent();
 		//Collection c = (Collection) i.getParcelableExtra("collection");
@@ -92,7 +95,15 @@ public class NewItemActivity extends Activity {
 			intent.putExtra("position",
 					collectionSpinner.getSelectedItemPosition());
 		}
+		
+		// save the new item
+		Uri newUri;
+		ContentValues value = item.makeContentValues();
+		value.remove(ItemOpenHelper.COLUMN_ID);
+		newUri = getContentResolver().insert(MainContentProvider.CONTENT_URI_I, value);
+		item.setID(Long.parseLong(newUri.getLastPathSegment()));
 
+		intent.putExtra("item", item);
 		setResult(Activity.RESULT_OK, intent);
 		finish();
 	}
