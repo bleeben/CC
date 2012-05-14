@@ -59,11 +59,10 @@ public class CCActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         
-        CCActivity.alert(this,"Home Screen");
-        
         //populate collections:
         String [] columns = CollectionOpenHelper.ALL_COLUMNS;
         Cursor cCursor = getContentResolver().query(MainContentProvider.CONTENT_URI_C, columns, null, null, null);
+        
         if (cCursor == null){
         	android.util.Log.e(ACTIVITY_SERVICE, "CCActivity cursor is null");
         	throw new RuntimeException("Cursor failed in CCActivity");

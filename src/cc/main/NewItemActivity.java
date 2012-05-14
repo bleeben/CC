@@ -164,7 +164,7 @@ public class NewItemActivity extends Activity {
 	    if (photo != null) {
 	    	imageUri = Uri.fromFile(photo);
 	        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-	        
+	        cameraIntent.putExtra("return-data", true);
 	        startActivityForResult(cameraIntent, ResultCode.CAMERA_PIC_REQUEST);
 	    }
 	}
