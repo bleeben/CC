@@ -22,9 +22,9 @@ public class CollectionOpenHelper extends SQLiteOpenHelper {
     private static final String COLLECTION_TABLE_CREATE =
             "CREATE TABLE " + COLLECTION_TABLE_NAME + " (" +
             COLUMN_ID + " integer primary key autoincrement, " +
-            COLUMN_NAME + " TEXT not null, " + 
-            COLUMN_DESC + " TExt not null, " + 
-            COLUMN_PIC + " TEXT not null " +");";
+            COLUMN_NAME + " TEXT, " + 
+            COLUMN_DESC + " TEXT, " + 
+            COLUMN_PIC + " TEXT " +");";
 
 	public CollectionOpenHelper(Context context, String name,
 			CursorFactory factory, int version) {

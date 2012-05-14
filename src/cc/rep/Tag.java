@@ -20,7 +20,7 @@ public class Tag implements Parcelable{
 
 	@Override
 	public String toString() {
-		return "@"+text;
+		return text;
 	}
 
 	@Override

@@ -69,14 +69,15 @@ public class NewCollectionActivity extends Activity {
        	c.setPrivate(shareToggle.isChecked());
     	Intent intent = new Intent();
     	
-    	
+    	if (CCActivity.PERSISTENT_ON) {
     	// add it to the database
     	Uri newUri;
     	ContentValues insertValues = c.makeContentValues();
     	insertValues.remove(CollectionOpenHelper.COLUMN_ID);
     	newUri = getContentResolver().insert(MainContentProvider.CONTENT_URI_C, insertValues);
     	c.setID(Long.parseLong(newUri.getLastPathSegment()));
-
+    	}
+    	
     	intent.putExtra("collection", c);
     	
     	setResult(Activity.RESULT_OK,intent);

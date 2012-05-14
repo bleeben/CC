@@ -27,6 +27,7 @@ public class CCActivity extends Activity {
 	 static final int NEW_COLLECTION_REQUEST = 0;
 	 static final int NEW_ITEM_REQUEST = 1;
 	 static final int BROWSE_COLLECTIONS = 2;
+	 static final boolean PERSISTENT_ON = false;
 
 	private ArrayList<Collection> collections = new ArrayList<Collection>();;
 	 
@@ -59,9 +60,10 @@ public class CCActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         
+        if (CCActivity.PERSISTENT_ON) {
         //populate collections:
         String [] columns = CollectionOpenHelper.ALL_COLUMNS;
-        Cursor cCursor = getContentResolver().query(MainContentProvider.CONTENT_URI_C, columns, null, new String[1], null);
+        Cursor cCursor = getContentResolver().query(MainContentProvider.CONTENT_URI_C, columns, null, new String[0], null);
         if (cCursor == null){
         	android.util.Log.e(ACTIVITY_SERVICE, "CCActivity cursor is null");
         	throw new RuntimeException("Cursor failed in CCActivity");
@@ -71,6 +73,8 @@ public class CCActivity extends Activity {
         	Collection newCol = Collection.cursorToCollection(cCursor);
         	collections.add(newCol);
         }
+        }
+        
         if (collections.size()==0) {
         	collections.add(new Collection("Unsorted"));
         }

@@ -1,5 +1,6 @@
 package cc.main;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import contentprovider.MainContentProvider;
@@ -12,6 +13,7 @@ import cc.rep.SpinnerListAdapter;
 import cc.rep.Tag;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +24,10 @@ import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,6 +51,8 @@ public class ItemActivity extends Activity {
     Spinner collectionSpinner;
     Gallery tagGallery;
     ArrayAdapter<Tag> tagArr;
+    
+    Uri imageUri;
 
     /** Called when the activity is first created. */
     @Override
@@ -74,11 +81,22 @@ public class ItemActivity extends Activity {
         tagArr=new ArrayAdapter<Tag>(this, android.R.layout.simple_gallery_item, item.getTags());
         tagGallery.setAdapter(tagArr);
         
-        
-        ImageView image = (ImageView) findViewById(R.id.imageView1);
-        if (item.getPicUri()!=null)
-        	image.setImageURI(item.getPicUri());
-		
+		try {
+			ImageView image = (ImageView) findViewById(R.id.imageView1);
+			if (item.getPicUri() != null) {
+				CCActivity.notify(this, "Picture Present");
+				imageUri = item.getPicUri();
+				ContentResolver cr = getContentResolver();
+				Bitmap thumbnail = android.provider.MediaStore.Images.Media
+						.getBitmap(cr, imageUri);
+				CCActivity.notify(this, "Thumbnail Obtained");
+				// image.setImageURI(data.getData());
+				// item.setPicUri(imageUri);
+				image.setImageBitmap(thumbnail);
+			}
+		} catch (Exception e) {
+			CCActivity.notify(this, "Picture Failed to Load");
+		}
     }
         
     public void onCancelButtonClick(View view) {
@@ -89,11 +107,14 @@ public class ItemActivity extends Activity {
     public void onDoneButtonClick(View view) {
     	item.setName(itemName.getText().toString());
     	Intent intent = new Intent();
+    	
+    	if (CCActivity.PERSISTENT_ON) {
     	//save the item
     	int updatedNum;
     	ContentValues v = item.makeContentValues();
     	updatedNum = getContentResolver().update(MainContentProvider.CONTENT_URI_I, v, ItemOpenHelper.COLUMN_ID + " = " + item.getID(), new String[0]);
     	Log.i(ACTIVITY_SERVICE, "Updated items " + updatedNum);
+    	}
     	
     	intent.putExtra("item", item);
     	intent.putExtra("position", position);
@@ -140,22 +161,70 @@ public class ItemActivity extends Activity {
 
 	}
     
-	public void takePicture(View view) {
-		Intent cameraIntent = new Intent(
-					android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-			startActivityForResult(cameraIntent, ResultCode.CAMERA_PIC_REQUEST);
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+	    super.onSaveInstanceState(outState);
+	    if (imageUri != null) {
+	        outState.putString("cameraImageUri", imageUri.toString());
+	    }
 	}
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-    	if (requestCode == ResultCode.CAMERA_PIC_REQUEST){
-    		CCActivity.notify(this, "Image saved to:\n" + data.getData());
-    		Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-    		ImageView image = (ImageView) findViewById(R.id.imageView1);
-    		//image.setImageURI(data.getData());
-    		item.setPicUri(data.getData());
-			image.setImageBitmap(thumbnail);
-    	}
-    }
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+	    super.onRestoreInstanceState(savedInstanceState);
+	    if (savedInstanceState.containsKey("cameraImageUri")) {
+	        imageUri = Uri.parse(savedInstanceState.getString("cameraImageUri"));
+	    }
+	}
+	
+	public void takePicture(View view) {
+		File photo;
+		if (android.os.Environment.getExternalStorageState().equals(
+	            android.os.Environment.MEDIA_MOUNTED)) {
+			photo = new File(Environment.getExternalStorageDirectory(),
+	                "cc_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
+	    } else {
+	        photo = new File(getCacheDir(),
+	                "cc_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
+	    }
+		Intent cameraIntent = new Intent(
+				android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+	        
+	    if (photo != null) {
+	    	imageUri = Uri.fromFile(photo);
+	        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+	        cameraIntent.putExtra("return-data", true);
+	        startActivityForResult(cameraIntent, ResultCode.CAMERA_PIC_REQUEST);
+	    }
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == ResultCode.CAMERA_PIC_REQUEST) {
+			if (resultCode == RESULT_OK) {
+				
+				try {
+	                Uri selectedImage = imageUri;
+	                CCActivity.alert(this, "Image attempted to:\n" + selectedImage);
+	                /*
+	                if (data.getData()!=null)
+	                	CCActivity.notify(this, "Image saved to:\n" + data.getData());
+	                	*/
+	                //getContentResolver().notifyChange(selectedImage, null);
+	                ContentResolver cr = getContentResolver();
+	                Bitmap thumbnail = android.provider.MediaStore.Images.Media
+	                        .getBitmap(cr, selectedImage);
+	                ImageView image = (ImageView) findViewById(R.id.imageView1);
+					//image.setImageURI(data.getData());
+					item.setPicUri(selectedImage);
+					image.setImageBitmap(thumbnail);
+	                CCActivity.alert(this, "Image saved to:\n" + selectedImage);
+	            } catch (Exception e) {
+	                CCActivity.notify(this, "Picture Failed to Load");
+	            }
+			}
+		}
+	}
+
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

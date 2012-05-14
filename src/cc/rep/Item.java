@@ -29,7 +29,7 @@ public class Item implements Parcelable, Storable {
 		this.desc = in.readString();
 		this.collection = in.readParcelable(Collection.class.getClassLoader());
 		in.readTypedList(tags, Tag.CREATOR);
-		in.readParcelable(Uri.class.getClassLoader());
+		this.picUri = in.readParcelable(Uri.class.getClassLoader());
 	}
 
 	public String getName() {

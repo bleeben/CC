@@ -95,14 +95,14 @@ public class NewItemActivity extends Activity {
 			intent.putExtra("position",
 					collectionSpinner.getSelectedItemPosition());
 		}
-		
+		if (CCActivity.PERSISTENT_ON) {
 		// save the new item
 		Uri newUri;
 		ContentValues value = item.makeContentValues();
 		value.remove(ItemOpenHelper.COLUMN_ID);
 		newUri = getContentResolver().insert(MainContentProvider.CONTENT_URI_I, value);
 		item.setID(Long.parseLong(newUri.getLastPathSegment()));
-
+		}
 		intent.putExtra("item", item);
 		setResult(Activity.RESULT_OK, intent);
 		finish();
@@ -186,9 +186,11 @@ public class NewItemActivity extends Activity {
 				
 				try {
 	                Uri selectedImage = imageUri;
-	                CCActivity.notify(this, "Image attempted to:\n" + selectedImage);
+	                CCActivity.alert(this, "Image attempted to:\n" + selectedImage);
+	                /*
 	                if (data.getData()!=null)
 	                	CCActivity.notify(this, "Image saved to:\n" + data.getData());
+	                	*/
 	                //getContentResolver().notifyChange(selectedImage, null);
 	                ContentResolver cr = getContentResolver();
 	                Bitmap thumbnail = android.provider.MediaStore.Images.Media
@@ -197,9 +199,9 @@ public class NewItemActivity extends Activity {
 					//image.setImageURI(data.getData());
 					item.setPicUri(selectedImage);
 					image.setImageBitmap(thumbnail);
-	                CCActivity.notify(this, "Image saved to:\n" + selectedImage);
+	                CCActivity.alert(this, "Image saved to:\n" + selectedImage);
 	            } catch (Exception e) {
-	                CCActivity.notify(this, "Picture Failed");
+	                CCActivity.notify(this, "Picture Failed to Load");
 	            }
 			}
 		}

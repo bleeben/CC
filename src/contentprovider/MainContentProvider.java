@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 public class MainContentProvider extends ContentProvider {
 	private CollectionOpenHelper collectionDB;
@@ -109,22 +110,24 @@ public class MainContentProvider extends ContentProvider {
 	public Uri insert(Uri uri, ContentValues values) {
 		SQLiteDatabase sqlDB;
 		long rowID;
+		Log.e(AUTHORITY, sURIMatcher.match(uri) + "");
 		switch (sURIMatcher.match(uri)) {
 		case C:
 		case C_ID:
 			sqlDB = collectionDB.getWritableDatabase();
 			rowID = sqlDB.insert(CollectionOpenHelper.COLLECTION_TABLE_NAME, null, values);
-			if (rowID > 0){
+			if (rowID >= 0){
 				Uri _uri = ContentUris.withAppendedId(CONTENT_URI_C, rowID);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
 			}
-			break;
+			throw new RuntimeException("Failed for row: " + rowID + " " + values.toString());
+			//break;
 		case I:
 		case I_ID:
 			sqlDB = itemDB.getWritableDatabase();
 			rowID = sqlDB.insert(ItemOpenHelper.ITEM_TABLE_NAME, null, values);
-			if (rowID > 0){
+			if (rowID >= 0){
 				Uri _uri = ContentUris.withAppendedId(CONTENT_URI_I, rowID);
 				getContext().getContentResolver().notifyChange(_uri, null);
 				return _uri;
@@ -134,7 +137,7 @@ public class MainContentProvider extends ContentProvider {
 			throw new IllegalArgumentException("Unknown uri: " + uri.toString());
 		}
 
-		throw new SQLException("Failed to insert row into " + uri);
+		throw new SQLException("Failed to insert row into " + uri + " for " + sURIMatcher.match(uri));
 	}
 
 	@Override

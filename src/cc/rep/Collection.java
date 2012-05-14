@@ -50,7 +50,7 @@ public class Collection implements Parcelable, Storable {
 		this.isVisible = in.readByte() == 1;
 		in.readTypedList(items, Item.CREATOR);
 		in.readTypedList(sharers, Sharer.CREATOR);
-		in.readParcelable(Uri.class.getClassLoader());
+		this.picUri = in.readParcelable(Uri.class.getClassLoader());
 	}
 
 	public Collection() {
