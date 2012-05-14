@@ -44,7 +44,9 @@ public class Collection implements Parcelable, Storable{
 	}
 	
 	public Collection(){
-		items = new ArrayList<Item>();
+	}
+	public Collection(String name){
+		setName(name);
 	}
 	
 	public long getID(){

@@ -28,11 +28,12 @@
     </LinearLayout>
 
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/collectionSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="235dip"
         android:layout_weight="1" >
@@ -89,7 +90,7 @@
 
         <Gallery
             android:id="@+id/galleryTags"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
