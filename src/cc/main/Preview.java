@@ -1,6 +1,7 @@
 package cc.main;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import android.content.Context;
@@ -31,12 +32,17 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
 
         mSurfaceView = new SurfaceView(context);
         addView(mSurfaceView);
-
+        
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
         mHolder = mSurfaceView.getHolder();
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+    }
+    
+    public void takePicture (Camera.ShutterCallback shutter, Camera.PictureCallback raw, Camera.PictureCallback postview, Camera.PictureCallback jpeg) {
+    	if (mCamera!=null)
+    		mCamera.takePicture(shutter, raw, postview, jpeg);
     }
 
     public void setCamera(Camera camera) {
@@ -159,12 +165,14 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
         // Now that the size is known, set up the camera parameters and begin
         // the preview.
-        Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
-        requestLayout();
+    	if (mCamera!=null) {
+    		Camera.Parameters parameters = mCamera.getParameters();
+    		parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+    		requestLayout();
 
-        mCamera.setParameters(parameters);
-        mCamera.startPreview();
+    		mCamera.setParameters(parameters);
+    		mCamera.startPreview();
+    	}
     }
 
 }
