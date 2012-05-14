@@ -1,10 +1,14 @@
 package cc.main;
 
+import contentprovider.MainContentProvider;
 import cc.rep.Collection;
+import cc.rep.CollectionOpenHelper;
 import cc.rep.Item;
 import cc.rep.ResultCode;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -65,6 +69,14 @@ public class NewCollectionActivity extends Activity {
        	c.setPrivate(shareToggle.isChecked());
     	Intent intent = new Intent();
     	intent.putExtra("collection", c);
+    	
+    	
+    	// add it to the database
+    	Uri newUri;
+    	ContentValues insertValues = c.makeContentValues();
+    	insertValues.remove(CollectionOpenHelper.COLUMN_ID);
+    	newUri = getContentResolver().insert(MainContentProvider.CONTENT_URI_C, insertValues);
+    	c.setID(Long.parseLong(newUri.getLastPathSegment()));
     	
     	setResult(Activity.RESULT_OK,intent);
     	finish();

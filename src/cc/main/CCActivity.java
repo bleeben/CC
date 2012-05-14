@@ -64,7 +64,7 @@ public class CCActivity extends Activity {
         //populate collections:
         String [] columns = CollectionOpenHelper.ALL_COLUMNS;
         Cursor cCursor = getContentResolver().query(MainContentProvider.CONTENT_URI_C, columns, null, null, null);
-        if (cCursor == null || cCursor.getCount() < 0){
+        if (cCursor == null){
         	android.util.Log.e(ACTIVITY_SERVICE, "CCActivity cursor is null");
         	throw new RuntimeException("Cursor failed in CCActivity");
         }
