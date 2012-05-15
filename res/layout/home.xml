@@ -22,7 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="onNewItemButtonClick"
-                android:text="@string/newItem" />
+                android:text="@string/newItem"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -40,7 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.50"
                 android:onClick="onNewCollectionButtonClick"
-                android:text="@string/newCollection" />
+                android:text="@string/newCollection"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnBrowseColl"
@@ -48,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.50"
                 android:onClick="onBrowseCollectionsButtonClick"
-                android:text="@string/browseCollections" />
+                android:text="@string/browseCollections"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -66,7 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
             android:text="@string/recentItems"
-            android:onClick="onRecentButtonClick" />
+            android:onClick="onRecentButtonClick"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </LinearLayout>
