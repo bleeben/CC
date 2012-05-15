@@ -164,11 +164,11 @@ public class CCActivity extends Activity {
     		case Activity.RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
     			int position = data.getIntExtra("position", 0);
+    			recentItems.recentAdd(newItem);
     			if (collections.size()>0) {
     				collections.get(position).addItem(newItem);
     				onBrowseCollectionsButtonClick(null,position);
     			}
-    			recentItems.recentAdd(newItem);
     			break;
     		}
     		break;
