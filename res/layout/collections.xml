@@ -35,11 +35,12 @@
         android:horizontalSpacing="10dp"
         android:gravity="center">
     </GridView>
-
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_weight="0">
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="right" >
 
         <TextView
             android:id="@+id/textView2"
@@ -47,24 +48,21 @@
             android:layout_height="wrap_content"
             android:text="@string/filter"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/filterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10" />
 
         <Button
             android:id="@+id/button1"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/btnAdd"
-            android:onClick="filter" />
+            android:onClick="clearFilter"
+            android:text="@string/btnClr" />
 
-
-        <EditText
-            android:id="@+id/filterText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" >
-
-            <requestFocus />
-        </EditText>
     </LinearLayout>
 
 </LinearLayout>

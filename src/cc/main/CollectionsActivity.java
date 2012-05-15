@@ -12,17 +12,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-public class CollectionsActivity extends Activity {
+public class CollectionsActivity extends Activity{
 	
 	static final int NEW_COLLECTION_REQUEST = 0;
 	static final int BROWSE_COLLECTION = 3;
@@ -67,8 +71,28 @@ public class CollectionsActivity extends Activity {
         
         filterEdit = (EditText) findViewById(R.id.filterText);
         filterEdit.clearFocus();
+        filterEdit.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				filter();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
     }
-    //hi
     
     public void onNewCollectionButtonClick(View view) {
     	Intent intent = new Intent(this, NewCollectionActivity.class);
@@ -120,7 +144,12 @@ public class CollectionsActivity extends Activity {
         inflater.inflate(R.menu.collections, menu);
         return true;
     }
-    
+
+
+	public void filter() {
+		filter(null); //TODO - IS THIS OKAY?!?!?!?
+	}
+	
     public void filter(View view){
     	Tag filter = new Tag(filterEdit.getText().toString());
 
@@ -129,6 +158,11 @@ public class CollectionsActivity extends Activity {
 //        gridColls.setAdapter(adapter);
     	adapter.notifyDataSetChanged();
     	gridColls.invalidateViews();
+    }
+    
+    public void clearFilter(View view){
+    	filterEdit.setText("");
+    	filter();
     }
     
     @Override

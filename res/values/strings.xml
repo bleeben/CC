@@ -54,7 +54,8 @@
 	<string name="btnOk">OK</string>
 	<string name="btnReturn">Return</string>
 	<string name="btnShare">Share</string>
-	<string name="btnAdd">Add</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnClr">Clear</string>
     <string name="btnAddTag">+</string>
 	<string name="untitled">Untitled</string>
     <string name="addTagTitle">Add Tag</string>

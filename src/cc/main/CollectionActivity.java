@@ -10,8 +10,12 @@ import cc.rep.Tag;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View.OnKeyListener;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +26,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
@@ -71,7 +76,37 @@ public class CollectionActivity extends Activity {
         filterEdit = (EditText) findViewById(R.id.filterText);
         filterEdit.clearFocus();
         filterEdit.setText(i.getStringExtra("filter"));
-        
+        filterEdit.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				filter();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
+//        filterEdit.setOnKeyListener(new OnKeyListener() {
+//        	@Override
+//        	public boolean onKey(View v, int keyCode, KeyEvent event) {
+//        		filter(v);
+//				Toast.makeText(CollectionActivity.this,
+//						"NewItemActivity: + cancel",
+//						Toast.LENGTH_SHORT).show();
+//        		return false;
+//        	}
+//        });
         filter();
 		
     }
@@ -208,6 +243,11 @@ public class CollectionActivity extends Activity {
 //        gridColls.setAdapter(adapter);
     	adapter.notifyDataSetChanged();
     	gridColls.invalidateViews();
+    }
+    
+    public void clearFilter(View view){
+    	filterEdit.setText("");
+    	filter();
     }
     
     public void onShareButtonClick(View view){
