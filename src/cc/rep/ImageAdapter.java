@@ -27,14 +27,23 @@ public class ImageAdapter extends BaseAdapter {
     Context context;
     LayoutInflater li;
     List<? extends Storable> c;
+    boolean isRecent=false;
     
     public ImageAdapter(Context context,LayoutInflater li, List<? extends Storable> list)
     {
        this.context = context;
        this.li=li;
        this.c = list;
+       this.isRecent=false;
     }
     
+    public ImageAdapter(Context context,LayoutInflater li, List<? extends Storable> list, boolean isRecent)
+    {
+       this.context = context;
+       this.li=li;
+       this.c = list;
+       this.isRecent=isRecent;
+    }
 	
 	//@Override
 	public int getCount() {
@@ -68,7 +77,10 @@ public class ImageAdapter extends BaseAdapter {
            
            // Add The Text!!!
            TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-           tv.setText(position +": "+s.getName());
+           if (isRecent)
+        	   tv.setText(position +": "+((Item) s).getCollection().getName()+":"+s.getName());
+           else
+        	   tv.setText(position +": "+s.getName());
            
            // Add The Image!!!           
            ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);
@@ -95,7 +107,10 @@ public class ImageAdapter extends BaseAdapter {
         	Storable s = c.get(position);
         	// Add The Text!!!
             TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-            tv.setText(position +": "+s.getName());
+            if (isRecent)
+         	   tv.setText(position +": "+((Item) s).getCollection().getName()+":"+s.getName());
+            else
+            	tv.setText(position +": "+s.getName());
             
             // Add The Image!!!           
             ImageView iv = (ImageView)itemView.findViewById(R.id.grid_item_image);

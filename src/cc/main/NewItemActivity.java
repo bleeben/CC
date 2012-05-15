@@ -60,7 +60,7 @@ public class NewItemActivity extends Activity {
 		int size = intent.getIntExtra("totalNum", 0);
 
 		nameEdit = (EditText) findViewById(R.id.editTextName);
-		nameEdit.setText("Untitled " + size);
+		nameEdit.setText("Untitled" + size);
 
 		collectionSpinner = (Spinner) findViewById(R.id.collectionSpinner);
 
@@ -125,15 +125,18 @@ public class NewItemActivity extends Activity {
 
 	public void onDoneButtonClick(View view) {
 		item.setName(nameEdit.getText().toString());
+		
 		Intent intent = new Intent();
 
 		Intent i = getIntent();
-		//Collection c = (Collection) i.getParcelableExtra("collection");
+		Collection c = (Collection) i.getParcelableExtra("collection");
 		ArrayList<Collection> cs = i.getParcelableArrayListExtra("collections");
 		if (cs == null) {
+			item.setCollection(c);
 		} else {
-			intent.putExtra("position",
-					collectionSpinner.getSelectedItemPosition());
+			int index=collectionSpinner.getSelectedItemPosition();
+			intent.putExtra("position", index);
+			item.setCollection(cs.get(index));
 		}
 		if (CCActivity.PERSISTENT_ON) {
 		// save the new item

@@ -35,7 +35,7 @@ public class NewCollectionActivity extends Activity {
         int size = i.getIntExtra("totalNum",0);
         
         nameEdit = (EditText)findViewById(R.id.editTextName);
-        nameEdit.setText("Untitled "+size);
+        nameEdit.setText("Untitled"+size);
         descEdit = (EditText)findViewById(R.id.editTextDesc);
         shareToggle = (ToggleButton) findViewById(R.id.toggleButtonShare);
         shareToggle.setChecked(true);

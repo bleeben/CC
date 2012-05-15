@@ -53,7 +53,10 @@ public class CollectionActivity extends Activity {
         recentItems = i.getParcelableExtra("recentItems");
         
         position = i.getIntExtra("position", 0);
-        adapter = new ImageAdapter(this,getLayoutInflater(),c.getItems());
+        if (c.getName().equals(recentItems.getName()))
+        	adapter = new ImageAdapter(this,getLayoutInflater(),c.getItems(),true);
+        else
+        	adapter = new ImageAdapter(this,getLayoutInflater(),c.getItems());
         gridColls = (GridView) findViewById(R.id.gridView1);
         gridColls.setAdapter(adapter);
         
