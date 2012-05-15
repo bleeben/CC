@@ -45,6 +45,9 @@ public class CollectionsActivity extends Activity {
         adapter = new ImageAdapter(this,getLayoutInflater(),collections);
         gridColls = (GridView) findViewById(R.id.gridView1);
         gridColls.setAdapter(adapter);
+
+        filterEdit = (EditText) findViewById(R.id.filterText);
+        filterEdit.clearFocus();
         
         gridColls.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -57,6 +60,7 @@ public class CollectionsActivity extends Activity {
                 i.putExtra("position", position);
                 i.putParcelableArrayListExtra("collections", collections);
                 i.putExtra("collection", collections.get(position));
+                i.putExtra("filter", filterEdit.getText().toString());
                 startActivityForResult(i,BROWSE_COLLECTION);
             }
         });

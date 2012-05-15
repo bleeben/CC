@@ -45,7 +45,6 @@ public class CollectionActivity extends Activity {
         Intent i = getIntent();
         c = (Collection) i.getParcelableExtra("collection");
         position = i.getIntExtra("position", 0);
-        
         adapter = new ImageAdapter(this,getLayoutInflater(),c.getItems());
         gridColls = (GridView) findViewById(R.id.gridView1);
         gridColls.setAdapter(adapter);
@@ -71,6 +70,10 @@ public class CollectionActivity extends Activity {
         
         filterEdit = (EditText) findViewById(R.id.filterText);
         filterEdit.clearFocus();
+        filterEdit.setText(i.getStringExtra("filter"));
+        
+        filter();
+		
     }
     //hi
 	
@@ -194,6 +197,9 @@ public class CollectionActivity extends Activity {
         }
     }
     
+    public void filter(){
+    	filter(null); //TODO - IS THIS OKAY?!?!?
+    }
     public void filter(View view){
     	Tag filter = new Tag(filterEdit.getText().toString());
 
