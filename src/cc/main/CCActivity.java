@@ -125,6 +125,7 @@ public class CCActivity extends Activity {
     	Intent intent = new Intent(this, CollectionsActivity.class);
     	CCActivity.alert(this,"Entering Collections From Home");
     	intent.putParcelableArrayListExtra("collections", collections);
+    	intent.putExtra("recentItems", recentItems);
     	intent.putExtra("position", position);
         intent.putExtra("toBrowseInner",true);
     	startActivityForResult(intent,BROWSE_COLLECTIONS);

@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 public class CollectionActivity extends Activity {
 	Collection c;
+	Collection recentItems;
 	GridView gridColls;
 	int position;
 	static final int BROWSE_ITEM = 4;
@@ -49,6 +50,8 @@ public class CollectionActivity extends Activity {
         
         Intent i = getIntent();
         c = (Collection) i.getParcelableExtra("collection");
+        recentItems = i.getParcelableExtra("recentItems");
+        
         position = i.getIntExtra("position", 0);
         adapter = new ImageAdapter(this,getLayoutInflater(),c.getItems());
         gridColls = (GridView) findViewById(R.id.gridView1);
@@ -176,6 +179,8 @@ public class CollectionActivity extends Activity {
     		case RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
     			c.addItem(newItem);
+    	        recentItems.recentAdd(newItem);
+    	        
     			((ImageAdapter) gridColls.getAdapter()).setC(c.getItems());
     			((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
     			CCActivity.alert(this, "Num Items: "+c.size());
@@ -230,6 +235,8 @@ public class CollectionActivity extends Activity {
     	
     	Intent intent = new Intent();
     	intent.putExtra("collection", c);
+    	intent.putExtra("recentItems", recentItems);
+    	
     	intent.putExtra("position", position);
     	setResult(Activity.RESULT_OK, intent);
     }

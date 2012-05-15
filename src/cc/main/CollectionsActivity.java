@@ -36,6 +36,7 @@ public class CollectionsActivity extends Activity{
 	
 	private ArrayList<Collection> collections = new ArrayList<Collection>();;
 	GridView gridColls;
+	Collection recentItems;
 	
 	EditText filterEdit;
 	ImageAdapter adapter;
@@ -48,6 +49,7 @@ public class CollectionsActivity extends Activity{
         
         Intent i = getIntent();
         collections = i.getParcelableArrayListExtra("collections");
+        recentItems = i.getParcelableExtra("recentItems");
         
         adapter = new ImageAdapter(this,getLayoutInflater(),collections);
         gridColls = (GridView) findViewById(R.id.gridView1);
@@ -106,6 +108,7 @@ public class CollectionsActivity extends Activity{
         i.putParcelableArrayListExtra("collections", collections);
         i.putExtra("collection", collections.get(position));
         i.putExtra("filter", filterEdit.getText().toString());
+        i.putExtra("recentItems", recentItems);
         startActivityForResult(i,BROWSE_COLLECTION);
     }
     
@@ -182,6 +185,7 @@ public class CollectionsActivity extends Activity{
     		switch (resultCode) {
     		case Activity.RESULT_OK:
     			Collection c = data.getParcelableExtra("collection");
+    			recentItems = data.getParcelableExtra("recentItems");
     			int pos = data.getIntExtra("position", 0);
     			collections.set(pos, c);
     			((ImageAdapter) gridColls.getAdapter()).setC(collections);
@@ -199,6 +203,7 @@ public class CollectionsActivity extends Activity{
     	
     	Intent intent = new Intent();
     	intent.putExtra("collections", collections);
+    	intent.putExtra("recentItems", recentItems);
     	setResult(Activity.RESULT_OK, intent);
     }
     	
