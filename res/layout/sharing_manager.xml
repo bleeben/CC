@@ -55,7 +55,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onAddButtonClick"
-            android:text="@string/btnAdd" />
+            android:text="@string/btnAdd"
+            android:textSize="15sp" />
     </LinearLayout>
     
     <ListView
@@ -78,7 +79,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onCancelButtonClick"
-            android:text="@string/btnCancel" />
+            android:text="@string/btnCancel"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/button3"
@@ -86,7 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onDoneButtonClick"
-            android:text="@string/btnDone" />
+            android:text="@string/btnDone"
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

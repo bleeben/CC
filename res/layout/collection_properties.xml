@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newCollection"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -26,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/fieldName"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editTextName"
@@ -52,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/fieldDesc"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editTextDesc"
@@ -80,7 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/fieldThumbnail"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/thumbnailView"
@@ -107,7 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:onClick="onShareButtonClick"
-                android:text="@string/share" />
+                android:text="@string/share"
+                android:textSize="20sp" />
 
             <ToggleButton
                 android:id="@+id/toggleButtonShare"
@@ -116,7 +121,8 @@
                 android:text="@string/shareVisible"
                 android:textOn="@string/sharePrivate"
                 android:textOff="@string/sharePublic"
-                android:checked="true" />
+                android:checked="true"
+                android:textSize="20sp" />
 
             <!--<Spinner
                 android:id="@+id/spinner1"
@@ -159,7 +165,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onCancelButtonClick"
-            android:text="@string/btnCancel" />
+            android:text="@string/btnCancel"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/button2"
@@ -167,7 +174,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onDoneButtonClick"
-            android:text="@string/btnDone" />
+            android:text="@string/btnDone"
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -13,7 +13,7 @@
       android:text="@string/fieldName"
       android:gravity="center_horizontal"
       android:textColor="#FFFFFF"
-      android:textSize="30sp">
+      android:textSize="25sp">
    </TextView>
    
 </LinearLayout>

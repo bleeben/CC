@@ -29,9 +29,9 @@
 	<string name="permEdit">Can Edit</string>
 	<string name="permOwn">Can Own</string>
     <string-array name="permArray">
-        <item >Can View</item>
-        <item >Can Edit</item>
-        <item >Can Own</item>
+        <item >View</item>
+        <item >Edit</item>
+        <item >Own</item>
     </string-array>
 	
 	<string name="newContact">New Contact</string>

@@ -13,7 +13,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
 
         <!-- <EditText
             android:id="@+id/editTextName"
@@ -42,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:onClick="takePicture"
-            android:text="Take Pic" />
+            android:text="Take Pic"
+            android:textSize="20sp" />
     </LinearLayout>
     
     <FrameLayout
@@ -82,7 +84,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tags"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/button1"
@@ -90,7 +93,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnAddTag"
-            android:onClick="onAddTag"/>
+            android:onClick="onAddTag"
+            android:textSize="25sp"/>
 
         <Gallery
             android:id="@+id/galleryTags"
@@ -116,7 +120,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnCancel"
-            android:onClick="onCancelButtonClick" />
+            android:onClick="onCancelButtonClick"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/button3"
@@ -124,7 +129,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnDone"
-            android:onClick="onDoneButtonClick" />
+            android:onClick="onDoneButtonClick"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
