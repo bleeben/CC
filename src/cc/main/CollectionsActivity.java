@@ -91,6 +91,12 @@ public class CollectionsActivity extends Activity{
 				
 			}
         });
+        
+        boolean toBrowseInner = i.getBooleanExtra("toBrowseInner", false);
+        if (toBrowseInner) {
+        	int position = i.getIntExtra("position", 0);
+        	openCollectionActivity(position);
+        }
     }
     
     public void openCollectionActivity(int position) {
@@ -120,6 +126,9 @@ public class CollectionsActivity extends Activity{
 	    super.onCreateContextMenu(menu, v, menuInfo);
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.context_collections, menu);
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+	    Collection seleColl = this.collections.get(info.position);
+	    menu.setHeaderTitle("Collection: "+seleColl.getName());
 	}
 	
 	@Override
@@ -137,6 +146,7 @@ public class CollectionsActivity extends Activity{
 	        	return true;
 	        case R.id.deleteColl:
 	        	collections.remove(selectedColl);
+	        	((ImageAdapter) gridColls.getAdapter()).setC(collections);
 	        	((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
 	        	CCActivity.notify(this, "Removed Collection "+selectedColl.getName());
 	        	return true;
@@ -159,8 +169,10 @@ public class CollectionsActivity extends Activity{
     		case RESULT_OK:
     	        Collection newColl = (Collection) data.getParcelableExtra("collection");
     	        collections.add(newColl);
+    	        ((ImageAdapter) gridColls.getAdapter()).setC(collections);
     	        ((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
     	        CCActivity.alert(this, "Num Collections: "+collections.size());
+    	        openCollectionActivity(collections.indexOf(newColl));
     			break;
     		case RESULT_CANCELED:
     			break;
@@ -172,7 +184,8 @@ public class CollectionsActivity extends Activity{
     			Collection c = data.getParcelableExtra("collection");
     			int pos = data.getIntExtra("position", 0);
     			collections.set(pos, c);
-    			//collections = c;
+    			((ImageAdapter) gridColls.getAdapter()).setC(collections);
+    			((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
     			break;
     		}
     		break;

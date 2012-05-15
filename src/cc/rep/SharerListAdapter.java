@@ -70,5 +70,8 @@ public class SharerListAdapter extends BaseAdapter{
         
         return itemView;
 	}
+	public void setC(List<? extends Storable> c){
+		this.c = c;
+	}
 
 }

@@ -125,6 +125,9 @@ public class CollectionActivity extends Activity {
 	    super.onCreateContextMenu(menu, v, menuInfo);
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.context_collection, menu);
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+	    Item seleItem = this.c.getItem(info.position);
+	    menu.setHeaderTitle("Item: "+seleItem.getName());
 	}
 	
 	@Override
@@ -147,6 +150,7 @@ public class CollectionActivity extends Activity {
 	        	return true;
 	        case R.id.deleteItem:
 	        	c.removeItem(selectedItem);
+	        	((ImageAdapter) gridColls.getAdapter()).setC(c.getItems());
 	        	((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
 	        	CCActivity.notify(this, "Removed Item "+selectedItem.getName());
 	        	return true;
@@ -171,6 +175,7 @@ public class CollectionActivity extends Activity {
     		case RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
     			c.addItem(newItem);
+    			((ImageAdapter) gridColls.getAdapter()).setC(c.getItems());
     			((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
     			CCActivity.alert(this, "Num Items: "+c.size());
     			break;
@@ -184,7 +189,8 @@ public class CollectionActivity extends Activity {
     			Item item = data.getParcelableExtra("item");
     			int pos = data.getIntExtra("position", 0);
     			c.setItem(pos, item);
-    			//collections = c;
+    			((ImageAdapter) gridColls.getAdapter()).setC(c.getItems());
+    			((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
     			break;
     		}
     		break;

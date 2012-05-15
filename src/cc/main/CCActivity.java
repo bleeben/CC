@@ -109,6 +109,16 @@ public class CCActivity extends Activity {
     	//startActivity(intent);
     }
     
+    public void onBrowseCollectionsButtonClick(View view,int position) {
+    	Intent intent = new Intent(this, CollectionsActivity.class);
+    	CCActivity.alert(this,"Entering Collections From Home");
+    	intent.putParcelableArrayListExtra("collections", collections);
+    	intent.putExtra("position", position);
+        intent.putExtra("toBrowseInner",true);
+    	startActivityForResult(intent,BROWSE_COLLECTIONS);
+    	//startActivity(intent);
+    }
+    
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);
     	intent.putExtra("totalNum", collections.size());
@@ -131,7 +141,7 @@ public class CCActivity extends Activity {
     	        Collection newColl = (Collection) data.getParcelableExtra("collection");
     	        collections.add(newColl);
     	        CCActivity.alert(this, "Num Collections: "+collections.size());
-    	        onBrowseCollectionsButtonClick(null);
+    	        onBrowseCollectionsButtonClick(null,collections.indexOf(newColl));
     			break;
     		}
     		break;
@@ -140,8 +150,10 @@ public class CCActivity extends Activity {
     		case Activity.RESULT_OK:
     			Item newItem = (Item) data.getParcelableExtra("item");
     			int position = data.getIntExtra("position", 0);
-    			if (collections.size()>0)
+    			if (collections.size()>0) {
     				collections.get(position).addItem(newItem);
+    				onBrowseCollectionsButtonClick(null,position);
+    			}
     			break;
     		}
     		break;

@@ -111,6 +111,9 @@ public class ItemActivity extends Activity {
 	    super.onCreateContextMenu(menu, v, menuInfo);
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.context_tags, menu);
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+	    Tag seleTag = this.item.getTag(info.position);
+	    menu.setHeaderTitle("Tag: "+seleTag.getText());
 	}
 	
 	@Override
