@@ -27,9 +27,11 @@ public class CCActivity extends Activity {
 	 static final int NEW_COLLECTION_REQUEST = 0;
 	 static final int NEW_ITEM_REQUEST = 1;
 	 static final int BROWSE_COLLECTIONS = 2;
+	 static final int BROWSE_COLLECTION = 3;
 	 static final boolean PERSISTENT_ON = false;
 
-	private ArrayList<Collection> collections = new ArrayList<Collection>();;
+	private ArrayList<Collection> collections = new ArrayList<Collection>();
+	private Collection recentItems = new Collection("Recent Items");
 	 
 	 public static void alert(Context context,String title, String msg) {
 		 AlertDialog aDial = new AlertDialog.Builder(context).create();
@@ -82,14 +84,17 @@ public class CCActivity extends Activity {
         	Item item = new Item("Dog");
         	item.addTag("Dog");
         	collection.addItem(item);
+        	recentItems.recentAdd(item);
         	
         	item = new Item("Also a dog");
         	item.addTag("Dog");
         	collection.addItem(item);
+        	recentItems.recentAdd(item);
         	
         	item = new Item("Not a dog");
         	item.addTag("Cat");
         	collection.addItem(item);
+        	recentItems.recentAdd(item);
         	
         	collections.add(collection);
         }
@@ -98,13 +103,20 @@ public class CCActivity extends Activity {
     //hi
     
     public void onRecentButtonClick(View view) {
-    	CCActivity.notify(this, getString(R.string.noRecentItems));
+    	if(recentItems.size() == 0){
+    		CCActivity.notify(this, getString(R.string.noRecentItems));
+    	} else {
+        	Intent i = new Intent(getApplicationContext(), CollectionActivity.class);
+            i.putExtra("collection", recentItems);
+            startActivityForResult(i,BROWSE_COLLECTION);
+    	}
     }
     
     public void onBrowseCollectionsButtonClick(View view) {
     	Intent intent = new Intent(this, CollectionsActivity.class);
     	CCActivity.alert(this,"Entering Collections From Home");
     	intent.putParcelableArrayListExtra("collections", collections);
+    	intent.putExtra("recentItems", recentItems);
     	startActivityForResult(intent,BROWSE_COLLECTIONS);
     	//startActivity(intent);
     }
@@ -129,6 +141,7 @@ public class CCActivity extends Activity {
     public void onNewCollectionButtonClick(View view) {
     	Intent intent = new Intent(this, NewCollectionActivity.class);
     	intent.putExtra("totalNum", collections.size());
+    	intent.putExtra("recentItems", recentItems); // If new collections goes straight to that screen.
     	startActivityForResult(intent, NEW_COLLECTION_REQUEST);
     }
     
@@ -154,6 +167,7 @@ public class CCActivity extends Activity {
     				collections.get(position).addItem(newItem);
     				onBrowseCollectionsButtonClick(null,position);
     			}
+    			recentItems.recentAdd(newItem);
     			break;
     		}
     		break;
@@ -162,6 +176,7 @@ public class CCActivity extends Activity {
     		case Activity.RESULT_OK:
     			ArrayList<Collection> c = data.getParcelableArrayListExtra("collections");
     			collections = c;
+    			recentItems = data.getParcelableExtra("recentItems");
     			break;
     		}
     		break;
