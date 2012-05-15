@@ -62,6 +62,9 @@ public class CollectionPropertiesActivity extends Activity {
 		} catch (Exception e) {
 			iv.setImageResource(R.drawable.ic_launcher);
 		}
+		
+		nameEdit.clearFocus();
+		descEdit.clearFocus();
     }
     //hi
     

@@ -74,7 +74,7 @@ public class CollectionActivity extends Activity {
         collectionName.setText(c.getName());
         
         filterEdit = (EditText) findViewById(R.id.filterText);
-        filterEdit.clearFocus();
+        
         String filter = i.getStringExtra("filter");
         filterEdit.setText(filter != null ? filter : "");
         filterEdit.addTextChangedListener(new TextWatcher(){
@@ -109,7 +109,7 @@ public class CollectionActivity extends Activity {
 //        	}
 //        });
         filter();
-		
+        filterEdit.clearFocus();
         
         boolean toEdit = i.getBooleanExtra("toEdit", false);
         if (toEdit)

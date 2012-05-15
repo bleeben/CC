@@ -71,7 +71,6 @@ public class CollectionsActivity extends Activity{
         this.registerForContextMenu(gridColls);
         
         filterEdit = (EditText) findViewById(R.id.filterText);
-        filterEdit.clearFocus();
         filterEdit.addTextChangedListener(new TextWatcher(){
 
 			@Override
@@ -93,6 +92,8 @@ public class CollectionsActivity extends Activity{
 				
 			}
         });
+        
+        filterEdit.clearFocus();
         
         boolean toBrowseInner = i.getBooleanExtra("toBrowseInner", false);
         if (toBrowseInner) {
