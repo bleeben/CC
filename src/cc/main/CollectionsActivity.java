@@ -187,6 +187,11 @@ public class CollectionsActivity extends Activity{
     		case Activity.RESULT_OK:
     			Collection c = data.getParcelableExtra("collection");
     			recentItems = data.getParcelableExtra("recentItems");
+    			String filterBack = data.getStringExtra("filterBack");
+    			//CCActivity.notify(this, data.toString());
+    	    	CCActivity.notify(this, "fuck" + filterBack);
+    			filterEdit.setText(filterBack);
+    			filter();
     			int pos = data.getIntExtra("position", 0);
     			collections.set(pos, c);
     			((ImageAdapter) gridColls.getAdapter()).setC(collections);
@@ -239,9 +244,6 @@ public class CollectionsActivity extends Activity{
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.share:
-            	
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

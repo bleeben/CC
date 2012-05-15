@@ -77,7 +77,7 @@ public class ImageAdapter extends BaseAdapter {
            
            // Add The Text!!!
            TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-           if (isRecent)
+           if (isRecent && ((Item) s).getCollection()!=null)
         	   tv.setText(position +": "+((Item) s).getCollection().getName()+":"+s.getName());
            else
         	   tv.setText(position +": "+s.getName());
@@ -107,7 +107,7 @@ public class ImageAdapter extends BaseAdapter {
         	Storable s = c.get(position);
         	// Add The Text!!!
             TextView tv = (TextView)itemView.findViewById(R.id.grid_item_text);
-            if (isRecent)
+            if (isRecent && ((Item) s).getCollection()!=null)
          	   tv.setText(position +": "+((Item) s).getCollection().getName()+":"+s.getName());
             else
             	tv.setText(position +": "+s.getName());
@@ -189,5 +189,9 @@ public class ImageAdapter extends BaseAdapter {
 
 	public void setC(List<? extends Storable> c){
 		this.c = c;
+	}
+	
+	public List<? extends Storable> getC() {
+		return this.c;
 	}
 }

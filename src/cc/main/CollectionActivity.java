@@ -53,7 +53,7 @@ public class CollectionActivity extends Activity {
         recentItems = i.getParcelableExtra("recentItems");
         
         position = i.getIntExtra("position", 0);
-        if (c.getName().equals(recentItems.getName()))
+        if ("Recent Items".equals(c.getName()))
         	adapter = new ImageAdapter(this,getLayoutInflater(),c.getItems(),true);
         else
         	adapter = new ImageAdapter(this,getLayoutInflater(),c.getItems());
@@ -120,9 +120,13 @@ public class CollectionActivity extends Activity {
 	public void openItemActivity(int position){
 		Intent i = new Intent(getApplicationContext(), ItemActivity.class);
         // passing array index
-        i.putExtra("position", position);
+        
         i.putExtra("collection", c);
-        i.putExtra("item", c.getItem(position));
+        int newPos = c.getItems().indexOf(adapter.getC().get(position));
+        //i.putExtra("position", position);
+        i.putExtra("position", newPos);
+        //i.putExtra("item", c.getItem(position));
+        i.putExtra("item", c.getItem(newPos));
         startActivityForResult(i,BROWSE_ITEM);
 	}
 	
@@ -187,6 +191,7 @@ public class CollectionActivity extends Activity {
     			((ImageAdapter) gridColls.getAdapter()).setC(c.getItems());
     			((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
     			CCActivity.alert(this, "Num Items: "+c.size());
+    			filter();
     			break;
     		case RESULT_CANCELED:
     			break;
@@ -200,6 +205,7 @@ public class CollectionActivity extends Activity {
     			c.setItem(pos, item);
     			((ImageAdapter) gridColls.getAdapter()).setC(c.getItems());
     			((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
+    			filter();
     			break;
     		}
     		break;
@@ -239,7 +245,8 @@ public class CollectionActivity extends Activity {
     	Intent intent = new Intent();
     	intent.putExtra("collection", c);
     	intent.putExtra("recentItems", recentItems);
-    	
+    	//CCActivity.notify(this, filterEdit.getText().toString());
+    	intent.putExtra("filterBack", filterEdit.getText().toString());
     	intent.putExtra("position", position);
     	setResult(Activity.RESULT_OK, intent);
     }
