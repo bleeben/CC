@@ -1,3 +1,6 @@
 bin/
 gen/
-
+trunk/
+svn-ds/
+git-ds/
+.svn/
