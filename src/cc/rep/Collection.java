@@ -72,6 +72,13 @@ public class Collection implements Parcelable, Storable {
 		items.add(item);
 	}
 
+
+	public void recentAdd(Item item) {
+		items.add(0,item);
+		if(items.size() > 10)
+			items.remove(10);
+	}
+
 	public void addSharer(Sharer sharer) {
 		sharers.add(sharer);
 	}
