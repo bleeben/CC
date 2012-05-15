@@ -62,16 +62,20 @@ public class SpinnerListAdapter extends BaseAdapter implements SpinnerAdapter{
         {
                                /*we define the view that will display on the grid*/
            
-           //Inflate the layout
-           itemView = li.inflate(R.layout.grid_item, null);
+           
+        	//Inflate the layout
+           itemView = li.inflate(R.layout.sharer_item, null);
            
            // Add The Text!!!
-           TextView tv = new TextView(context);
+           TextView tv = (TextView)itemView.findViewById(R.id.share_name);
            tv.setText(c.get(position).getName());
            
-           itemView = tv;
+           //itemView = tv;
+           
         } else {
-        	((TextView) view).setText(c.get(position).getName());
+        	TextView tv = (TextView)itemView.findViewById(R.id.share_name);
+            tv.setText(c.get(position).getName());
+            
         }
         
         return itemView;
