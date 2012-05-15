@@ -75,6 +75,8 @@ public class NewItemActivity extends Activity {
 		tagArr = new ArrayAdapter<Tag>(this,
 				android.R.layout.simple_gallery_item, item.getTags());
 		tagGallery.setAdapter(tagArr);
+		
+		this.registerForContextMenu(tagGallery);
 
 		nameEdit.clearFocus();
 	}
@@ -196,10 +198,14 @@ public class NewItemActivity extends Activity {
 	                Bitmap thumbnail = android.provider.MediaStore.Images.Media
 	                        .getBitmap(cr, selectedImage);
 	                ImageView image = (ImageView) findViewById(R.id.imageView1);
-					//image.setImageURI(selectedImage);
-					item.setPicUri(selectedImage);
 					image.setImageBitmap(thumbnail);
-	                CCActivity.alert(this, "Image saved to:\n" + selectedImage);
+					
+	                Uri oldUri = item.getPicUri();
+	                item.setPicUri(selectedImage);
+					if (oldUri != null)
+						cr.delete(oldUri, null, null);
+	                
+					CCActivity.alert(this, "Image saved to:\n" + selectedImage);
 	            } catch (Exception e) {
 	                CCActivity.notify(this, "Picture Failed to Load");
 	            }

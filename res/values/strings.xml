@@ -60,5 +60,19 @@
     <string name="addTagTitle">Add Tag</string>
     <string name="addTagOK">OK</string>
     <string name="addTagCancel">Cancel</string>
-	
+
+    
+    <string name="collectionThumb">Set as Collection Thumbnail</string>
+    <string name="addDesc">Add Description</string>
+    <string name="renameItem">Rename Item</string>
+    <string name="deleteItem">Delete Item</string>
+    <string name="renameColl">Rename Collection</string>
+    <string name="deleteColl">Delete Collection</string>
+    <string name="notifyEmail">Notify with Email</string>
+    <string name="renameSharer">Rename Sharer</string>
+    <string name="editSharer">Edit Sharer</string>
+    <string name="deleteSharer">Delete Sharer</string>
+    <string name="renameTag">Rename Tag</string>
+    <string name="deleteTag">Delete Tag</string>
+    	
 </resources>

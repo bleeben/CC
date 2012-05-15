@@ -103,9 +103,10 @@ public class ImageAdapter extends BaseAdapter {
 				if (s.getPicUri() != null) {
 					Uri imageUri = s.getPicUri();
 					ContentResolver cr = context.getContentResolver();
-					Bitmap thumbnail = android.provider.MediaStore.Images.Media
-							.getBitmap(cr, imageUri);
-					//iv.setImageBitmap(thumbnail);
+					//Bitmap thumbnail = android.provider.MediaStore.Images.Media
+					//		.getBitmap(cr, imageUri);
+					Bitmap thumbnail = ImageAdapter.getThumbnail(context, imageUri, 100);
+					iv.setImageBitmap(thumbnail);
 				} else {
 					iv.setImageResource(R.drawable.ic_launcher);					
 				}

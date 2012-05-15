@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/addDesc" android:title="@string/addDesc"></item>
+    <item android:id="@+id/renameColl" android:title="@string/renameColl"></item>
+    <item android:id="@+id/deleteColl" android:title="@string/deleteColl"></item>    
+
+</menu>

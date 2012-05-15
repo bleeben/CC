@@ -3,13 +3,18 @@ package cc.main;
 import contentprovider.MainContentProvider;
 import cc.rep.Collection;
 import cc.rep.CollectionOpenHelper;
+import cc.rep.ImageAdapter;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -41,6 +46,22 @@ public class CollectionPropertiesActivity extends Activity {
         
         shareToggle = (ToggleButton) findViewById(R.id.toggleButtonShare);
         shareToggle.setChecked(c.isPrivate());
+        
+        ImageView iv = (ImageView)findViewById(R.id.thumbnailView);
+        try {
+			if (c.getPicUri() != null) {
+				Uri imageUri = c.getPicUri();
+				ContentResolver cr = getContentResolver();
+				//Bitmap thumbnail = android.provider.MediaStore.Images.Media
+				//		.getBitmap(cr, imageUri);
+				Bitmap thumbnail = ImageAdapter.getThumbnail(this, imageUri, 200);
+				iv.setImageBitmap(thumbnail);
+			} else {
+				iv.setImageResource(R.drawable.ic_launcher);					
+			}
+		} catch (Exception e) {
+			iv.setImageResource(R.drawable.ic_launcher);
+		}
     }
     //hi
     

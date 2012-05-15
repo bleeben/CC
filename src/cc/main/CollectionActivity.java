@@ -10,11 +10,14 @@ import cc.rep.Tag;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -61,6 +64,7 @@ public class CollectionActivity extends Activity {
                 startActivityForResult(i,BROWSE_ITEM);
             }
         });
+        this.registerForContextMenu(gridColls);
         
         collectionName = (TextView) findViewById(R.id.collectionName);
         collectionName.setText(c.getName());
@@ -69,6 +73,32 @@ public class CollectionActivity extends Activity {
         filterEdit.clearFocus();
     }
     //hi
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+	                                ContextMenuInfo menuInfo) {
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.context_collection, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    switch (item.getItemId()) {
+	        case R.id.collectionThumb:
+	            //editNote(info.id);
+	            return true;
+	        case R.id.addDesc:
+	        	return true;
+	        case R.id.renameItem:
+	        	return true;
+	        case R.id.deleteItem:
+	        	return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
     
     public void onNewItemButtonClick(View view) {
     	Intent intent = new Intent(this, NewItemActivity.class);

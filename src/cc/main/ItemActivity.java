@@ -215,8 +215,13 @@ public class ItemActivity extends Activity {
 	                        .getBitmap(cr, selectedImage);
 	                ImageView image = (ImageView) findViewById(R.id.imageView1);
 					//image.setImageURI(data.getData());
-					item.setPicUri(selectedImage);
-					image.setImageBitmap(thumbnail);
+	                image.setImageBitmap(thumbnail);
+					
+	                Uri oldUri = item.getPicUri();
+	                item.setPicUri(selectedImage);
+					if (oldUri != null)
+						cr.delete(oldUri, null, null);
+	                
 	                CCActivity.alert(this, "Image saved to:\n" + selectedImage);
 	            } catch (Exception e) {
 	                CCActivity.notify(this, "Picture Failed to Load");
