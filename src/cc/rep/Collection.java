@@ -152,7 +152,48 @@ public class Collection implements Parcelable, Storable {
 
 		return temp;
 	}
+	
+	public boolean matches(Tag filter){
+		for (Item item : items) {
+			if (item.matchesTag(filter)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean matches(ArrayList<Tag> filters) {
+		for (Item item : items) {
+			if (item.matchesTags(filters)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static List<Collection> getMatches(List<Collection> cs, Tag filter){
+		List<Collection> collections = new ArrayList<Collection>();
 
+		for (Collection c : cs) {
+			if (c.matches(filter)){
+				collections.add(c);
+			}
+		}
+		return collections;
+	}
+	
+	public static List<Collection> getMatches(List<Collection> cs, ArrayList<Tag> filters){
+		List<Collection> collections = new ArrayList<Collection>();
+
+		for (Collection c : cs) {
+			if (c.matches(filters)){
+				collections.add(c);
+			}
+		}
+		return collections;
+	}
+	
+	
 	// used to regenerate object
 	public static final Parcelable.Creator<Collection> CREATOR = new Parcelable.Creator<Collection>() {
 		public Collection createFromParcel(Parcel in) {

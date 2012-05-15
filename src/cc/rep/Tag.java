@@ -15,7 +15,7 @@ public class Tag implements Parcelable{
 	}
 
 	public boolean matchesTag(Tag tag){
-		return text.startsWith(tag.getText());
+		return text.toLowerCase().startsWith(tag.getText().toLowerCase());
 	}
 
 	@Override

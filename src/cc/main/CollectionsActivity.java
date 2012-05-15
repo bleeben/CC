@@ -7,6 +7,7 @@ import java.util.List;
 import cc.rep.Collection;
 import cc.rep.ImageAdapter;
 import cc.rep.Item;
+import cc.rep.Tag;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class CollectionsActivity extends Activity {
 	GridView gridColls;
 	
 	EditText filterEdit;
+	ImageAdapter adapter;
 	
     /** Called when the activity is first created. */
     @Override
@@ -40,8 +42,9 @@ public class CollectionsActivity extends Activity {
         Intent i = getIntent();
         collections = i.getParcelableArrayListExtra("collections");
         
+        adapter = new ImageAdapter(this,getLayoutInflater(),collections);
         gridColls = (GridView) findViewById(R.id.gridView1);
-        gridColls.setAdapter(new ImageAdapter(this,getLayoutInflater(),collections));
+        gridColls.setAdapter(adapter);
         
         gridColls.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -112,6 +115,16 @@ public class CollectionsActivity extends Activity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.collections, menu);
         return true;
+    }
+    
+    public void filter(View view){
+    	Tag filter = new Tag(filterEdit.getText().toString());
+
+//        adapter = new ImageAdapter(this,getLayoutInflater(),c.getMatches(filter));        
+    	adapter.setC(Collection.getMatches(collections,filter));
+//        gridColls.setAdapter(adapter);
+    	adapter.notifyDataSetChanged();
+    	gridColls.invalidateViews();
     }
     
     @Override
