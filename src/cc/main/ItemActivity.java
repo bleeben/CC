@@ -29,11 +29,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -42,6 +44,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ItemActivity extends Activity {
 	
@@ -97,7 +100,39 @@ public class ItemActivity extends Activity {
 		} catch (Exception e) {
 			CCActivity.notify(this, "Picture Failed to Load");
 		}
+		
+		this.registerForContextMenu(tagGallery);
+		
     }
+    
+    @Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+	                                ContextMenuInfo menuInfo) {
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.context_tags, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    Tag selectedTag = this.item.getTag(info.position);
+	    switch (item.getItemId()) {
+	        case R.id.renameTag:
+	            //editNote(info.id);
+	        	onEditTag(info.position,selectedTag);
+	        	//updateTagAdapter(); already done in onEditTag
+	            return true;
+	        case R.id.deleteTag:
+	        	this.item.removeTag(info.position);
+	        	updateTagAdapter();
+	        	CCActivity.notify(this, "Removed Tag "+selectedTag.getText());
+	        	return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
+
         
     public void onCancelButtonClick(View view) {
     	setResult(RESULT_CANCELED);
@@ -121,6 +156,36 @@ public class ItemActivity extends Activity {
     	setResult(Activity.RESULT_OK, intent);
     	finish();
     }
+    
+	public void onEditTag(final int position,Tag selectedTag) {
+		LayoutInflater factory = LayoutInflater.from(this);
+		final View add_tag = factory.inflate(R.layout.add_tag, null);
+		final EditText editTag = (EditText) add_tag
+				.findViewById(R.id.editTextTag);
+		editTag.setText(selectedTag.getText());
+		AlertDialog alertDialog = new AlertDialog.Builder(this)
+				// .setIconAttribute(android.R.attr.alertDialogIcon)
+				.setTitle(R.string.renameTag)
+				.setView(add_tag)
+				.setPositiveButton(R.string.addTagOK,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								item.setTag(editTag.getText().toString(),position);
+								updateTagAdapter();
+							}
+						})
+				.setNegativeButton(R.string.addTagCancel,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								CCActivity.alert(ItemActivity.this,
+										"NewItemActivity: + cancel");
+							}
+						}).create();
+		alertDialog.show();
+	}
+
     
     public void onAddTag(View view){
         LayoutInflater factory = LayoutInflater.from(this);

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 	<item android:id="@+id/notifyEmail" android:title="@string/notifyEmail"></item>
-    <item android:id="@+id/renameSharer" android:title="@string/renameSharer"></item>
     <item android:id="@+id/editSharer" android:title="@string/editSharer"></item>
     <item android:id="@+id/deleteSharer" android:title="@string/deleteSharer"></item>
 

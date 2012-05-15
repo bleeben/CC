@@ -64,13 +64,13 @@
 
     
     <string name="collectionThumb">Set as Collection Thumbnail</string>
+    <string name="removeThumb">Remove Thumbnail</string>
     <string name="addDesc">Add Description</string>
-    <string name="renameItem">Rename Item</string>
+    <string name="editItem">Edit Item</string>
     <string name="deleteItem">Delete Item</string>
-    <string name="renameColl">Rename Collection</string>
+    <string name="editColl">Edit Collection</string>
     <string name="deleteColl">Delete Collection</string>
     <string name="notifyEmail">Notify with Email</string>
-    <string name="renameSharer">Rename Sharer</string>
     <string name="editSharer">Edit Sharer</string>
     <string name="deleteSharer">Delete Sharer</string>
     <string name="renameTag">Rename Tag</string>

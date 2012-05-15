@@ -59,13 +59,7 @@ public class CollectionActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View v,
                     int position, long id) {
  
-                // Sending image id to FullScreenActivity
-                Intent i = new Intent(getApplicationContext(), ItemActivity.class);
-                // passing array index
-                i.putExtra("position", position);
-                i.putExtra("collection", c);
-                i.putExtra("item", c.getItem(position));
-                startActivityForResult(i,BROWSE_ITEM);
+                openItemActivity(position);
             }
         });
         this.registerForContextMenu(gridColls);
@@ -109,8 +103,21 @@ public class CollectionActivity extends Activity {
 //        });
         filter();
 		
+        
+        boolean toEdit = i.getBooleanExtra("toEdit", false);
+        if (toEdit)
+        	editProperties();
     }
     //hi
+	
+	public void openItemActivity(int position){
+		Intent i = new Intent(getApplicationContext(), ItemActivity.class);
+        // passing array index
+        i.putExtra("position", position);
+        i.putExtra("collection", c);
+        i.putExtra("item", c.getItem(position));
+        startActivityForResult(i,BROWSE_ITEM);
+	}
 	
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -123,15 +130,25 @@ public class CollectionActivity extends Activity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    Item selectedItem = c.getItem(info.position);
 	    switch (item.getItemId()) {
 	        case R.id.collectionThumb:
 	            //editNote(info.id);
+	        	c.setPicUri(selectedItem.getPicUri());
+	        	CCActivity.notify(this, "Picture Set To Collection Preview");
 	            return true;
-	        case R.id.addDesc:
+	        case R.id.editItem:
+	        	openItemActivity(info.position);
 	        	return true;
-	        case R.id.renameItem:
+	    	case R.id.removeThumb:
+	    		selectedItem.setPicUri(null);
+	    		((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
+	        	CCActivity.notify(this, "Removed Thumbnail");
 	        	return true;
 	        case R.id.deleteItem:
+	        	c.removeItem(selectedItem);
+	        	((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
+	        	CCActivity.notify(this, "Removed Item "+selectedItem.getName());
 	        	return true;
 	        default:
 	            return super.onContextItemSelected(item);

@@ -80,6 +80,22 @@ public class Item implements Parcelable, Storable {
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
+	
+	public Tag getTag(int position) {
+		return tags.get(position);
+	}
+	
+	public void setTag(Tag tag, int position) {
+		tags.set(position, tag);
+	}
+	
+	public void setTag(String tag, int position) {
+		setTag(new Tag(tag),position);
+	}
+	
+	public Tag removeTag(int position) {
+		return tags.remove(position);
+	}
 
 	public void addTag(Tag tag) {
 		tags.add(tag);

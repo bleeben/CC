@@ -75,6 +75,10 @@ public class Collection implements Parcelable, Storable {
 	public void addSharer(Sharer sharer) {
 		sharers.add(sharer);
 	}
+	
+	public void setSharer(Sharer sharer, int position) {
+		sharers.set(position, sharer);
+	}
 
 	public boolean removeItem(Item item) {
 		return items.remove(item);

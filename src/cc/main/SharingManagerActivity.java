@@ -3,14 +3,20 @@ package cc.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import cc.rep.Collection;
+import cc.rep.Item;
 import cc.rep.Permission;
 import cc.rep.Sharer;
 import cc.rep.SharerListAdapter;
@@ -20,6 +26,7 @@ public class SharingManagerActivity extends Activity{
 	Spinner permSpinner;
 	ListView sharerList;
 	EditText nameEdit;
+	int position = -1;
 	
     /** Called when the activity is first created. */
     @Override
@@ -43,14 +50,55 @@ public class SharingManagerActivity extends Activity{
             	CCActivity.alert(getApplicationContext(), c.getSharer(position).getName());
             }
         });
+        this.registerForContextMenu(sharerList);
         
         nameEdit.clearFocus();
+        
     }
+    
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+	                                ContextMenuInfo menuInfo) {
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.context_sharing, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    Sharer selectedSharer = c.getSharer(info.position);
+	    switch (item.getItemId()) {
+	        case R.id.notifyEmail:
+	            //editNote(info.id);
+	        	CCActivity.notify(this, "Sharing notification sent to "+selectedSharer.getName());
+	            return true;
+	        case R.id.editSharer:
+	        	position = info.position;
+	        	//
+	        	nameEdit.setText(selectedSharer.getName());
+	        	permSpinner.setSelection(selectedSharer.getPermission().ordinal());
+	        	CCActivity.notify(this, "Editing Sharer "+selectedSharer.getName());
+	        	return true;
+	        case R.id.deleteSharer:
+	        	c.removeSharer(selectedSharer);
+	        	((BaseAdapter) sharerList.getAdapter()).notifyDataSetChanged();
+	        	CCActivity.notify(this, "Removed Sharer "+selectedSharer.getName());
+	        	return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
     
     public void onAddButtonClick(View view) {
     	Permission p = Permission.values()[permSpinner.getSelectedItemPosition()];
     	Sharer share = new Sharer(nameEdit.getText().toString(),p);
+    	if (position==-1) {
     	c.addSharer(share);
+    	} else {
+    		c.setSharer(share,position);
+    		position=-1;
+    	}
     	((BaseAdapter) sharerList.getAdapter()).notifyDataSetChanged();
     	nameEdit.setText(R.string.fieldName);
     	permSpinner.setSelection(0);

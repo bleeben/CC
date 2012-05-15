@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/collectionThumb" android:title="@string/collectionThumb"></item>
-    <item android:id="@+id/addDescription" android:title="@string/addDesc"></item>
-    <item android:id="@+id/renameItem" android:title="@string/renameItem"></item>
+    <item android:id="@+id/editItem" android:title="@string/editItem"></item>
+    <item android:id="@+id/removeThumb" android:title="@string/removeThumb"></item>
     <item android:id="@+id/deleteItem" android:title="@string/deleteItem"></item>
 
 </menu>

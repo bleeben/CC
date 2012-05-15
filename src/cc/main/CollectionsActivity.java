@@ -14,15 +14,18 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
@@ -58,16 +61,12 @@ public class CollectionsActivity extends Activity{
             public void onItemClick(AdapterView<?> parent, View v,
                     int position, long id) {
  
-                // Sending image id to FullScreenActivity
-                Intent i = new Intent(getApplicationContext(), CollectionActivity.class);
-                // passing array index
-                i.putExtra("position", position);
-                i.putParcelableArrayListExtra("collections", collections);
-                i.putExtra("collection", collections.get(position));
-                i.putExtra("filter", filterEdit.getText().toString());
-                startActivityForResult(i,BROWSE_COLLECTION);
+                openCollectionActivity(position);
+                
             }
         });
+        
+        this.registerForContextMenu(gridColls);
         
         filterEdit = (EditText) findViewById(R.id.filterText);
         filterEdit.clearFocus();
@@ -93,6 +92,58 @@ public class CollectionsActivity extends Activity{
 			}
         });
     }
+    
+    public void openCollectionActivity(int position) {
+    	Intent i = new Intent(getApplicationContext(), CollectionActivity.class);
+        // passing array index
+        i.putExtra("position", position);
+        i.putParcelableArrayListExtra("collections", collections);
+        i.putExtra("collection", collections.get(position));
+        i.putExtra("filter", filterEdit.getText().toString());
+        startActivityForResult(i,BROWSE_COLLECTION);
+    }
+    
+    public void editCollectionActivity(int position) {
+    	Intent i = new Intent(getApplicationContext(), CollectionActivity.class);
+        // passing array index
+        i.putExtra("position", position);
+        i.putParcelableArrayListExtra("collections", collections);
+        i.putExtra("collection", collections.get(position));
+        i.putExtra("filter", filterEdit.getText().toString());
+        i.putExtra("toEdit",true);
+        startActivityForResult(i,BROWSE_COLLECTION);
+    }
+    
+    @Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+	                                ContextMenuInfo menuInfo) {
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.context_collections, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    Collection selectedColl = collections.get(info.position);
+	    switch (item.getItemId()) {
+	    	case R.id.removeThumb:
+	    		selectedColl.setPicUri(null);
+	    		((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
+	        	CCActivity.notify(this, "Removed Thumbnail");
+	        	return true;
+	        case R.id.editColl:
+	        	editCollectionActivity(info.position);
+	        	return true;
+	        case R.id.deleteColl:
+	        	collections.remove(selectedColl);
+	        	((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
+	        	CCActivity.notify(this, "Removed Collection "+selectedColl.getName());
+	        	return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
     
     public void onNewCollectionButtonClick(View view) {
     	Intent intent = new Intent(this, NewCollectionActivity.class);
