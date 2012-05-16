@@ -56,7 +56,6 @@ public abstract class SkeletonHashMap<K, V> {
 		capacity |= capacity >> 16;
 		capacity++;
 		
-		System.out.println(capacity);
 		return capacity;
 	}
 }
