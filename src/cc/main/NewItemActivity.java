@@ -63,7 +63,7 @@ public class NewItemActivity extends Activity {
 		nameEdit.setText("Untitled" + size);
 
 		collectionSpinner = (Spinner) findViewById(R.id.collectionSpinner);
-
+		collectionSpinner.setPrompt("Located in Collection:");
 		Collection c = (Collection) intent.getParcelableExtra("collection");
 		ArrayList<Collection> cs = intent
 				.getParcelableArrayListExtra("collections");
@@ -77,13 +77,12 @@ public class NewItemActivity extends Activity {
 		
 		
 		tagGallery = (Gallery) findViewById(R.id.galleryTags);
-		tagArr = new ArrayAdapter<Tag>(this,
-				android.R.layout.simple_gallery_item, item.getTags());
-		tagGallery.setAdapter(tagArr);
+		updateTagAdapter();
 		
 		this.registerForContextMenu(tagGallery);
 
 		nameEdit.clearFocus();
+		tagGallery.requestFocus();
 	}
 	
 	@Override
@@ -210,7 +209,7 @@ public class NewItemActivity extends Activity {
 
 	public void updateTagAdapter() {
 		tagArr = new ArrayAdapter<Tag>(this,
-				android.R.layout.simple_gallery_item, item.getTags());
+				R.layout.tag_item, item.getTags());
 		tagGallery.setAdapter(tagArr);
 	}
 	

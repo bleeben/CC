@@ -49,14 +49,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filter"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp"  />
 
         <EditText
             android:id="@+id/filterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10" 
-            android:inputType="text" />
+            android:inputType="text"
+            android:textSize="20sp"  />
 
         <Button
             android:id="@+id/button1"
@@ -64,7 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:onClick="clearFilter"
-            android:text="@string/btnClr" />
+            android:text="@string/btnClr"
+            android:textSize="20sp"  />
 
     </LinearLayout>
 

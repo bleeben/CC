@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:text="@string/btnCancel"
             android:onClick="onCancelButtonClick"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/button3"
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:text="@string/btnDone"
             android:onClick="onDoneButtonClick"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

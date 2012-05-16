@@ -15,21 +15,24 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onNewItemButtonClick"
-                android:text="@string/newPic" />
+                android:text="@string/newPic" 
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnBrowseColl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/browseCollections" />
+                android:text="@string/browseCollections" 
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btnNewColl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/newCollection" />
+                android:text="@string/newCollection" 
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -38,7 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.00"
-            android:text="@string/recentItems" />
+            android:text="@string/recentItems" 
+            android:textSize="20sp" />
 
 
 </LinearLayout>

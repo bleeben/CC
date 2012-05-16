@@ -41,7 +41,7 @@ public class SharingManagerActivity extends Activity{
         
         nameEdit = (EditText) findViewById(R.id.editText);
         permSpinner = (Spinner) findViewById(R.id.spinnerPerm);
-        
+        permSpinner.setPrompt("Set Access Privileges:");
         sharerList = (ListView) findViewById(R.id.listSharers);
         sharerList.setAdapter(new SharerListAdapter(this,getLayoutInflater(),c));
         
@@ -55,7 +55,7 @@ public class SharingManagerActivity extends Activity{
         this.registerForContextMenu(sharerList);
         
         nameEdit.clearFocus();
-        
+        sharerList.requestFocus();
     }
     
 	@Override

@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.BaseAdapter;
@@ -114,6 +115,10 @@ public class CollectionActivity extends Activity {
         boolean toEdit = i.getBooleanExtra("toEdit", false);
         if (toEdit)
         	editProperties();
+        
+        collectionName.requestFocus();
+        filterEdit.clearFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
     //hi
 	

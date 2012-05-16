@@ -14,6 +14,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 public class NewCollectionActivity extends Activity {
@@ -41,6 +42,8 @@ public class NewCollectionActivity extends Activity {
         shareToggle.setChecked(true);
         
         nameEdit.clearFocus();
+        TextView textV = (TextView) findViewById(R.id.textView2);
+        textV.requestFocus();
     }
     //hi
     

@@ -71,7 +71,7 @@ public class ItemActivity extends Activity {
         itemName.setText(item.getName());
 
         collectionSpinner = (Spinner) findViewById(R.id.collectionSpinner);
-        
+        collectionSpinner.setPrompt("Located in Collection:");
         Collection c = (Collection) intent.getParcelableExtra("collection");
         ArrayList<Collection> cs = intent.getParcelableArrayListExtra("collections");
         if (cs==null) {
@@ -81,8 +81,7 @@ public class ItemActivity extends Activity {
         }
         
         tagGallery = (Gallery) findViewById(R.id.galleryTags);
-        tagArr=new ArrayAdapter<Tag>(this, android.R.layout.simple_gallery_item, item.getTags());
-        tagGallery.setAdapter(tagArr);
+        updateTagAdapter();
         
 		try {
 			ImageView image = (ImageView) findViewById(R.id.imageView1);
@@ -102,7 +101,7 @@ public class ItemActivity extends Activity {
 		}
 		
 		this.registerForContextMenu(tagGallery);
-		
+		itemName.requestFocus();
     }
     
     @Override
@@ -213,7 +212,7 @@ public class ItemActivity extends Activity {
     }
     
     public void updateTagAdapter(){
-    	tagArr=new ArrayAdapter<Tag>(this, android.R.layout.simple_gallery_item, item.getTags());
+    	tagArr=new ArrayAdapter<Tag>(this, R.layout.tag_item, item.getTags());
         tagGallery.setAdapter(tagArr);
     }
 

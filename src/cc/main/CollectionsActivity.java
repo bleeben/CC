@@ -100,6 +100,7 @@ public class CollectionsActivity extends Activity{
         	int position = i.getIntExtra("position", 0);
         	openCollectionActivity(position);
         }
+        gridColls.requestFocus();
     }
     
     public void openCollectionActivity(int position) {
@@ -189,7 +190,7 @@ public class CollectionsActivity extends Activity{
     			recentItems = data.getParcelableExtra("recentItems");
     			String filterBack = data.getStringExtra("filterBack");
     			//CCActivity.notify(this, data.toString());
-    	    	CCActivity.notify(this, "fuck" + filterBack);
+    	    	//CCActivity.notify(this, "fuck" + filterBack);
     			filterEdit.setText(filterBack);
     			filter();
     			int pos = data.getIntExtra("position", 0);

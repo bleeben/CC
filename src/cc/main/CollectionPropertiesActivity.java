@@ -65,6 +65,7 @@ public class CollectionPropertiesActivity extends Activity {
 		
 		nameEdit.clearFocus();
 		descEdit.clearFocus();
+		headText.requestFocus();
     }
     //hi
     
