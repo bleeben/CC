@@ -287,4 +287,13 @@ public class NewItemActivity extends Activity {
 		inflater.inflate(R.menu.item, menu);
 		return true;
 	}
+	
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

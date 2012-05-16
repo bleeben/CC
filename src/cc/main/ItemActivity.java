@@ -309,12 +309,6 @@ public class ItemActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.description:
-            	
-                return true;
-            case R.id.summary:
-            	
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
