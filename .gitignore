@@ -4,3 +4,4 @@ trunk/
 svn-ds/
 git-ds/
 .svn/
+*.log

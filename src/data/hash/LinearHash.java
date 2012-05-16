@@ -3,8 +3,8 @@ package data.hash;
 import java.lang.reflect.Array;
 
 public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
-	private Entry[] entries;
-	private boolean[] deleted;
+	protected Entry[] entries;
+	protected boolean[] deleted;
 
 	public int next(int i){
 		return (i+81019) % capacity;
@@ -111,7 +111,7 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 		for(int i = 0;i<tempCapacity;i++){
 			Entry<K,V> e = tempEntries[i];
 			if(e!=null){			
-				int j = e.getHash() & (capacity-1);
+				int j = hash(e.getHash()) & (capacity-1);
 				if(entries[j]==null){
 					entries[j] = e;
 				} else {
@@ -129,7 +129,8 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 		this(DEFAULT_CAPACITY);
 	}	
 	public LinearHash(int capacity){
-		this.capacity = nearestPowerOfTwo(capacity);
+		capacity = nearestPowerOfTwo(capacity);
+		this.capacity = capacity;
 		
 		minLoad = 3.0f / 16.0f; // 3/16
 		maxLoad = 3.0f / 4.0f; // 3/4
