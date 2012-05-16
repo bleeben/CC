@@ -14,11 +14,6 @@ public class CachedLinearHash<K,V> extends LinearHash<K, V>{
 		cachedEntries[cachei] = new Entry<K,V>(key.hashCode(),key,value);
 		if(e != null){
 			super.put(e.getKey(),e.getValue());
-//			int i = find_space(e.getKey());
-//			entries[i] = new Entry<K, V>(key.hashCode(),key,value);
-//			deleted[i] = false;
-//			++size;
-//			resize();
 		}
 		return value;
 	}
@@ -32,12 +27,6 @@ public class CachedLinearHash<K,V> extends LinearHash<K, V>{
 				return e.getValue();
 		}
 		return super.get(key);
-//		int i = find(key);
-//		Entry<K,V> e = entries[i];
-//		if(e!=null){
-//			return e.getValue();
-//		}
-//		return null;
 	}
 
 	@Override
@@ -51,15 +40,6 @@ public class CachedLinearHash<K,V> extends LinearHash<K, V>{
 			}
 		}
 		return super.remove(key);
-//		
-//		if(e!=null){
-//			--size;
-//			entries[i] = null;
-//			deleted[i] = true;
-//			resize();
-//			return e.getValue();
-//		}
-//		return null;
 	}
 
 	@Override
@@ -72,8 +52,6 @@ public class CachedLinearHash<K,V> extends LinearHash<K, V>{
 			}
 		}
 		return super.containsKey(key);
-//		int i = find(key);
-//		return entries[i]!=null && key.equals(entries[i].getKey());
 	}
 
 	@Override
