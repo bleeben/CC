@@ -90,15 +90,11 @@ public class CCActivity extends Activity {
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item("Cat");
 			item.addTag("Cats");
 			item.addTag("Mammals");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
-			
-			collections.add(collection);
 			
 			item = new Item("Elephant");
 			item.addTag("Elephants");
@@ -106,15 +102,11 @@ public class CCActivity extends Activity {
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item("Giraffe");
 			item.addTag("Giraffes");
 			item.addTag("Mammals");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
-			
-			collections.add(collection);
 			
 			item = new Item("Penguin");
 			item.addTag("Penguins");
@@ -122,16 +114,12 @@ public class CCActivity extends Activity {
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item("Whale");
 			item.addTag("Whales");
 			item.addTag("Ocean Animals");
 			item.addTag("Fish");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
-			
-			collections.add(collection);
 			
 			item = new Item("Snake");
 			item.addTag("Snakes");
@@ -152,15 +140,11 @@ public class CCActivity extends Activity {
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item("Dominion");
 			item.addTag("Card Game");
 			item.addTag("too good to be true");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
-			
-			collections.add(collection);
 			
 			item = new Item("Monopoly");
 			item.addTag("Bored Game");
@@ -179,23 +163,17 @@ public class CCActivity extends Activity {
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item("");
 			item.addTag("");
 			item.addTag("");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item("");
 			item.addTag("");
 			item.addTag("");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
-			
-			collections.add(collection);
 			
 			item = new Item("");
 			item.addTag("");
@@ -215,16 +193,12 @@ public class CCActivity extends Activity {
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item(":)");
 			item.addTag("Smiley");
 			item.addTag("Happy");
 			item.addTag("Face");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
-			
-			collections.add(collection);
 			
 			item = new Item(":[");
 			item.addTag("Frowny");
@@ -233,16 +207,12 @@ public class CCActivity extends Activity {
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item(":(");
 			item.addTag("Frowny");
 			item.addTag("Sad");
 			item.addTag("Face");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
-			
-			collections.add(collection);
 			
 			item = new Item("[:|]");
 			item.addTag("Robot");
@@ -251,14 +221,10 @@ public class CCActivity extends Activity {
 			collection.addItem(item);
 			recentItems.recentAdd(item);
 			
-			collections.add(collection);
-			
 			item = new Item("v.V.v");
 			item.addTag("Crab");
 			collection.addItem(item);
 			recentItems.recentAdd(item);
-			
-			collections.add(collection);
 			
 			item = new Item("D:");
 			item.addTag("Oh noooo");
