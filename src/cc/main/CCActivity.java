@@ -185,44 +185,66 @@ public class CCActivity extends Activity {
 		
 		item = new Item("Dog");
 		item.addTag("Dogs");
-		item.addTag("Mammals");
+		item.addTag("Mammal");
+		item.addTag("Pet");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
 		item = new Item("Cat");
 		item.addTag("Cats");
-		item.addTag("Mammals");
+		item.addTag("Mammal");
+		item.addTag("Pet");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
 		item = new Item("Elephant");
 		item.addTag("Elephants");
-		item.addTag("Mammals");
+		item.addTag("Mammal");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
 		item = new Item("Giraffe");
 		item.addTag("Giraffes");
-		item.addTag("Mammals");
+		item.addTag("Mammal");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Loch Ness");
+		item.addTag("Monster");
+		item.addTag("Imaginary");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
 		item = new Item("Penguin");
 		item.addTag("Penguins");
-		item.addTag("Birds");
+		item.addTag("Bird");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
+		item = new Item("Flamingo");
+		item.addTag("Flamingos");
+		item.addTag("Bird");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Hamster");
+		item.addTag("Hamsters");
+		item.addTag("Mammal");
+		item.addTag("Pet");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		
 		item = new Item("Whale");
 		item.addTag("Whales");
-		item.addTag("Ocean Animals");
+		item.addTag("Ocean");
 		item.addTag("Fish");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
 		item = new Item("Snake");
 		item.addTag("Snakes");
-		item.addTag("Reptiles");
+		item.addTag("Reptile");
 		item.addTag("Scary");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
@@ -236,14 +258,66 @@ public class CCActivity extends Activity {
 		item.addTag("Board Game");
 		item.addTag("Random");
 		item.addTag("Anger");
+		item.addTag("Exploration");
+		item.addTag("Resource");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
 		item = new Item("Dominion");
 		item.addTag("Card Game");
-		item.addTag("too good to be true");
+		item.addTag("too good");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
+		
+		item = new Item("Munchkin");
+		item.addTag("Card Game");
+		item.addTag("Fun");
+		item.addTag("RPG");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Deus Ex");
+		item.addTag("Video Game");
+		item.addTag("RPG");
+		item.addTag("Action");
+		item.addTag("Adventure");
+		item.addTag("Eidos");
+		item.addTag("Square Enix");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		
+		item = new Item("D&D");
+		item.addTag("Role-Playing");
+		item.addTag("RPG");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Mario Kart");
+		item.addTag("Video Game");
+		item.addTag("Console");
+		item.addTag("Nintendo");
+		item.addTag("Wii");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+
+		item = new Item("Brawl");
+		item.addTag("Video Game");
+		item.addTag("Console");
+		item.addTag("Nintendo");
+		item.addTag("Wii");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		
+		item = new Item("Sonic");
+		item.addTag("Video Game");
+		item.addTag("Console");
+		item.addTag("Sega");
+		item.addTag("Wii");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
 		
 		item = new Item("Monopoly");
 		item.addTag("Bored Game");
@@ -256,27 +330,75 @@ public class CCActivity extends Activity {
 		
 		collection = new Collection("Shoes");
 		
-		item = new Item("");
-		item.addTag("");
-		item.addTag("");
+		item = new Item("York");
+		item.addTag("Mens");
+		item.addTag("Black");
+		item.addTag("Boots");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
-		item = new Item("");
-		item.addTag("");
-		item.addTag("");
+		item = new Item("Court");
+		item.addTag("Mens");
+		item.addTag("Sneaker");
+		item.addTag("Red");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
-		item = new Item("");
-		item.addTag("");
-		item.addTag("");
+		item = new Item("Stroll");
+		item.addTag("Mens");
+		item.addTag("Dress");
+		item.addTag("Black");
+		item.addTag("Leather");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
-		item = new Item("");
-		item.addTag("");
-		item.addTag("");
+		item = new Item("Kicks");
+		item.addTag("White");
+		item.addTag("Sneakers");
+		item.addTag("Boys");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Couch");
+		item.addTag("Sandals");
+		item.addTag("Brown");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Party");
+		item.addTag("Womens");
+		item.addTag("Heels");
+		item.addTag("Taupe");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Street");
+		item.addTag("Womens");
+		item.addTag("Heels");
+		item.addTag("Red");
+		item.addTag("Patent");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("High");
+		item.addTag("Womens");
+		item.addTag("Sandals");
+		item.addTag("White");
+		item.addTag("Platform");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Lounge");
+		item.addTag("Womens");
+		item.addTag("Sandals");
+		item.addTag("Lime");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("Rider");
+		item.addTag("Womens");
+		item.addTag("Boots");
+		item.addTag("Brown");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
@@ -295,6 +417,20 @@ public class CCActivity extends Activity {
 		item = new Item(":)");
 		item.addTag("Smiley");
 		item.addTag("Happy");
+		item.addTag("Face");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item(":D");
+		item.addTag("Smiley");
+		item.addTag("Excited");
+		item.addTag("Happy");
+		item.addTag("Face");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item(":O");
+		item.addTag("Surprised");
 		item.addTag("Face");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
@@ -320,8 +456,27 @@ public class CCActivity extends Activity {
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		
+		item = new Item("<3");
+		item.addTag("Love");
+		item.addTag("Symbol");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item("C>");
+		item.addTag("Ice Cream");
+		item.addTag("Symbol");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
+		item = new Item(":|");
+		item.addTag("Face");
+		item.addTag("Neutral");
+		collection.addItem(item);
+		recentItems.recentAdd(item);
+		
 		item = new Item("v.V.v");
 		item.addTag("Crab");
+		item.addTag("Crabby");
 		collection.addItem(item);
 		recentItems.recentAdd(item);
 		

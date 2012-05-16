@@ -288,7 +288,16 @@ public class CollectionActivity extends Activity {
     	filter(null); //TODO - IS THIS OKAY?!?!?
     }
     public void filter(View view){
-    	Tag filter = new Tag(filterEdit.getText().toString());
+    	String filterStr = filterEdit.getText().toString();
+    	if (filterStr==null || filterStr.length()==0) {
+    		adapter.setC(this.c.getItems());
+//          gridColls.setAdapter(adapter);
+    		adapter.notifyDataSetChanged();
+    		gridColls.invalidateViews();
+    		return;
+    	}
+    	CCActivity.notify(this, "Filtering: "+filterStr);
+    	Tag filter = new Tag(filterStr);
 
 //        adapter = new ImageAdapter(this,getLayoutInflater(),c.getMatches(filter));        
     	adapter.setC(this.c.getMatches(filter));

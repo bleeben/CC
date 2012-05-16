@@ -15,6 +15,7 @@ import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.ContextMenu;
+import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,6 +70,8 @@ public class CollectionsActivity extends Activity{
         });
         
         this.registerForContextMenu(gridColls);
+        //gridColls.setHapticFeedbackEnabled(true);
+        //gridColls.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
         
         filterEdit = (EditText) findViewById(R.id.filterText);
         filterEdit.addTextChangedListener(new TextWatcher(){
@@ -234,7 +237,16 @@ public class CollectionsActivity extends Activity{
 	}
 	
     public void filter(View view){
-    	Tag filter = new Tag(filterEdit.getText().toString());
+    	String filterStr = filterEdit.getText().toString();
+    	if (filterStr==null || filterStr.length()==0) {
+    		adapter.setC(collections);
+//          gridColls.setAdapter(adapter);
+    		adapter.notifyDataSetChanged();
+    		gridColls.invalidateViews();
+    		return;
+    	}
+    	CCActivity.notify(this, "Filtering: "+filterStr);
+    	Tag filter = new Tag(filterStr);
 
 //        adapter = new ImageAdapter(this,getLayoutInflater(),c.getMatches(filter));        
     	adapter.setC(Collection.getMatches(collections,filter));

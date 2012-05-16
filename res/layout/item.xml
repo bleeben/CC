@@ -105,7 +105,8 @@
             android:spacing="50px"
             android:scrollbars="horizontal"
             android:scrollbarFadeDuration="0"
-            android:scrollX="50px" />
+            android:scrollX="50px"
+            android:hapticFeedbackEnabled="true" />
 
     </LinearLayout>
 

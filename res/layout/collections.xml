@@ -35,7 +35,8 @@
         android:numColumns="3"
         android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:hapticFeedbackEnabled="true">
     </GridView>
 
     <LinearLayout
