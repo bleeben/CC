@@ -103,7 +103,13 @@ public class CollectionsActivity extends Activity{
         gridColls.requestFocus();
     }
     
+    public int positionToNewPos(int position) {
+    	int newPos = collections.indexOf(adapter.getC().get(position));
+        return newPos;
+    }
+    
     public void openCollectionActivity(int position) {
+    	position = positionToNewPos(position);
     	Intent i = new Intent(getApplicationContext(), CollectionActivity.class);
         // passing array index
         i.putExtra("position", position);
@@ -115,6 +121,7 @@ public class CollectionsActivity extends Activity{
     }
     
     public void editCollectionActivity(int position) {
+    	position = positionToNewPos(position);
     	Intent i = new Intent(getApplicationContext(), CollectionActivity.class);
         // passing array index
         i.putExtra("position", position);

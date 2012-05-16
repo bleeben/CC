@@ -122,16 +122,22 @@ public class CollectionActivity extends Activity {
     }
     //hi
 	
+	public int positionToNewPos(int position) {
+    	int newPos = c.getItems().indexOf(adapter.getC().get(position));
+        return newPos;
+    }
+	
 	public void openItemActivity(int position){
+		position = positionToNewPos(position);
 		Intent i = new Intent(getApplicationContext(), ItemActivity.class);
         // passing array index
         
         i.putExtra("collection", c);
-        int newPos = c.getItems().indexOf(adapter.getC().get(position));
-        //i.putExtra("position", position);
-        i.putExtra("position", newPos);
-        //i.putExtra("item", c.getItem(position));
-        i.putExtra("item", c.getItem(newPos));
+        //int newPos = c.getItems().indexOf(adapter.getC().get(position));
+        i.putExtra("position", position);
+        //i.putExtra("position", newPos);
+        i.putExtra("item", c.getItem(position));
+        //i.putExtra("item", c.getItem(newPos));
         startActivityForResult(i,BROWSE_ITEM);
 	}
 	
