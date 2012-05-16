@@ -78,25 +78,153 @@ public class CCActivity extends Activity {
         }
         
         if (collections.size()==0) {
-        	Collection collection = new Collection("Unsorted");
-        	
-        	//TODO - TEST
-        	Item item = new Item("Dog");
-        	item.addTag("Dog");
-        	collection.addItem(item);
-        	recentItems.recentAdd(item);
-        	
-        	item = new Item("Also a dog");
-        	item.addTag("Dog");
-        	collection.addItem(item);
-        	recentItems.recentAdd(item);
-        	
-        	item = new Item("Not a dog");
-        	item.addTag("Cat");
-        	collection.addItem(item);
-        	recentItems.recentAdd(item);
-        	
-        	collections.add(collection);
+			Item item;
+			Collection collection;
+			
+			
+			collection = new Collection("Animals");
+			
+			item = new Item("Dog");
+			item.addTag("Dogs");
+			item.addTag("Mammals");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("Cat");
+			item.addTag("Cats");
+			item.addTag("Mammals");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("Elephant");
+			item.addTag("Elephants");
+			item.addTag("Mammals");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("Giraffe");
+			item.addTag("Giraffes");
+			item.addTag("Mammals");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("Penguin");
+			item.addTag("Penguins");
+			item.addTag("Birds");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("Whale");
+			item.addTag("Whales");
+			item.addTag("Ocean Animals");
+			item.addTag("Fish");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("Snake");
+			item.addTag("Snakes");
+			item.addTag("Reptiles");
+			item.addTag("Scary");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			
+			collection = new Collection("Games");
+			
+			item = new Item("Settlers of Catan");
+			item.addTag("Board Game");
+			item.addTag("Random");
+			item.addTag("Anger");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("Dominion");
+			item.addTag("Card Game");
+			item.addTag("too good to be true");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("Monopoly");
+			item.addTag("Bored Game");
+			item.addTag("Board Game");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			
+			collection = new Collection("Shoes");
+			
+			item = new Item("");
+			item.addTag("");
+			item.addTag("");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("");
+			item.addTag("");
+			item.addTag("");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("");
+			item.addTag("");
+			item.addTag("");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("");
+			item.addTag("");
+			item.addTag("");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			
+			collection = new Collection("Emoticons");
+			
+			item = new Item(":]");
+			item.addTag("Smiley");
+			item.addTag("Happy");
+			item.addTag("Face");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item(":)");
+			item.addTag("Smiley");
+			item.addTag("Happy");
+			item.addTag("Face");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item(":[");
+			item.addTag("Frowny");
+			item.addTag("Sad");
+			item.addTag("Face");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item(":(");
+			item.addTag("Frowny");
+			item.addTag("Sad");
+			item.addTag("Face");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("[:|]");
+			item.addTag("Robot");
+			item.addTag("Face");
+			item.addTag("Neutral");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("v.V.v");
+			item.addTag("Crab");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
+			
+			item = new Item("D:");
+			item.addTag("Oh noooo");
+			item.addTag("Face");
+			collection.addItem(item);
+			recentItems.recentAdd(item);
         }
         
     }
