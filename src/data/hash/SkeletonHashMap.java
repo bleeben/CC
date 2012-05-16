@@ -57,5 +57,8 @@ public abstract class SkeletonHashMap<K, V> {
 		capacity++;
 		
 		return capacity;
+	
 	}
+	
+	public abstract Object copy();
 }
