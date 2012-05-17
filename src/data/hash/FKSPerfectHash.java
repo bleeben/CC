@@ -38,4 +38,10 @@ public class FKSPerfectHash<K,V> extends SkeletonHashMap<K, V>{
 		
 	}
 
+	@Override
+	public Object copy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

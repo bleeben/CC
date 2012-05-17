@@ -230,4 +230,10 @@ public class CuckooHash<K,V> extends SkeletonHashMap<K, V>{
 		System.out.println(table.f1.toString());
 		System.out.println(table.f2.toString());
 	}
+
+	@Override
+	public Object copy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

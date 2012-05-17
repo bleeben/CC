@@ -224,7 +224,10 @@ public class CollectionActivity extends Activity {
     		switch (resultCode) {
     		case Activity.RESULT_OK:
     			Collection collection = data.getParcelableExtra("collection");
-    			c = collection;
+    			c.setName(collection.getName());
+    			c.setDesc(collection.getDesc());
+    			c.setPrivate(collection.isPrivate());
+    			c.setSharers(collection.getSharers());
     			break;
     		}
     		break;
@@ -232,7 +235,7 @@ public class CollectionActivity extends Activity {
     		switch (resultCode) {
     		case Activity.RESULT_OK:
     			Collection collection = data.getParcelableExtra("collection");
-    			c = collection;
+    			c.setSharers(collection.getSharers());
     			break;
     		}
     		break;

@@ -106,6 +106,10 @@ public class Collection implements Parcelable, Storable {
 	public List<Sharer> getSharers() {
 		return sharers;
 	}
+	
+	public void setSharers(List<Sharer> list){
+		this.sharers = list;
+	}
 
 	public Item getItem(int location) {
 		return items.get(location);

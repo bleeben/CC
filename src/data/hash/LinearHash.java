@@ -149,4 +149,10 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 		 System.out.println(hash("".hashCode()));
 		 
 	}
+
+	@Override
+	public Object copy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -76,7 +76,7 @@ public class CollectionPropertiesActivity extends Activity {
     		switch (resultCode) {
     		case Activity.RESULT_OK:
     			Collection collection = data.getParcelableExtra("collection");
-    			c = collection;
+    			c.setSharers(collection.getSharers());
     			break;
     		}
     		break;
