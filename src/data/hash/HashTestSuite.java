@@ -28,6 +28,7 @@ public class HashTestSuite<T extends SkeletonHashMap<String, ?>> {
 	private HashMap<String,Long> runNanos;
 	private int timerTestNum;
 	private HashMap<String,ArrayList<Long>> memoryUsages;
+	private HashMap<String,Info> infos;
 	
 	public void setupTimers(){
 		startTimes = new HashMap<String,Long>();
@@ -36,6 +37,7 @@ public class HashTestSuite<T extends SkeletonHashMap<String, ?>> {
 		runNanos = new HashMap<String,Long>();
 		timerTestNum=1;
 		memoryUsages=new HashMap<String,ArrayList<Long>>();
+		infos = new HashMap<String,Info>();
 	}
 	
 	public void logMemory(String tag) { // string tag returned from startTimer
@@ -43,6 +45,10 @@ public class HashTestSuite<T extends SkeletonHashMap<String, ?>> {
 		if (!memoryUsages.containsKey(tag))
 			memoryUsages.put(tag, new ArrayList<Long>());
 		memoryUsages.get(tag).add(totalMem);
+	}
+	
+	public void logInfo(String tag) { // string tag returned from startTimer
+		infos.put(tag, new Info(hashSubject.getLoad(),hashSubject.getPrefLoad(), hashSubject.getSize()));
 	}
 	
 	public String startTimer(String tag){ // returns true is started, false if already existed

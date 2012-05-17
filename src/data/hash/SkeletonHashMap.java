@@ -60,5 +60,17 @@ public abstract class SkeletonHashMap<K, V> {
 	
 	}
 	
+	public int getSize(){
+		return size;
+	}
+	
+	public float getLoad(){
+		return 1.0f*size/capacity;
+	}
+	
+	public float getPrefLoad(){
+		return prefLoad;
+	}
+	
 	public abstract Object copy();
 }
