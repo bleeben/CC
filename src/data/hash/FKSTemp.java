@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 public class FKSTemp<K,V> extends SkeletonHashMap<K, V>{
 	Entry<K,V>[][] entries;
+	HashFunction[] hs;
 	int[] sizes;
 	int startingCollisionSize=8;
 	
