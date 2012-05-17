@@ -23,7 +23,7 @@ public class ChainingHash<K,V> extends SkeletonHashMap<K, V>{
 				return value;
 			}
 		}
-		ll.add(new Entry<K, V>(hash,key,value));
+		ll.add(0,new Entry<K, V>(hash,key,value));
 		++size;
 		resize();
 		return value;
@@ -123,12 +123,10 @@ public class ChainingHash<K,V> extends SkeletonHashMap<K, V>{
 		entries = (LinkedList<Entry<K,V>>[]) new LinkedList<?>[capacity];
 	}
 
-	public static void main(String[] args){
-		ChainingHash<String,Integer> test = new ChainingHash<String, Integer>();
-		 test.put("Test", 10);
-		 System.out.println(test.get("Test"));
-		 
+
+	@Override
+	public Object copy() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-
 }
