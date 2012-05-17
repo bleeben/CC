@@ -127,16 +127,16 @@ public class CollectionActivity extends Activity {
         return newPos;
     }
 	
-	public void openItemActivity(int position){
-		position = positionToNewPos(position);
+	public void openItemActivity(int pos){
+		pos = positionToNewPos(pos);
 		Intent i = new Intent(getApplicationContext(), ItemActivity.class);
         // passing array index
         
         i.putExtra("collection", c);
         //int newPos = c.getItems().indexOf(adapter.getC().get(position));
-        i.putExtra("position", position);
+        i.putExtra("position", pos);
         //i.putExtra("position", newPos);
-        i.putExtra("item", c.getItem(position));
+        i.putExtra("item", c.getItem(pos));
         //i.putExtra("item", c.getItem(newPos));
         startActivityForResult(i,BROWSE_ITEM);
 	}
@@ -253,7 +253,7 @@ public class CollectionActivity extends Activity {
     
     @Override
     public void onPause(){
-    	super.onPause();
+    	
     	CCActivity.alert(this, "Leaving Collections");
     	
     	Intent intent = new Intent();
@@ -263,6 +263,7 @@ public class CollectionActivity extends Activity {
     	intent.putExtra("filterBack", filterEdit.getText().toString());
     	intent.putExtra("position", position);
     	setResult(Activity.RESULT_OK, intent);
+    	super.onPause();
     }
     
     @Override

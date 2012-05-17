@@ -259,4 +259,9 @@ public class Collection implements Parcelable, Storable {
 		c.setPicUri(Uri.parse(cursor.getString(3)));
 		return c;
 	}
+
+	public void setItems(List<Item> items2) {
+		this.items = items2;
+		
+	}
 }

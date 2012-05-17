@@ -205,6 +205,7 @@ public class CollectionsActivity extends Activity{
     			filter();
     			int pos = data.getIntExtra("position", 0);
     			collections.set(pos, c);
+    			//collections.get(pos).setItems(c.getItems());
     			((ImageAdapter) gridColls.getAdapter()).setC(collections);
     			((BaseAdapter) gridColls.getAdapter()).notifyDataSetChanged();
     			break;
