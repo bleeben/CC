@@ -6,6 +6,23 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 	protected Entry[] entries;
 	protected boolean[] deleted;
 
+	public LinearHash(){
+		this(DEFAULT_CAPACITY);
+	}	
+	public LinearHash(int capacity){
+		capacity = nearestPowerOfTwo(capacity);
+		this.capacity = capacity;
+		
+		minLoad = 3.0f / 16.0f; // 3/16
+		maxLoad = 3.0f / 4.0f; // 3/4
+		minThreshold = (int) (minLoad*capacity);
+		maxThreshold = (int) (maxLoad*capacity);
+		
+		entries = new Entry[capacity];
+		deleted = new boolean[capacity];
+	}
+	
+	
 	public int next(int i){
 		return (i+81019) % capacity;
 	}
@@ -31,7 +48,6 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 	     }
 	     return i;
 	}
-	
 
 	@Override
 	public V put(K key, V value) {
@@ -87,13 +103,10 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void resize() {
 		if(checkLoad())
 			return;
-
-//		System.out.println(size + " " + capacity + " " +minThreshold + " " + maxThreshold);
 		
 		Entry<K,V>[] tempEntries = entries;
 		int tempCapacity = capacity;
@@ -102,7 +115,6 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 			capacity = size < minThreshold ? capacity/2 : capacity*2;
 			minThreshold = (int) (minLoad*capacity);
 			maxThreshold = (int) (maxLoad*capacity);
-//			System.out.println("-"+ size + " " + capacity + " " +minThreshold + " " + maxThreshold);
 		}
 		
 		entries = new Entry[capacity];
@@ -124,35 +136,10 @@ public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 		}
 	}
 
-	
-	public LinearHash(){
-		this(DEFAULT_CAPACITY);
-	}	
-	public LinearHash(int capacity){
-		capacity = nearestPowerOfTwo(capacity);
-		this.capacity = capacity;
-		
-		minLoad = 3.0f / 16.0f; // 3/16
-		maxLoad = 3.0f / 4.0f; // 3/4
-		minThreshold = (int) (minLoad*capacity);
-		maxThreshold = (int) (maxLoad*capacity);
-		
-		entries = new Entry[capacity];
-		deleted = new boolean[capacity];
-	}
-	
-
-	public static void main(String[] args){
-		 LinearHash<String,Integer> test = new LinearHash<String, Integer>();
-		 test.put("Test", 10);
-		 System.out.println("".hashCode());
-		 System.out.println(hash("".hashCode()));
-		 
-	}
-
 	@Override
 	public Object copy() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

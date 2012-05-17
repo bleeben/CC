@@ -23,7 +23,7 @@ public class ChainingHash<K,V> extends SkeletonHashMap<K, V>{
 				return value;
 			}
 		}
-		ll.add(new Entry<K, V>(hash,key,value));
+		ll.add(0,new Entry<K, V>(hash,key,value));
 		++size;
 		resize();
 		return value;

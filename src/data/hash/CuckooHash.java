@@ -219,21 +219,10 @@ public class CuckooHash<K,V> extends SkeletonHashMap<K, V>{
 		System.out.println("END");
 	}
 	
-	public static void main(String[] args){
-		CuckooHash<String,Integer> table = new CuckooHash<String,Integer>();
-		for(int i = 0; i < 100000; ++i){
-			table.put(""+i,i);
-		}
-		for(int i = 0; i < 100000; ++i){
-			assertEquals(table.get(""+i), new Integer(i));
-		}
-		System.out.println(table.f1.toString());
-		System.out.println(table.f2.toString());
-	}
-
 	@Override
 	public Object copy() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
