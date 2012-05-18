@@ -17,6 +17,9 @@ public class HashTestSuite<T extends SkeletonHashMap<String, Integer>> {
 		setupTimers();
 		run = Runtime.getRuntime();
 		spawnCopy = spawnTest();
+	}
+	
+	public void start(){
 		runTests();
 	}
 	
