@@ -33,19 +33,18 @@ public class HashFunction {
 	    return ((int) h) & capacityMask;
 	}
 	
-	public static int nextInt(int c){
+	public static int nextInt(){
 		int i = Math.abs(generator.nextInt());
-		if(i==0)
-			return nextInt(c);
-		while((i&1)==0)
-			i >>= 1;
-		if(i<c)
-			return nextInt(c);
+		
+		i &= (1 << 31) - 1; //Make sure it's positive.
+		i |= 1 << 30; //Make sure it's large.
+		i |= 1; //Make sure it's odd.
+		
 		return i;
 	}
 	
 	public HashFunction(int c){
-		this(nextInt(c),nextInt(c), c);
+		this(nextInt(),nextInt(), c);
 	}
 
 	public HashFunction(int b, int m, int capacity) {
@@ -58,5 +57,11 @@ public class HashFunction {
 		return "exponent="+exponent+
 				", m="+m+
 				", mask="+capacityMask;
+	}
+	
+	public static void main(String[] args){
+		System.out.println(nextInt());
+		System.out.println(nextInt());
+		System.out.println(nextInt());
 	}
 }
