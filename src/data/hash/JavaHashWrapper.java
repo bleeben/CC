@@ -6,6 +6,14 @@ public class JavaHashWrapper<K,V> extends SkeletonHashMap<K, V>{
 	public JavaHashWrapper(Class<K> c,Class<V> v){
 		hashMap = new HashMap<K,V>();
 	}
+	public JavaHashWrapper(){
+		hashMap = new HashMap<K,V>();
+	}
+	@Override
+	public JavaHashWrapper<K,V> spawn(){
+		return new JavaHashWrapper<K,V>();
+		
+	}
 	@Override
 	public V put(K key, V value) {
 		hashMap.put(key, value);

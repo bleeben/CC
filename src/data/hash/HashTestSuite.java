@@ -1,17 +1,22 @@
 package data.hash;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 
-public class HashTestSuite<T extends SkeletonHashMap<String, ?>> {
+import org.junit.Test;
+
+public class HashTestSuite<T extends SkeletonHashMap<String, Integer>> {
 	private T hashSubject;
-	private T copy;
+	private T spawnCopy;
 	private Runtime run;
 	public HashTestSuite(T subject){
 		setHashSubject(subject);
 		setupTimers();
 		run = Runtime.getRuntime();
-		copy = copyTest();
+		spawnCopy = spawnTest();
 		runTests();
 	}
 	
@@ -73,18 +78,21 @@ public class HashTestSuite<T extends SkeletonHashMap<String, ?>> {
 		runTimes.put(tag, runTime);
 		runNanos.put(tag, runNano);
 		logMemory(tag);
+		logInfo(tag);
 		return true;
 	}
 	
 	public void runTests() {
 		testSample();
+		testGet(1000000);
+		//new IntegerTest().run(this);
 	}
 	
-	public T copyTest() {
-		String tag=startTimer("copy");
+	public T spawnTest() {
+		String tag=startTimer("spawn");
 		
 		//run tests here
-		T result=(T) hashSubject.copy();
+		T result=(T) hashSubject.spawn();
 		//
 		
 		stopTimer(tag); // output should be saved
@@ -99,7 +107,17 @@ public class HashTestSuite<T extends SkeletonHashMap<String, ?>> {
 		stopTimer(tag); // output should be saved
 	}
 	
-	
-	
+	public void testGet(int size) {
+		hashSubject = spawnTest();
+		String tag = startTimer("get");
+		for(int i = 0; i < size; ++i){
+			hashSubject.put(""+i,i);
+			logInfo(tag);
+		}
+		/*for(int i = 0; i < size; ++i){
+			assertEquals(hashSubject.get(""+i), new Integer(i));
+		}*/
+		stopTimer(tag);
+	}	
 	
 }

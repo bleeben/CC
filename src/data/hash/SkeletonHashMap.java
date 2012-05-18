@@ -133,4 +133,6 @@ public abstract class SkeletonHashMap<K, V> {
 	}
 
 	public abstract Object copy();
+	
+	public abstract SkeletonHashMap<K,V> spawn();
 }

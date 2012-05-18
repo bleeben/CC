@@ -1,7 +1,12 @@
 package data.hash;
 
 public class FKSPerfectHash<K,V> extends SkeletonHashMap<K, V>{
-
+	
+	@Override
+	public FKSPerfectHash<K,V> spawn(){
+		return new FKSPerfectHash<K,V>();
+		
+	}
 	@Override
 	public V put(K key, V value) {
 		// TODO Auto-generated method stub

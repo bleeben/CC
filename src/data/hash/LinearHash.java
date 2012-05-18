@@ -5,7 +5,12 @@ import java.lang.reflect.Array;
 public class LinearHash<K,V> extends SkeletonHashMap<K, V>{
 	protected Entry[] entries;
 	protected boolean[] deleted;
-
+	
+	@Override
+	public LinearHash<K,V> spawn(){
+		return new LinearHash<K,V>();
+		
+	}
 	public LinearHash(){
 		this(DEFAULT_CAPACITY);
 	}	

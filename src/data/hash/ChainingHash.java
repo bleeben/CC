@@ -5,6 +5,12 @@ import java.util.LinkedList;
 public class ChainingHash<K,V> extends SkeletonHashMap<K, V>{
 	LinkedList<Entry<K,V>>[] entries;
 	
+	@Override
+	public ChainingHash<K,V> spawn(){
+		return new ChainingHash<K,V>();
+		
+	}
+	
 	public int chain_hash(K key){
 		return hash(key.hashCode()) & (capacity - 1);
 	}

@@ -9,6 +9,11 @@ public class FKSTemp<K,V> extends SkeletonHashMap<K, V>{
 	int[] sizes;
 	int startingCollisionSize=8;
 	
+	@Override
+	public FKSTemp<K,V> spawn(){
+		return new FKSTemp<K,V>();
+		
+	}
 	public int chain_hash(K key){
 		return hash(key.hashCode()) & (capacity - 1);
 	}

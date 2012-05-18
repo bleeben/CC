@@ -12,6 +12,11 @@ public class CuckooHash<K,V> extends SkeletonHashMap<K, V>{
 	
 	
 	@Override
+	public CuckooHash<K,V> spawn(){
+		return new CuckooHash<K,V>();
+		
+	}
+	@Override
 	public V put(K key, V value) {
 		Entry<K,V> e;
 		e = entries[0][f1.hash(key)];
