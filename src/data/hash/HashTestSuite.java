@@ -84,7 +84,7 @@ public class HashTestSuite<T extends SkeletonHashMap<String, Integer>> {
 	
 	public void runTests() {
 		testSample();
-		testGet(1000000);
+		testPutGet(1000000);
 		//new IntegerTest().run(this);
 	}
 	
@@ -107,9 +107,9 @@ public class HashTestSuite<T extends SkeletonHashMap<String, Integer>> {
 		stopTimer(tag); // output should be saved
 	}
 	
-	public void testGet(int size) {
+	public void testPutGet(int size) {
 		hashSubject = spawnTest();
-		String tag = startTimer("get");
+		String tag = startTimer("put");
 		for(int i = 0; i < size; ++i){
 			hashSubject.put(""+i,i);
 			logInfo(tag);
@@ -118,6 +118,35 @@ public class HashTestSuite<T extends SkeletonHashMap<String, Integer>> {
 			assertEquals(hashSubject.get(""+i), new Integer(i));
 		}*/
 		stopTimer(tag);
-	}	
+		tag = startTimer("get");
+		for(int i = 0; i < size; ++i){
+			hashSubject.get(""+i);
+			logInfo(tag);
+		}
+		/*for(int i = 0; i < size; ++i){
+			assertEquals(hashSubject.get(""+i), new Integer(i));
+		}*/
+		stopTimer(tag);
+		tag = startTimer("containsKey");
+		for(int i = 0; i < size; ++i){
+			hashSubject.containsKey(""+i);
+			logInfo(tag);
+		}
+		/*for(int i = 0; i < size; ++i){
+			assertEquals(hashSubject.get(""+i), new Integer(i));
+		}*/
+		stopTimer(tag);
+		tag = startTimer("containsVal");
+		for(int i = 0; i < size; ++i){
+			hashSubject.containsValue(i);
+			logInfo(tag);
+		}
+		/*for(int i = 0; i < size; ++i){
+			assertEquals(hashSubject.get(""+i), new Integer(i));
+		}*/
+		stopTimer(tag);
+	}
+	
+	
 	
 }
