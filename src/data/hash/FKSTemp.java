@@ -1,5 +1,5 @@
 package data.hash;
-
+/*
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -26,7 +26,7 @@ public class FKSTemp<K,V> extends SkeletonHashMap<K, V>{
 		if(ll==null){
 			ll = new Entry[startingCollisionSize];
 			entries[hashCap] = ll;
-			BLAH
+			//BLAH
 			ll[0]=new Entry<K, V>(hash,key,value);
 			sizes[hashCap]=1;
 		} else {
@@ -199,3 +199,4 @@ class PerfectHashResolver<K,V> extends SkeletonHashMap<K, V>{
 	}
 
 }
+*/
