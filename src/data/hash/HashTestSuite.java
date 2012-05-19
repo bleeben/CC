@@ -19,6 +19,34 @@ public class HashTestSuite<T extends SkeletonHashMap<String, Integer>> {
 		spawnCopy = spawnTest();
 	}
 	
+	public HashMap<String,HashMap<String,Long>> extractTimes(){
+		HashMap<String, HashMap<String, Long>> result = new HashMap<String, HashMap<String, Long>>();
+		result.put("startTimes", startTimes);
+		result.put("runTimes", runTimes);
+		result.put("startNanos", startNanos);
+		result.put("runNanos", runNanos);
+		return result;
+	}
+	
+	public HashMap<String,Info> extractInfos(){
+		return infos;
+	}
+	
+	public HashMap<String,ArrayList<Long>> extractMemories(){
+		return memoryUsages;
+	}
+	
+	public HashMap extractData(){
+		HashMap result = new HashMap();
+		result.put("startTimes", startTimes);
+		result.put("runTimes", runTimes);
+		result.put("startNanos", startNanos);
+		result.put("runNanos", runNanos);
+		result.put("memoryUsages", memoryUsages);
+		result.put("infos", infos);
+		return result;
+	}
+	
 	public void start(){
 		runTests();
 	}

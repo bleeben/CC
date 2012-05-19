@@ -45,10 +45,5 @@ public class JavaHashWrapper<K,V> extends SkeletonHashMap<K, V>{
 		return;
 		//not needed;
 	}
-	@Override
-	public Object copy() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -131,8 +131,6 @@ public abstract class SkeletonHashMap<K, V> {
 		
 		return capacity;
 	}
-
-	public abstract Object copy();
 	
 	public abstract SkeletonHashMap<K,V> spawn();
 }
