@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TestMain {
+	/*
+	 * compile data here?
+	 */
+	
 	public static void main(String[] arg) {
 		HashTestSuite suite1 = new HashTestSuite(
 				new LinearHash<String, Integer>());
@@ -37,6 +41,6 @@ public class TestMain {
 		HashMap<String,ArrayList<Long>> memoryUsages = (HashMap<String,ArrayList<Long>>) data.get("memoryUsages");
 		HashMap<String,Info> infos = (HashMap<String,Info>) data.get("infos");
 		
-		// yay data?
+		// yay data? compile it somehow?
 	}
 }
